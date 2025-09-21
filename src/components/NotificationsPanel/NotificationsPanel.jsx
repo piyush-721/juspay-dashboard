@@ -1,13 +1,20 @@
-// NotificationsPanel.jsx
+// src/components/NotificationsPanel/NotificationsPanel.jsx - UPDATED FOR DARK MODE ICONS
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleNotifications, closeSidebar } from '../../store/slices/themeSlice';
 import styles from './NotificationsPanel.module.css';
 
-// Import icons from Figma assets
+// Light theme icons
 import bugIcon from '../../assets/icons/bug.png';
 import userIcon from '../../assets/icons/user.png';
 import antennaIcon from '../../assets/icons/antenna.png';
+
+// ✅ Dark theme icons
+import bugIconDark from '../../assets/darkIcons/bug.png';
+import userIconDark from '../../assets/darkIcons/user.png';
+import antennaIconDark from '../../assets/darkIcons/antenna.png';
+
+// Avatar imports (these don't change with theme)
 import avatarIcon1 from '../../assets/avatars/avatar1.png';
 import avatarIcon2 from '../../assets/avatars/avatar2.png';
 import avatarIcon3 from '../../assets/avatars/avatar3.png';
@@ -17,7 +24,7 @@ import avatarIcon6 from '../../assets/avatars/avatar6.png';
 
 const NotificationsPanel = () => {
   const dispatch = useDispatch();
-  const { notificationsPanelOpen, sidebarOpen } = useSelector((state) => state.theme);
+  const { notificationsPanelOpen, sidebarOpen, theme } = useSelector((state) => state.theme); // ✅ Get theme
 
   const handleClosePanel = () => {
     dispatch(toggleNotifications());
@@ -32,34 +39,39 @@ const NotificationsPanel = () => {
     }
   }, [notificationsPanelOpen, dispatch, sidebarOpen]);
 
+  // ✅ Helper function to get correct icon based on theme
+  const getIcon = (lightIcon, darkIcon) => {
+    return theme === 'dark' ? darkIcon : lightIcon;
+  };
+
   if (!notificationsPanelOpen) return null;
 
   const notificationsData = [
     {
       id: 1,
       type: 'bug',
-      icon: bugIcon,
+      icon: getIcon(bugIcon, bugIconDark), // ✅ Dynamic icon
       title: 'You have a bug that needs...',
       time: 'Just now'
     },
     {
       id: 2,
       type: 'user',
-      icon: userIcon,
+      icon: getIcon(userIcon, userIconDark), // ✅ Dynamic icon
       title: 'New user registered',
       time: '59 minutes ago'
     },
     {
       id: 3,
       type: 'bug',
-      icon: bugIcon,
+      icon: getIcon(bugIcon, bugIconDark), // ✅ Dynamic icon
       title: 'You have a bug that needs...',
       time: '12 hours ago'
     },
     {
       id: 4,
       type: 'antenna',
-      icon: antennaIcon,
+      icon: getIcon(antennaIcon, antennaIconDark), // ✅ Dynamic icon
       title: 'Andi Lane subscribed to you',
       time: 'Today, 11:59 AM'
     }

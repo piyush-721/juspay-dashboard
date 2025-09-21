@@ -1,4 +1,4 @@
-/* src/components/OrdersTable/OrdersTable.module.css */
+/* src/components/OrdersTable/OrdersTable.module.css - COMPLETE UPDATED VERSION */
 
 .ordersTable {
   width: 1070px;
@@ -275,39 +275,61 @@
   text-align: center;
 }
 
-/* ✅ Hover-based checkbox visibility - Updated for black selection */
-.checkbox {
+/* ✅ CUSTOM CHECKBOX STYLING - Updated to match your specification */
+.customCheckbox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkboxInput {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
   width: 16px;
   height: 16px;
-  border-radius: 3px;
+}
+
+.checkboxCustom {
+  width: 16px;
+  height: 16px;
   border: 1px solid #d1d5db;
+  border-radius: 3px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.checkboxCustom svg {
+  color: #ffffff;
+  opacity: 0;
   transition: opacity 0.2s ease;
-  appearance: none; /* Remove default browser styling */
-  position: relative;
 }
 
-.checkbox:checked {
-  background: #1C1C1C; /* Black background when checked */
-  border-color: #1C1C1C; /* Black border when checked */
+.checkboxInput:checked + .checkboxCustom {
+  background: #1C1C1C; /* ✅ Black background when checked */
+  border-color: #1C1C1C; /* ✅ Black border when checked */
 }
 
-.checkbox:checked::after {
-  content: '✓';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white; /* White checkmark */
-  font-size: 10px;
-  font-weight: bold;
+.checkboxInput:checked + .checkboxCustom svg {
+  opacity: 1;
+  color: #ffffff; /* ✅ White checkmark */
+}
+
+/* ✅ Visibility classes for row hover */
+.checkboxVisible {
+  opacity: 1;
 }
 
 .checkboxHidden {
   opacity: 0;
 }
 
-.checkboxVisible {
+.checkboxHidden:hover {
   opacity: 1;
 }
 
@@ -348,7 +370,7 @@
 /* Address */
 .address {
   font-size: 14px;
-  color:#1C1C1C;
+  color: #1C1C1C;
 }
 
 /* ✅ Date container with calendar icon */
@@ -364,10 +386,10 @@
 
 .date {
   font-size: 14px;
-  color:#1C1C1C;
+  color: #1C1C1C;
 }
 
-/* ✅ Status Badges - Text only, no background */
+/* ✅ Status Badges - Text only with colored dots, same colors in both themes */
 .status {
   display: inline-flex;
   align-items: center;
@@ -510,113 +532,7 @@
   font-weight: 600;
 }
 
-/* Responsive Design */
-@media screen and (max-width: 1200px) {
-  .ordersTable {
-    width: 100%;
-    max-width: 1070px; /* ✅ Updated to match new width */
-  }
-  
-  .searchContainer {
-    width: 200px;
-  }
-  
-  .dropdownMenu {
-    min-width: 180px;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .ordersTable {
-    height: auto;
-    min-height: 400px;
-    padding: 16px;
-  }
-  
-  .tableHeader {
-    flex-direction: column;
-    gap: 12px;
-    align-items: stretch;
-  }
-  
-  .leftActions,
-  .rightActions {
-    justify-content: center;
-  }
-  
-  .searchContainer {
-    width: 100%;
-    max-width: 300px;
-  }
-  
-  .tableContainer {
-    overflow-x: auto;
-  }
-  
-  .table {
-    min-width: 800px;
-  }
-  
-  .headerCell,
-  .tableCell {
-    padding: 8px 12px;
-    font-size: 13px;
-  }
-  
-  .pagination {
-    flex-wrap: wrap;
-    gap: 1px;
-    justify-content: center; /* ✅ Center on mobile */
-  }
-  
-  .paginationNav,
-  .paginationNumber {
-    width: 28px;
-    height: 28px;
-    font-size: 12px;
-  }
-
-  /* ✅ Always show checkboxes on mobile */
-  .checkboxHidden {
-    opacity: 1;
-  }
-  
-  /* ✅ Adjust date container for mobile */
-  .dateContainer {
-    gap: 4px;
-  }
-  
-  .dateIcon {
-    width: 14px;
-    height: 14px;
-  }
-  
-  .date {
-    font-size: 13px;
-
-  }
-  
-  /* ✅ Mobile dropdown adjustments */
-  .dropdownMenu {
-    min-width: 160px;
-    max-height: 250px;
-  }
-  
-  .actionButton {
-    width: 28px;
-    height: 28px;
-  }
-  
-  .icon {
-    width: 14px;
-    height: 14px;
-  }
-}
-
-/* Dark Theme Support */
-/* ADD TO: src/components/OrdersTable/OrdersTable.module.css */
-
-/* ✅ DARK THEME - COMPLETE OVERHAUL TO MATCH REFERENCE */
+/* ✅ DARK THEME - COMPLETE STYLING */
 [data-theme="dark"] .ordersTable {
   background: #2D2D2D;
   border-color: #404040;
@@ -747,4 +663,166 @@
 
 [data-theme="dark"] .overlay {
   background: rgba(0, 0, 0, 0.8);
+}
+
+/* ✅ DARK THEME CUSTOM CHECKBOXES - White background with black checkmark */
+[data-theme="dark"] .checkboxCustom {
+  border-color: #6B7280;
+  background: #374151;
+}
+
+[data-theme="dark"] .checkboxInput:checked + .checkboxCustom {
+  background: #FFFFFF; /* ✅ White background when checked in dark theme */
+  border-color: #FFFFFF;
+}
+
+[data-theme="dark"] .checkboxInput:checked + .checkboxCustom svg {
+  color: #000000; /* ✅ Black checkmark in dark theme */
+}
+
+[data-theme="dark"] .checkboxCustom:hover {
+  border-color: #9CA3AF;
+}
+
+/* ✅ STATUS COLORS STAY THE SAME IN DARK THEME */
+[data-theme="dark"] .statusInProgress {
+  color: #8A8CD9; /* ✅ Same color as light theme */
+}
+
+[data-theme="dark"] .statusInProgress::before {
+  background: #8A8CD9; /* ✅ Same dot color */
+}
+
+[data-theme="dark"] .statusComplete {
+  color: #4AA785; /* ✅ Same color as light theme */
+}
+
+[data-theme="dark"] .statusComplete::before {
+  background: #4AA785; /* ✅ Same dot color */
+}
+
+[data-theme="dark"] .statusPending {
+  color: #59A8D4; /* ✅ Same color as light theme */
+}
+
+[data-theme="dark"] .statusPending::before {
+  background: #59A8D4; /* ✅ Same dot color */
+}
+
+[data-theme="dark"] .statusApproved {
+  color: #FFC555; /* ✅ Same color as light theme */
+}
+
+[data-theme="dark"] .statusApproved::before {
+  background: #FFC555; /* ✅ Same dot color */
+}
+
+[data-theme="dark"] .statusRejected {
+  color: #9ca3af; /* ✅ Same color as light theme */
+}
+
+[data-theme="dark"] .statusRejected::before {
+  background: #9ca3af; /* ✅ Same dot color */
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1200px) {
+  .ordersTable {
+    width: 100%;
+    max-width: 1070px; /* ✅ Updated to match new width */
+  }
+  
+  .searchContainer {
+    width: 200px;
+  }
+  
+  .dropdownMenu {
+    min-width: 180px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .ordersTable {
+    height: auto;
+    min-height: 400px;
+    padding: 16px;
+  }
+  
+  .tableHeader {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+  
+  .leftActions,
+  .rightActions {
+    justify-content: center;
+  }
+  
+  .searchContainer {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .tableContainer {
+    overflow-x: auto;
+  }
+  
+  .table {
+    min-width: 800px;
+  }
+  
+  .headerCell,
+  .tableCell {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  
+  .pagination {
+    flex-wrap: wrap;
+    gap: 1px;
+    justify-content: center; /* ✅ Center on mobile */
+  }
+  
+  .paginationNav,
+  .paginationNumber {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+
+  /* ✅ Always show checkboxes on mobile */
+  .checkboxHidden {
+    opacity: 1;
+  }
+  
+  /* ✅ Adjust date container for mobile */
+  .dateContainer {
+    gap: 4px;
+  }
+  
+  .dateIcon {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .date {
+    font-size: 13px;
+  }
+  
+  /* ✅ Mobile dropdown adjustments */
+  .dropdownMenu {
+    min-width: 160px;
+    max-height: 250px;
+  }
+  
+  .actionButton {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .icon {
+    width: 14px;
+    height: 14px;
+  }
 }

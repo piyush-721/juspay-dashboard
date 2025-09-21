@@ -1,14 +1,21 @@
-// src/components/OrdersTable/OrdersTable.jsx
+// src/components/OrdersTable/OrdersTable.jsx - UPDATED FOR DARK MODE ICONS & CUSTOM CHECKBOXES
 import React, { useState, useMemo, useCallback, useRef } from 'react';
+import { useSelector } from 'react-redux';
 import styles from './OrdersTable.module.css';
 
-// Import icons
+// Light theme icons
 import searchIcon from '../../assets/icons/search.png';
 import filterIcon from '../../assets/icons/filter.png';
 import sortIcon from '../../assets/icons/sort.png';
 import addIcon from '../../assets/icons/add.png';
 
-// Import avatars
+// ✅ Dark theme icons
+import searchIconDark from '../../assets/darkIcons/search.png';
+import filterIconDark from '../../assets/darkIcons/filter.png';
+import sortIconDark from '../../assets/darkIcons/sort.png';
+import addIconDark from '../../assets/darkIcons/add.png';
+
+// Import avatars (these don't change with theme)
 import avatar1 from '../../assets/avatars/avatar1.png';
 import avatar2 from '../../assets/avatars/avatar2.png';
 import avatar3 from '../../assets/avatars/avatar3.png';
@@ -156,6 +163,7 @@ const sampleOrders = [
 ];
 
 const OrdersTable = () => {
+  const theme = useSelector((state) => state.theme.theme); // ✅ Get current theme
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
@@ -168,6 +176,11 @@ const OrdersTable = () => {
   const itemsPerPage = 10;
 
   const debounceTimeoutRef = useRef(null);
+
+  // ✅ Helper function to get correct icon based on theme
+  const getIcon = (lightIcon, darkIcon) => {
+    return theme === 'dark' ? darkIcon : lightIcon;
+  };
 
   // Status options for filtering
   const statusOptions = ['All', 'In Progress', 'Complete', 'Pending', 'Approved', 'Rejected'];
@@ -321,9 +334,9 @@ const OrdersTable = () => {
       {/* Header Section */}
       <div className={styles.tableHeader}>
         <div className={styles.leftActions}>
-          {/* ✅ Add Button */}
+          {/* ✅ Add Button with dynamic icon */}
           <button className={styles.actionButton} onClick={handleAddOrder}>
-            <img src={addIcon} alt="Add" className={styles.icon} />
+            <img src={getIcon(addIcon, addIconDark)} alt="Add" className={styles.icon} />
           </button>
           
           {/* ✅ Filter Button with Dropdown */}
@@ -335,7 +348,7 @@ const OrdersTable = () => {
                 setShowSortDropdown(false);
               }}
             >
-              <img src={filterIcon} alt="Filter" className={styles.icon} />
+              <img src={getIcon(filterIcon, filterIconDark)} alt="Filter" className={styles.icon} />
             </button>
             {showFilterDropdown && (
               <div className={styles.dropdownMenu}>
@@ -363,7 +376,7 @@ const OrdersTable = () => {
                 setShowFilterDropdown(false);
               }}
             >
-              <img src={sortIcon} alt="Sort" className={styles.icon} />
+              <img src={getIcon(sortIcon, sortIconDark)} alt="Sort" className={styles.icon} />
             </button>
             {showSortDropdown && (
               <div className={styles.dropdownMenu}>
@@ -391,7 +404,7 @@ const OrdersTable = () => {
 
         <div className={styles.rightActions}>
           <div className={styles.searchContainer}>
-            <img src={searchIcon} alt="Search" className={styles.searchIcon} />
+            <img src={getIcon(searchIcon, searchIconDark)} alt="Search" className={styles.searchIcon} />
             <input
               type="text"
               placeholder="Search"
@@ -409,12 +422,21 @@ const OrdersTable = () => {
           <thead>
             <tr>
               <th className={styles.checkboxHeader}>
-                <input
-                  type="checkbox"
-                  checked={selectedOrders.length === paginatedOrders.length && paginatedOrders.length > 0}
-                  onChange={handleSelectAll}
-                  className={styles.checkbox}
-                />
+                <div className={styles.customCheckbox}>
+                  <input
+                    type="checkbox"
+                    checked={selectedOrders.length === paginatedOrders.length && paginatedOrders.length > 0}
+                    onChange={handleSelectAll}
+                    className={styles.checkboxInput}
+                  />
+                  <div className={styles.checkboxCustom}>
+                    {selectedOrders.length === paginatedOrders.length && paginatedOrders.length > 0 && (
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 3L4.5 8.5L2 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    )}
+                  </div>
+                </div>
               </th>
               <th className={styles.headerCell} onClick={() => handleSort('id')}>
                 Order ID
@@ -476,16 +498,25 @@ const OrdersTable = () => {
                 onMouseLeave={() => setHoveredRow(null)}
               >
                 <td className={styles.checkboxCell}>
-                  <input
-                    type="checkbox"
-                    checked={selectedOrders.includes(order.id)}
-                    onChange={() => handleSelectOrder(order.id)}
-                    className={`${styles.checkbox} ${
-                      hoveredRow === order.id || selectedOrders.includes(order.id) 
-                        ? styles.checkboxVisible 
-                        : styles.checkboxHidden
-                    }`}
-                  />
+                  <div className={`${styles.customCheckbox} ${
+                    hoveredRow === order.id || selectedOrders.includes(order.id) 
+                      ? styles.checkboxVisible 
+                      : styles.checkboxHidden
+                  }`}>
+                    <input
+                      type="checkbox"
+                      checked={selectedOrders.includes(order.id)}
+                      onChange={() => handleSelectOrder(order.id)}
+                      className={styles.checkboxInput}
+                    />
+                    <div className={styles.checkboxCustom}>
+                      {selectedOrders.includes(order.id) && (
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M10 3L4.5 8.5L2 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      )}
+                    </div>
+                  </div>
                 </td>
                 <td className={styles.tableCell}>
                   <span className={styles.orderId}>{order.id}</span>
