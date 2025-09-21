@@ -1,18 +1,44 @@
+/**
+ * NotificationsPanel Component
+ * 
+ * A responsive side panel that displays notifications, user activities, and
+ * contacts list. Features adaptive behavior - fixed sidebar on desktop and
+ * overlay modal on mobile devices. Supports theme-aware icon switching and
+ * automatic sidebar management for optimal space utilization.
+ * 
+ * @component
+ * @author Your Name
+ * @since 1.0.0
+ * @version 2.3.0
+ */
+
 // src/components/NotificationsPanel/NotificationsPanel.jsx - UPDATED FOR DARK MODE ICONS
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleNotifications, closeSidebar } from '../../store/slices/themeSlice';
 import styles from './NotificationsPanel.module.css';
 
+// =============================================================================
+// ASSET IMPORTS - Light Theme Icons
+// =============================================================================
+
 // Light theme icons
 import bugIcon from '../../assets/icons/bug.png';
 import userIcon from '../../assets/icons/user.png';
 import antennaIcon from '../../assets/icons/antenna.png';
 
+// =============================================================================
+// ASSET IMPORTS - Dark Theme Icons  
+// =============================================================================
+
 // ✅ Dark theme icons
 import bugIconDark from '../../assets/darkIcons/bug.png';
 import userIconDark from '../../assets/darkIcons/user.png';
 import antennaIconDark from '../../assets/darkIcons/antenna.png';
+
+// =============================================================================
+// ASSET IMPORTS - User Avatar Images (Theme Independent)
+// =============================================================================
 
 // Avatar imports (these don't change with theme)
 import avatarIcon1 from '../../assets/avatars/avatar1.png';
@@ -22,13 +48,35 @@ import avatarIcon4 from '../../assets/avatars/avatar4.png';
 import avatarIcon5 from '../../assets/avatars/avatar5.png';
 import avatarIcon6 from '../../assets/avatars/avatar6.png';
 
+/**
+ * NotificationsPanel functional component
+ * 
+ * Renders contextual panel with notifications, activities, and contacts
+ * @returns {JSX.Element|null} Panel component or null if closed
+ */
 const NotificationsPanel = () => {
+  // ===========================================================================
+  // HOOKS & STATE MANAGEMENT
+  // ===========================================================================
+  
   const dispatch = useDispatch();
   const { notificationsPanelOpen, sidebarOpen, theme } = useSelector((state) => state.theme); // ✅ Get theme
 
+  // ===========================================================================
+  // EVENT HANDLERS
+  // ===========================================================================
+
+  /**
+   * Handles panel close action
+   * Dispatches Redux action to hide the notifications panel
+   */
   const handleClosePanel = () => {
     dispatch(toggleNotifications());
   };
+
+  // ===========================================================================
+  // SIDE EFFECTS - Responsive Behavior Management
+  // ===========================================================================
 
   // ✅ Auto-close sidebar when notifications panel opens on small screens
   useEffect(() => {
@@ -39,13 +87,29 @@ const NotificationsPanel = () => {
     }
   }, [notificationsPanelOpen, dispatch, sidebarOpen]);
 
+  // ===========================================================================
+  // UTILITY FUNCTIONS
+  // ===========================================================================
+
   // ✅ Helper function to get correct icon based on theme
   const getIcon = (lightIcon, darkIcon) => {
     return theme === 'dark' ? darkIcon : lightIcon;
   };
 
+  // ===========================================================================
+  // EARLY RETURN - Panel Visibility Check
+  // ===========================================================================
+
   if (!notificationsPanelOpen) return null;
 
+  // ===========================================================================
+  // DATA CONFIGURATION - Panel Content
+  // ===========================================================================
+
+  /**
+   * System notifications data with dynamic theme-aware icons
+   * @type {Array<Object>}
+   */
   const notificationsData = [
     {
       id: 1,
@@ -77,6 +141,11 @@ const NotificationsPanel = () => {
     }
   ];
 
+  /**
+   * User activity feed data
+   * Recent activities with user avatars (theme-independent)
+   * @type {Array<Object>}
+   */
   const activitiesData = [
     {
       id: 1,
@@ -115,6 +184,11 @@ const NotificationsPanel = () => {
     }
   ];
 
+  /**
+   * Team contacts directory
+   * List of team members for quick access
+   * @type {Array<Object>}
+   */
   const contactsData = [
     { id: 1, avatar: avatarIcon1, name: 'Natali Craig' },
     { id: 2, avatar: avatarIcon2, name: 'Drew Cano' },
@@ -124,9 +198,17 @@ const NotificationsPanel = () => {
     { id: 6, avatar: avatarIcon6, name: 'Koray Okumus' }
   ];
 
+  // ===========================================================================
+  // COMPONENT RENDER
+  // ===========================================================================
+
   return (
     <div className={styles.panelWrapper}>
       <div className={styles.notificationsPanel}>
+        {/* =====================================================================
+            PANEL HEADER - Title and Mobile Close Button
+            ===================================================================== */}
+        
         {/* ✅ Header with close button for mobile */}
         <div className={styles.header}>
           <h2 className={styles.title}>Notifications</h2>
@@ -141,7 +223,15 @@ const NotificationsPanel = () => {
           </button>
         </div>
 
+        {/* =====================================================================
+            PANEL CONTENT - Scrollable Content Areas
+            ===================================================================== */}
+
         <div className={styles.content}>
+          {/* ==================================================================
+              NOTIFICATIONS SECTION - System Alerts and Updates
+              ================================================================== */}
+          
           {/* Notifications Section */}
           <div className={styles.section}>
             {notificationsData.map((notification) => (
@@ -156,6 +246,10 @@ const NotificationsPanel = () => {
               </div>
             ))}
           </div>
+
+          {/* ==================================================================
+              ACTIVITIES SECTION - User Activity Feed
+              ================================================================== */}
 
           {/* Activities Section */}
           <div className={styles.section}>
@@ -172,6 +266,10 @@ const NotificationsPanel = () => {
               </div>
             ))}
           </div>
+
+          {/* ==================================================================
+              CONTACTS SECTION - Team Directory
+              ================================================================== */}
 
           {/* Contacts Section */}
           <div className={styles.section}>

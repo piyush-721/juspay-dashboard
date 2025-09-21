@@ -1,261 +1,391 @@
+/**
+ * TopSellingProducts Component Styles
+ * 
+ * Advanced responsive styling for a product performance table component with
+ * progressive column hiding, hover effects, and exact dimensional matching
+ * with the RevenueChart component for consistent dashboard layout.
+ * 
+ * Key Features:
+ * - Exact dimensional matching with RevenueChart (650px × 318px)
+ * - Progressive responsive design with smart column hiding
+ * - Mobile-first column priority system (Name → Amount → Price → Quantity)
+ * - Smooth hover transitions and visual feedback
+ * - Text overflow handling with ellipsis truncation
+ * - Theme-aware styling for light/dark modes
+ * - Fixed table layout for consistent column widths
+ * 
+ * Layout Architecture:
+ * - Desktop: All 4 columns visible (Name 40%, Price 20%, Quantity 20%, Amount 20%)
+ * - Tablet: Hide Quantity column (Name 50%, Price 25%, Amount 25%)
+ * - Mobile: Show only Name + Amount (Name 60%, Amount 40%)
+ * 
+ * Responsive Breakpoints:
+ * - Matches RevenueChart breakpoints exactly for layout consistency
+ * - Progressive column hiding based on screen size and content priority
+ * 
+ * @author Your Name
+ * @since 1.0.0
+ * @version 2.0.0
+ */
+
 /* src/components/TopSellingProducts/TopSellingProducts.module.css */
 
+/* =============================================================================
+   MAIN CONTAINER - Exact RevenueChart Dimensional Matching
+   ============================================================================= */
+
+/**
+ * Primary component container with exact RevenueChart dimensions
+ * 
+ * Maintains perfect consistency with RevenueChart component for
+ * seamless dashboard grid layout and visual harmony.
+ */
 .topSellingProducts {
-  width: 650px; /* ✅ EXACTLY same as RevenueChart */
-  height: 318px; /* ✅ EXACTLY same as RevenueChart */
-  min-width: 650px; /* ✅ EXACTLY same as RevenueChart */
-  background: #F7F9FB; /* ✅ Same background as RevenueChart */
-  border-radius: 16px; /* ✅ Same border-radius as RevenueChart */
-  padding: 24px; /* ✅ Same padding as RevenueChart */
-  font-family: Inter, sans-serif;
+  width: 650px;                     /* ✅ EXACTLY same as RevenueChart */
+  height: 318px;                    /* ✅ EXACTLY same as RevenueChart */
+  min-width: 650px;                 /* ✅ EXACTLY same as RevenueChart */
+  background: #F7F9FB;              /* ✅ Same background as RevenueChart */
+  border-radius: 16px;              /* ✅ Same border-radius as RevenueChart */
+  padding: 24px;                    /* ✅ Same padding as RevenueChart */
+  font-family: Inter, sans-serif;   /* Consistent brand typography */
   display: flex;
-  flex-direction: column;
-  gap: 16px; /* ✅ Same gap as RevenueChart */
+  flex-direction: column;           /* Vertical layout: header + table */
+  gap: 16px;                        /* ✅ Same gap as RevenueChart */
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* ✅ Same shadow as RevenueChart */
-  overflow: hidden;
-  box-sizing: border-box;
+  overflow: hidden;                 /* Contain table overflow */
+  box-sizing: border-box;           /* Include padding in dimensions */
 }
 
+/* =============================================================================
+   HEADER SECTION - Title Area Matching RevenueChart
+   ============================================================================= */
+
+/**
+ * Header container with RevenueChart consistency
+ */
 /* ✅ Header - Match RevenueChart header */
 .header {
-  flex-shrink: 0;
-  margin-bottom: 12px; /* ✅ Same as RevenueChart chartHeader */
+  flex-shrink: 0;                   /* Prevent header compression */
+  margin-bottom: 12px;              /* ✅ Same as RevenueChart chartHeader */
 }
 
+/**
+ * Component title with precise design specifications
+ */
 .title {
-width: 614px;
-height: 20px;
-opacity: 1;
-font-family: Inter;
-font-weight: 600;
-font-style: Semi Bold;
-font-size: 14px;
-line-height: 20px;
-letter-spacing: 0%;
-color: #1C1C1C;
+  width: 614px;                     /* Fixed width from design specs */
+  height: 20px;                     /* Fixed height for alignment */
+  opacity: 1;                       /* Full visibility */
+  font-family: Inter;               /* Consistent typography */
+  font-weight: 600;                 /* Semi-bold weight */
+  font-style: Semi Bold;
+  font-size: 14px;                  /* Readable title size */
+  line-height: 20px;                /* Perfect vertical alignment */
+  letter-spacing: 0%;               /* No additional spacing */
+  color: #1C1C1C;                   /* High contrast dark text */
 }
 
+/* =============================================================================
+   TABLE CONTAINER - Data Display Area
+   ============================================================================= */
+
+/**
+ * Table container matching RevenueChart's chart container
+ */
 /* ✅ Table Container - Match RevenueChart chartContainer */
 .tableContainer {
-  flex: 1; /* ✅ Same as RevenueChart chartContainer */
-  width: 100%; /* ✅ Same as RevenueChart chartContainer */
-  height: 220px; /* ✅ Same as RevenueChart chartContainer */
-  overflow: hidden;
-  border-radius: 8px;
+  flex: 1;                          /* ✅ Same as RevenueChart chartContainer */
+  width: 100%;                      /* ✅ Same as RevenueChart chartContainer */
+  height: 220px;                    /* ✅ Same as RevenueChart chartContainer */
+  overflow: hidden;                 /* Hide table overflow */
+  border-radius: 8px;               /* Subtle container rounding */
 }
 
+/* =============================================================================
+   TABLE STRUCTURE - Base Table Styling
+   ============================================================================= */
+
+/**
+ * Main table element with fixed layout for consistent columns
+ */
 .table {
-  width: 100%;
-  border-collapse: collapse;
-  background: transparent;
-  table-layout: fixed;
+  width: 100%;                      /* Full container width */
+  border-collapse: collapse;        /* Remove cell spacing */
+  background: transparent;          /* Inherit container background */
+  table-layout: fixed;              /* Fixed layout for consistent column widths */
 }
 
+/**
+ * Table head section
+ */
 .tableHead {
-  background: transparent;
+  background: transparent;          /* Inherit background */
 }
 
+/**
+ * Header row with bottom border separator
+ */
 .headerRow {
-  border-bottom: 1px solid #E5E7EB;
+  border-bottom: 1px solid #E5E7EB; /* Subtle separator line */
 }
 
+/* =============================================================================
+   TABLE HEADERS - Column Definitions
+   ============================================================================= */
+
+/**
+ * Header cell styling with muted appearance
+ * 
+ * Creates clear visual hierarchy with muted gray headers
+ * that don't compete with data content.
+ */
 .headerCell {
-  font-family: Inter;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
-  color: #9CA3AF;
-  text-align: left;
-  padding: 0 0 12px 0;
-  border: none;
-  background: transparent;
-  width: 212px;
-  height: 18px;
-  opacity: 1;
-
+  font-family: Inter;               /* Consistent typography */
+  font-weight: 400;                 /* Regular weight for headers */
+  font-size: 12px;                  /* Smaller header text */
+  line-height: 16px;                /* Compact line height */
+  color: #9CA3AF;                   /* Muted gray for headers */
+  text-align: left;                 /* Left-align headers */
+  padding: 0 0 12px 0;              /* Bottom padding for spacing */
+  border: none;                     /* No individual cell borders */
+  background: transparent;          /* Inherit background */
+  width: 212px;                     /* Base width (overridden below) */
+  height: 18px;                     /* Fixed height for alignment */
+  opacity: 1;                       /* Full visibility */
 }
 
-.headerCell:nth-child(1) { width: 40%; }
-.headerCell:nth-child(2) { width: 20%; }
-.headerCell:nth-child(3) { width: 20%; }
-.headerCell:nth-child(4) { width: 20%; }
+/**
+ * Responsive column width distribution
+ * 
+ * Defines how table columns are distributed across available space
+ * with content-priority-based sizing.
+ */
+.headerCell:nth-child(1) { width: 40%; } /* Product Name - Primary content */
+.headerCell:nth-child(2) { width: 20%; } /* Price - Important metric */
+.headerCell:nth-child(3) { width: 20%; } /* Quantity - Volume indicator */
+.headerCell:nth-child(4) { width: 20%; } /* Amount - Revenue total */
 
+/* =============================================================================
+   TABLE BODY - Data Rows and Cells
+   ============================================================================= */
 
+/**
+ * Table body section
+ */
 .tableBody {
-  background: transparent;
+  background: transparent;          /* Inherit background */
 }
 
+/**
+ * Data row styling with hover effects
+ * 
+ * Provides visual feedback on row interaction with smooth
+ * background color transitions.
+ */
 .tableRow {
-  border-bottom: 1px solid #F3F4F6;
-  transition: background-color 0.2s ease;
+  border-bottom: 1px solid #F3F4F6; /* Subtle row separator */
+  transition: background-color 0.2s ease; /* Smooth hover transition */
 }
 
 .tableRow:last-child {
-  border-bottom: none;
+  border-bottom: none;              /* Remove border from last row */
 }
 
 .tableRow:hover {
-  background-color: #F9FAFB;
+  background-color: #F9FAFB;        /* Light hover background */
 }
 
+/**
+ * Data cell styling with consistent padding
+ */
 .tableCell {
-  padding: 14px 0;
-  border: none;
-  vertical-align: middle;
+  padding: 14px 0;                  /* Vertical padding for touch targets */
+  border: none;                     /* No individual cell borders */
+  vertical-align: middle;           /* Center align cell content */
 }
 
+/* =============================================================================
+   DATA CONTENT - Product Information Styling
+   ============================================================================= */
+
+/**
+ * Base styling for all product data text elements
+ * 
+ * Ensures consistent typography across all data cells
+ * with readable font sizes and proper color contrast.
+ */
 .productName,
 .productPrice,
 .productQuantity,
 .productAmount {
-  font-family: Inter;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
-  color: #1C1C1C;
+  font-family: Inter;               /* Consistent typography */
+  font-weight: 400;                 /* Regular weight for data */
+  font-size: 14px;                  /* Readable data size */
+  line-height: 20px;                /* Comfortable line spacing */
+  color: #1C1C1C;                   /* High contrast dark text */
 }
 
+/**
+ * Total amount styling with specific design dimensions
+ */
 .productAmount {
-  width: 106px;
-  height: 18px;
-  opacity: 1;
-
+  width: 106px;                     /* Fixed width from design specs */
+  height: 18px;                     /* Fixed height for alignment */
+  opacity: 1;                       /* Full visibility */
 }
 
+/**
+ * Product name with text overflow handling
+ * 
+ * Handles long product names gracefully with ellipsis
+ * truncation to maintain table layout integrity.
+ */
 .productName {
-  display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  display: block;                   /* Block display for text handling */
+  overflow: hidden;                 /* Hide overflow text */
+  text-overflow: ellipsis;          /* Show ellipsis for long names */
+  white-space: nowrap;              /* Prevent text wrapping */
 }
 
-/* ✅ RESPONSIVE BREAKPOINTS - EXACTLY MATCHING REVENUECHART */
+/* =============================================================================
+   RESPONSIVE DESIGN - Exact RevenueChart Breakpoint Matching
+   ============================================================================= */
+
+/* ✅ LARGE SCREENS (1441px+) - Full desktop experience */
 @media screen and (min-width: 1441px) {
   .topSellingProducts {
-    width: 650px;
-    min-width: 650px;
-    max-width: 850px;
+    width: 650px;                   /* Maintain base width */
+    min-width: 650px;               /* Fixed minimum for large screens */
+    max-width: 850px;               /* Allow growth on very large screens */
   }
 }
 
+/* ✅ DESKTOP (1301px - 1440px) - Standard desktop adaptation */
 @media screen and (max-width: 1440px) and (min-width: 1301px) {
   .topSellingProducts {
-    width: 100%;
-    min-width: 550px;
-    max-width: 750px;
+    width: 100%;                    /* Responsive width */
+    min-width: 550px;               /* Reduced minimum width */
+    max-width: 750px;               /* Reasonable maximum */
   }
 }
 
+/* ✅ MEDIUM DESKTOP (1123px - 1300px) - Flexible desktop layout */
 @media screen and (max-width: 1300px) and (min-width: 1123px) {
   .topSellingProducts {
-    width: 100%;
-    min-width: 500px;
-    max-width: 650px;
+    width: 100%;                    /* Full available width */
+    min-width: 500px;               /* Further reduced minimum */
+    max-width: 650px;               /* Maintain optimal maximum */
   }
 }
 
+/* ✅ TABLET LANDSCAPE + SMALL DESKTOP (901px - 1122px) - Compact layout */
 @media screen and (max-width: 1122px) and (min-width: 901px) {
   .topSellingProducts {
     width: 100%;
-    min-width: 400px;
+    min-width: 400px;               /* Tablet-appropriate minimum */
     max-width: 550px;
-    padding: 20px;
-    height: 300px;
+    padding: 20px;                  /* Reduced padding for space */
+    height: 300px;                  /* Slightly reduced height */
   }
   
   .tableContainer {
-    height: 200px;
+    height: 200px;                  /* Proportionally reduced table area */
   }
   
+  /* Maintain same column distribution */
   .headerCell:nth-child(1) { width: 40%; }
   .headerCell:nth-child(2) { width: 20%; }
   .headerCell:nth-child(3) { width: 20%; }
   .headerCell:nth-child(4) { width: 20%; }
 }
 
+/* ✅ TABLET LANDSCAPE (769px - 900px) - Tablet optimization */
 @media screen and (max-width: 900px) and (min-width: 769px) {
   .topSellingProducts {
     width: 100%;
-    min-width: 350px;
+    min-width: 350px;               /* Tablet minimum width */
     max-width: 500px;
-    padding: 18px;
-    height: 280px;
+    padding: 18px;                  /* Compact tablet padding */
+    height: 280px;                  /* Tablet-optimized height */
   }
   
   .title {
-    font-size: 15px;
+    font-size: 15px;                /* Slightly smaller title */
   }
   
   .tableContainer {
-    height: 180px;
+    height: 180px;                  /* Compact table area */
   }
   
   .headerCell {
-    font-size: 11px;
+    font-size: 11px;                /* Smaller header text */
   }
   
   .productName,
   .productPrice,
   .productQuantity,
   .productAmount {
-    font-size: 13px;
+    font-size: 13px;                /* Smaller data text */
   }
   
   .tableCell {
-    padding: 12px 0;
+    padding: 12px 0;                /* Reduced cell padding */
   }
 }
 
+/* ✅ TABLET PORTRAIT (481px - 768px) - Progressive column hiding */
 @media screen and (max-width: 768px) and (min-width: 481px) {
   .topSellingProducts {
     width: 100%;
-    min-width: 300px;
+    min-width: 300px;               /* Tablet portrait minimum */
     max-width: 450px;
-    padding: 16px;
-    height: 260px;
+    padding: 16px;                  /* Minimal tablet padding */
+    height: 260px;                  /* Compact height */
   }
   
   .title {
-    font-size: 14px;
+    font-size: 14px;                /* Mobile-appropriate title size */
   }
   
   .tableContainer {
-    height: 160px;
+    height: 160px;                  /* Very compact table area */
   }
   
   .headerCell {
-    font-size: 10px;
+    font-size: 10px;                /* Small header text */
   }
   
   .productName,
   .productPrice,
   .productQuantity,
   .productAmount {
-    font-size: 12px;
+    font-size: 12px;                /* Small data text */
   }
   
   .tableCell {
-    padding: 10px 0;
+    padding: 10px 0;                /* Minimal cell padding */
   }
   
-  /* ✅ Hide some columns on smaller tablets */
+  /* ✅ Progressive column hiding - Hide Quantity on smaller tablets */
   .headerCell:nth-child(3),
-  .tableCell:nth-child(3) { /* Quantity */
-    display: none;
+  .tableCell:nth-child(3) {         /* Quantity column */
+    display: none;                  /* Hide quantity column */
   }
   
-  .headerCell:nth-child(1) { width: 50%; }
-  .headerCell:nth-child(2) { width: 25%; }
-  .headerCell:nth-child(4) { width: 25%; }
+  /* Redistribute remaining columns */
+  .headerCell:nth-child(1) { width: 50%; } /* Name gets more space */
+  .headerCell:nth-child(2) { width: 25%; } /* Price */
+  .headerCell:nth-child(4) { width: 25%; } /* Amount */
 }
 
+/* ✅ MOBILE LANDSCAPE (376px - 480px) - Essential columns only */
 @media screen and (max-width: 480px) and (min-width: 376px) {
   .topSellingProducts {
     width: 100%;
-    min-width: 280px;
+    min-width: 280px;               /* Mobile minimum width */
     max-width: 380px;
-    padding: 14px;
-    height: 240px;
+    padding: 14px;                  /* Mobile padding */
+    height: 240px;                  /* Mobile height */
   }
   
   .title {
@@ -263,7 +393,7 @@ color: #1C1C1C;
   }
   
   .tableContainer {
-    height: 140px;
+    height: 140px;                  /* Minimal table height */
   }
   
   .headerCell {
@@ -274,81 +404,152 @@ color: #1C1C1C;
   .productPrice,
   .productQuantity,
   .productAmount {
-    font-size: 11px;
+    font-size: 11px;                /* Very small mobile text */
   }
   
   .tableCell {
-    padding: 8px 0;
+    padding: 8px 0;                 /* Minimal padding */
   }
   
-  /* ✅ Show only Name and Amount on mobile */
+  /* ✅ Show only Name and Amount on mobile - Most essential columns */
   .headerCell:nth-child(2),
   .headerCell:nth-child(3),
   .tableCell:nth-child(2),
   .tableCell:nth-child(3) {
-    display: none;
+    display: none;                  /* Hide Price and Quantity */
   }
   
-  .headerCell:nth-child(1) { width: 60%; }
-  .headerCell:nth-child(4) { width: 40%; }
+  /* Focus on essential information */
+  .headerCell:nth-child(1) { width: 60%; } /* Product name priority */
+  .headerCell:nth-child(4) { width: 40%; } /* Total amount */
 }
 
+/* ✅ MOBILE PORTRAIT (320px - 375px) - Ultra-compact mobile */
 @media screen and (max-width: 375px) {
   .topSellingProducts {
     width: 100%;
-    min-width: 250px;
+    min-width: 250px;               /* Ultra-compact minimum */
     max-width: 320px;
-    padding: 12px;
-    height: 220px;
+    padding: 12px;                  /* Minimal padding */
+    height: 220px;                  /* Minimal height */
   }
   
   .title {
-    font-size: 13px;
+    font-size: 13px;                /* Smallest reasonable title */
   }
   
   .tableContainer {
-    height: 120px;
+    height: 120px;                  /* Very minimal table area */
   }
   
   .headerCell {
-    font-size: 9px;
+    font-size: 9px;                 /* Smallest readable header text */
   }
   
   .productName,
   .productAmount {
-    font-size: 10px;
+    font-size: 10px;                /* Smallest readable data text */
   }
   
   .tableCell {
-    padding: 6px 0;
+    padding: 6px 0;                 /* Ultra-minimal padding */
   }
 }
 
+/* =============================================================================
+   THEME SUPPORT - Dark Mode Styling
+   ============================================================================= */
+
+/**
+ * Dark theme component background
+ */
 /* ✅ Dark Theme Support */
 [data-theme="dark"] .topSellingProducts {
-  background: #1f2937;
+  background: #1f2937;              /* Dark background matching other components */
 }
 
+/**
+ * Dark theme title color
+ */
 [data-theme="dark"] .title {
-  color: #f9fafb;
+  color: #f9fafb;                   /* Light title text */
 }
 
+/**
+ * Dark theme header styling
+ */
 [data-theme="dark"] .headerCell {
-  color: #9ca3af;
+  color: #9ca3af;                   /* Muted light headers */
 }
 
+/**
+ * Dark theme table borders
+ */
 [data-theme="dark"] .headerRow,
 [data-theme="dark"] .tableRow {
-  border-bottom-color: #374151;
+  border-bottom-color: #374151;    /* Dark theme borders */
 }
 
+/**
+ * Dark theme row hover effect
+ */
 [data-theme="dark"] .tableRow:hover {
-  background-color: #374151;
+  background-color: #374151;       /* Dark hover background */
 }
 
+/**
+ * Dark theme data text colors
+ */
 [data-theme="dark"] .productName,
 [data-theme="dark"] .productPrice,
 [data-theme="dark"] .productQuantity,
 [data-theme="dark"] .productAmount {
-  color: #f9fafb;
+  color: #f9fafb;                   /* Light data text */
+}
+
+/* =============================================================================
+   ACCESSIBILITY AND PERFORMANCE FEATURES
+   ============================================================================= */
+
+/**
+ * High contrast mode support
+ */
+@media (forced-colors: active) {
+  .topSellingProducts {
+    border: 1px solid;              /* Ensure visible border */
+  }
+  
+  .tableRow {
+    border-bottom: 1px solid;       /* Visible row separators */
+  }
+}
+
+/**
+ * Reduced motion accessibility
+ */
+@media (prefers-reduced-motion: reduce) {
+  .tableRow {
+    transition: none;               /* Disable hover transitions */
+  }
+}
+
+/**
+ * Print styles for table
+ */
+@media print {
+  .topSellingProducts {
+    break-inside: avoid;            /* Avoid page breaks inside table */
+    box-shadow: none;               /* Remove shadows for print */
+  }
+  
+  .title {
+    color: #000 !important;         /* Black title for print */
+  }
+  
+  .productName,
+  .productPrice,
+  .productQuantity,
+  .productAmount {
+    color: #000 !important;         /* Black data text for print */
+  }
 }

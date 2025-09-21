@@ -1,237 +1,482 @@
+/**
+ * WorldMap Component Styles
+ * 
+ * Advanced styling for a geographic revenue visualization component with
+ * interactive location markers, proportional progress bars, and responsive
+ * map scaling. Features precise coordinate positioning and theme support.
+ * 
+ * Key Features:
+ * - Fixed component dimensions (222px × 318px) matching TotalSales
+ * - Interactive location dots with hover effects and tooltips
+ * - Proportional progress bars scaled to maximum revenue value
+ * - Responsive map scaling with maintained aspect ratios
+ * - Theme-aware image filtering for dark mode
+ * - Professional typography and color coordination
+ * - Geographic coordinate-based positioning system
+ * 
+ * Layout Architecture:
+ * - Header: Component title
+ * - Map Container: World map image with overlay markers
+ * - Location List: Revenue data with progress bar visualization
+ * 
+ * Interactive Elements:
+ * - Location dots expand from 4px to 6px on hover
+ * - Tooltips show location name and revenue on hover
+ * - Progress bars animate with smooth width transitions
+ * 
+ * @author Your Name
+ * @since 1.0.0
+ * @version 1.8.0
+ */
+
 /* src/components/WorldMap/WorldMap.module.css */
 
+/* =============================================================================
+   MAIN COMPONENT CONTAINER - Fixed Dimensions and Layout
+   ============================================================================= */
+
+/**
+ * Primary component container matching TotalSales dimensions
+ * 
+ * Maintains consistent dashboard layout with fixed dimensions
+ * and professional styling consistent with other components.
+ */
 .worldMap {
-  width: 222px;
-  height: 318px;
-  border-radius: 16px;
-  padding: 20px;
-  background: var(--Primary-Light, #F7F9FB);
-  font-family: Inter, sans-serif;
+  width: 222px;                     /* Fixed width matching TotalSales */
+  height: 318px;                    /* Fixed height matching TotalSales */
+  border-radius: 16px;              /* Rounded corners */
+  padding: 20px;                    /* Internal spacing */
+  background: var(--Primary-Light, #F7F9FB); /* Light background variable */
+  font-family: Inter, sans-serif;   /* Consistent brand typography */
   display: flex;
-  flex-direction: column;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  box-sizing: border-box;
+  flex-direction: column;           /* Vertical layout: header + map + list */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Subtle depth shadow */
+  box-sizing: border-box;           /* Include padding in dimensions */
 }
 
-/* Header */
+/* =============================================================================
+   COMPONENT HEADER - Title Section
+   ============================================================================= */
+
+/**
+ * Header container with title spacing
+ */
 .header {
-  margin-bottom: 16px;
-  flex-shrink: 0;
+  margin-bottom: 16px;              /* Space before map area */
+  flex-shrink: 0;                   /* Prevent header compression */
 }
 
+/**
+ * Component title styling
+ */
 .title {
-  font-size: 14px;
-  font-weight: 600;
-  color: #111827;
-  margin: 0;
-  line-height: 1.4;
-  font-family: Inter, sans-serif;
+  font-size: 14px;                  /* Readable title size */
+  font-weight: 600;                 /* Semi-bold weight */
+  color: #111827;                   /* High contrast dark text */
+  margin: 0;                        /* Remove default margins */
+  line-height: 1.4;                 /* Comfortable line spacing */
+  font-family: Inter, sans-serif;   /* Consistent typography */
 }
 
-/* Map Container */
+/* =============================================================================
+   MAP CONTAINER - World Map Display Area
+   ============================================================================= */
+
+/**
+ * Map container with fixed dimensions and centering
+ */
 .mapContainer {
-  flex: 0 0 100px;
+  flex: 0 0 100px;                  /* Fixed 100px height, no grow/shrink */
   display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 16px;
-  overflow: hidden;
+  align-items: center;              /* Center map vertically */
+  justify-content: center;          /* Center map horizontally */
+  margin-bottom: 16px;              /* Space before location list */
+  overflow: hidden;                 /* Hide map overflow */
 }
 
+/**
+ * Map image wrapper with size constraints
+ * 
+ * Provides relative positioning context for location dots
+ * while maintaining map aspect ratio and size limits.
+ */
 .mapImageWrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  max-width: 140px;
-  max-height: 90px;
+  position: relative;               /* Enable absolute positioning for dots */
+  width: 100%;                      /* Full container width */
+  height: 100%;                     /* Full container height */
+  max-width: 140px;                 /* Maximum map width */
+  max-height: 90px;                 /* Maximum map height */
 }
 
+/**
+ * World map image styling with transparency
+ */
 .mapImage {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  opacity: 0.8;
+  width: 100%;                      /* Fill wrapper width */
+  height: 100%;                     /* Fill wrapper height */
+  object-fit: contain;              /* Maintain aspect ratio */
+  opacity: 0.8;                     /* Subtle transparency for visual hierarchy */
 }
 
-/* Location Dots Overlay */
+/* =============================================================================
+   LOCATION MARKERS - Interactive Geographic Indicators
+   ============================================================================= */
+
+/**
+ * Location dots overlay container
+ * 
+ * Provides absolute positioning context for location markers
+ * while maintaining full coverage of the map image.
+ */
 .locationDotsOverlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
+  top: 0;                           /* Cover entire map from top */
+  left: 0;                          /* Cover entire map from left */
+  width: 100%;                      /* Full map width coverage */
+  height: 100%;                     /* Full map height coverage */
+  pointer-events: none;             /* Allow clicks to pass through overlay */
 }
 
+/**
+ * Individual location marker dots
+ * 
+ * Small circular indicators positioned at geographic coordinates
+ * with hover effects and tooltip functionality.
+ */
 .locationDot {
-  position: absolute;
-  width: 4px;
+  position: absolute;               /* Absolute positioning within overlay */
+  width: 4px;                       /* Base dot diameter */
   height: 4px;
-  background-color: #374151;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  pointer-events: all;
+  background-color: #374151;        /* Dark gray dot color */
+  border-radius: 50%;               /* Perfect circle */
+  cursor: pointer;                  /* Indicate interactivity */
+  transition: all 0.2s ease;       /* Smooth hover transitions */
+  pointer-events: all;              /* Enable hover and click events */
 }
 
+/**
+ * Location dot hover effects
+ * 
+ * Enlarges dots and darkens color on hover for visual feedback
+ * while adjusting transform to maintain center positioning.
+ */
 .locationDot:hover {
-  width: 6px;
+  width: 6px;                       /* Enlarged hover diameter */
   height: 6px;
-  background-color: #1f2937;
-  transform: translate(-1px, -1px);
+  background-color: #1f2937;        /* Darker hover color */
+  transform: translate(-1px, -1px); /* Adjust position to maintain center */
 }
 
-/* Location List */
+/* =============================================================================
+   LOCATION DATA LIST - Revenue Information Display
+   ============================================================================= */
+
+/**
+ * Location list container with flexible layout
+ */
 .locationList {
-  flex: 1;
+  flex: 1;                          /* Take remaining vertical space */
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  flex-direction: column;           /* Stack location items vertically */
+  gap: 12px;                        /* Space between location items */
 }
 
+/**
+ * Individual location item container
+ */
 .locationItem {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  flex-direction: column;           /* Stack row and bar vertically */
+  gap: 4px;                         /* Small gap between text and progress bar */
 }
 
+/**
+ * Location row with name and revenue
+ */
 .locationRow {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: space-between;   /* Spread location name and revenue */
+  align-items: center;              /* Center align row content */
 }
 
+/**
+ * Location name styling
+ */
 .locationName {
-  font-size: 12px;
-  font-weight: 400;
-  color: #374151;
-  line-height: 1.3;
-  font-family: Inter, sans-serif;
+  font-size: 12px;                  /* Small readable text */
+  font-weight: 400;                 /* Regular weight */
+  color: #374151;                   /* Muted dark text */
+  line-height: 1.3;                 /* Compact line spacing */
+  font-family: Inter, sans-serif;   /* Consistent typography */
 }
 
+/**
+ * Revenue value styling with emphasis
+ */
 .locationRevenue {
-  font-size: 12px;
-  font-weight: 600;
-  color: #111827;
-  font-family: Inter, sans-serif;
+  font-size: 12px;                  /* Small readable text */
+  font-weight: 600;                 /* Bold weight for emphasis */
+  color: #111827;                   /* High contrast dark text */
+  font-family: Inter, sans-serif;   /* Consistent typography */
 }
 
+/* =============================================================================
+   PROGRESS BAR SYSTEM - Revenue Visualization Bars
+   ============================================================================= */
+
+/**
+ * Progress bar container with precise specifications
+ * 
+ * Creates background track for progress bars with exact design
+ * specifications including border-radius and color.
+ */
 /* Progress Bar - Full width spanning under revenue numbers */
 .barContainer {
-  width: 100%; /* ✅ Full width to go under revenue numbers */
-  height: 2px; /* ✅ Exact Figma height */
-  background-color: #F3F4F6; /* ✅ Light gray track background */
-  border-radius: 80px; /* ✅ Exact Figma border-radius */
-  overflow: hidden;
-  opacity: 1; /* ✅ Exact Figma opacity */
+  width: 100%;                      /* ✅ Full width to go under revenue numbers */
+  height: 2px;                      /* ✅ Exact Figma height */
+  background-color: #F3F4F6;        /* ✅ Light gray track background */
+  border-radius: 80px;              /* ✅ Exact Figma border-radius */
+  overflow: hidden;                 /* Contain progress bar within track */
+  opacity: 1;                       /* ✅ Exact Figma opacity */
 }
 
+/**
+ * Animated progress bar with proportional width
+ * 
+ * Displays revenue proportion through dynamic width calculation
+ * with smooth transitions and consistent styling.
+ */
 .progressBar {
-  height: 100%;
+  height: 100%;                     /* Fill container height */
   background: var(--Secondary-Cyan, #A8C5DA); /* ✅ Solid cyan color */
-  border-radius: 80px; /* ✅ Matching border-radius */
-  transition: width 0.3s ease;
-  opacity: 1; /* ✅ Full opacity */
+  border-radius: 80px;              /* ✅ Matching border-radius */
+  transition: width 0.3s ease;      /* Smooth width animation */
+  opacity: 1;                       /* ✅ Full opacity */
 }
 
+/* =============================================================================
+   RESPONSIVE DESIGN - Progressive Mobile Optimization
+   ============================================================================= */
+
+/**
+ * Desktop responsiveness (max-width: 1440px)
+ * Flexible width while maintaining maximum size
+ */
 /* Responsive Design */
 @media screen and (max-width: 1440px) {
   .worldMap {
-    width: 100%;
-    min-width: 180px;
-    max-width: 222px;
+    width: 100%;                    /* Responsive width */
+    min-width: 180px;               /* Minimum width for readability */
+    max-width: 222px;               /* Maintain maximum size */
   }
 }
 
+/**
+ * Tablet responsiveness (max-width: 768px)
+ * Reduced map size and adjusted spacing
+ */
 @media screen and (max-width: 768px) {
   .worldMap {
     width: 100%;
-    min-width: 180px;
-    max-width: 240px;
-    padding: 18px;
-    height: 300px;
+    min-width: 180px;               /* Tablet minimum width */
+    max-width: 240px;               /* Slightly larger maximum */
+    padding: 18px;                  /* Reduced padding */
+    height: 300px;                  /* Slightly reduced height */
   }
   
   .mapContainer {
-    flex: 0 0 80px;
-    margin-bottom: 14px;
+    flex: 0 0 80px;                 /* Smaller map container */
+    margin-bottom: 14px;            /* Reduced spacing */
   }
   
   .mapImageWrapper {
-    max-width: 120px;
-    max-height: 70px;
+    max-width: 120px;               /* Smaller map width */
+    max-height: 70px;               /* Smaller map height */
   }
   
   .locationList {
-    gap: 10px;
+    gap: 10px;                      /* Reduced list spacing */
   }
 }
 
+/**
+ * Mobile responsiveness (max-width: 480px)
+ * Compact layout with minimal map size
+ */
 @media screen and (max-width: 480px) {
   .worldMap {
-    min-width: 160px;
-    max-width: 200px;
-    padding: 16px;
-    height: 280px;
+    min-width: 160px;               /* Mobile minimum width */
+    max-width: 200px;               /* Compact maximum */
+    padding: 16px;                  /* Minimal padding */
+    height: 280px;                  /* Compact height */
   }
   
   .title {
-    font-size: 13px;
+    font-size: 13px;                /* Smaller title text */
   }
   
   .mapContainer {
-    flex: 0 0 70px;
-    margin-bottom: 12px;
+    flex: 0 0 70px;                 /* Minimal map container */
+    margin-bottom: 12px;            /* Minimal spacing */
   }
   
   .mapImageWrapper {
-    max-width: 100px;
-    max-height: 60px;
+    max-width: 100px;               /* Minimal map width */
+    max-height: 60px;               /* Minimal map height */
   }
   
   .locationName,
   .locationRevenue {
-    font-size: 11px;
+    font-size: 11px;                /* Smaller text for mobile */
   }
   
   .locationList {
-    gap: 8px;
+    gap: 8px;                       /* Minimal list spacing */
   }
 }
 
+/* =============================================================================
+   THEME SUPPORT - Dark Mode Styling
+   ============================================================================= */
+
+/**
+ * Dark theme component background
+ */
 /* Dark Theme Support */
 [data-theme="dark"] .worldMap {
-  background: var(--Primary-Dark, #1f2937);
+  background: var(--Primary-Dark, #1f2937); /* Dark background variable */
 }
 
+/**
+ * Dark theme title color
+ */
 [data-theme="dark"] .title {
-  color: #f9fafb;
+  color: #f9fafb;                   /* Light title text */
 }
 
+/**
+ * Dark theme map image filtering
+ * 
+ * Adjusts map image for better visibility in dark theme
+ * with reduced brightness and enhanced contrast.
+ */
 [data-theme="dark"] .mapImage {
-  filter: brightness(0.8) contrast(1.1);
+  filter: brightness(0.8) contrast(1.1); /* Darker, more contrasted map */
 }
 
+/**
+ * Dark theme location dot styling
+ */
 [data-theme="dark"] .locationDot {
-  background-color: #9ca3af;
+  background-color: #9ca3af;        /* Light gray dots for dark theme */
 }
 
 [data-theme="dark"] .locationDot:hover {
-  background-color: #f9fafb;
+  background-color: #f9fafb;        /* Bright hover color for dark theme */
 }
 
+/**
+ * Dark theme location name color
+ */
 [data-theme="dark"] .locationName {
-  color: #e5e7eb;
+  color: #e5e7eb;                   /* Muted light text */
 }
 
+/**
+ * Dark theme revenue value color
+ */
 [data-theme="dark"] .locationRevenue {
-  color: #f9fafb;
+  color: #f9fafb;                   /* Bright light text for emphasis */
 }
 
+/**
+ * Dark theme progress bar track
+ */
 [data-theme="dark"] .barContainer {
-  background-color: #374151; /* ✅ Dark gray track */
+  background-color: #374151;        /* ✅ Dark gray track */
 }
 
+/**
+ * Dark theme progress bar - maintains same color
+ */
 [data-theme="dark"] .progressBar {
   background: var(--Secondary-Cyan, #A8C5DA); /* ✅ Same cyan color */
+}
+
+/* =============================================================================
+   ACCESSIBILITY AND PERFORMANCE FEATURES
+   ============================================================================= */
+
+/**
+ * High contrast mode support
+ */
+@media (forced-colors: active) {
+  .worldMap {
+    border: 1px solid;              /* Ensure visible border */
+  }
+  
+  .locationDot {
+    border: 1px solid;              /* Visible location markers */
+    background-color: Highlight;    /* System highlight color */
+  }
+  
+  .progressBar {
+    background: Highlight;          /* System highlight for progress */
+  }
+}
+
+/**
+ * Reduced motion accessibility
+ */
+@media (prefers-reduced-motion: reduce) {
+  .locationDot,
+  .progressBar {
+    transition: none;               /* Disable animations */
+  }
+}
+
+/**
+ * Print styles for map component
+ */
+@media print {
+  .worldMap {
+    break-inside: avoid;            /* Avoid page breaks inside component */
+    box-shadow: none;               /* Remove shadows for print */
+  }
+  
+  .mapImage {
+    filter: grayscale(100%);        /* Convert to grayscale for print */
+  }
+  
+  .title,
+  .locationName,
+  .locationRevenue {
+    color: #000 !important;         /* Black text for print */
+  }
+  
+  .locationDot {
+    background-color: #000 !important; /* Black dots for print */
+  }
+}
+
+/**
+ * Touch device optimizations
+ */
+@media (hover: none) and (pointer: coarse) {
+  .locationDot {
+    min-width: 44px;                /* Larger touch target */
+    min-height: 44px;
+    border-radius: 50%;             /* Maintain circular shape */
+    display: flex;
+    align-items: center;            /* Center small dot within large target */
+    justify-content: center;
+  }
+  
+  .locationDot::before {
+    content: '';
+    width: 6px;                     /* Visible dot within touch target */
+    height: 6px;
+    background-color: inherit;
+    border-radius: 50%;
+  }
 }

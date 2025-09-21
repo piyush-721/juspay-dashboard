@@ -1,7 +1,47 @@
+/**
+ * OrdersTable Component
+ * 
+ * A sophisticated data table component for managing order information with advanced features
+ * including sorting, filtering, searching, pagination, and bulk selection. Features responsive
+ * design with theme-aware icons and custom checkbox styling.
+ * 
+ * Features:
+ * - Advanced search with 300ms debouncing
+ * - Multi-column sorting with visual indicators
+ * - Status-based filtering with dropdown UI
+ * - Custom checkbox system with hover-based visibility
+ * - Pagination with page navigation
+ * - Bulk row selection capabilities
+ * - Theme-aware icon switching (light/dark)
+ * - Responsive design with mobile optimizations
+ * - Real-time data filtering and sorting
+ * 
+ * Design Specifications:
+ * - Fixed dimensions: 1070px × 536px
+ * - 10 items per page pagination
+ * - Custom black/white checkbox styling
+ * - Right-aligned pagination controls
+ * - Dropdown overlays with backdrop
+ * 
+ * @component
+ * @example
+ * return (
+ *   <OrdersTable />
+ * )
+ * 
+ * @author Your Name
+ * @since 1.0.0
+ * @version 3.2.0
+ */
+
 // src/components/OrdersTable/OrdersTable.jsx - UPDATED FOR DARK MODE ICONS & CUSTOM CHECKBOXES
 import React, { useState, useMemo, useCallback, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import styles from './OrdersTable.module.css';
+
+// =============================================================================
+// ASSET IMPORTS - Light Theme Icons
+// =============================================================================
 
 // Light theme icons
 import searchIcon from '../../assets/icons/search.png';
@@ -9,11 +49,19 @@ import filterIcon from '../../assets/icons/filter.png';
 import sortIcon from '../../assets/icons/sort.png';
 import addIcon from '../../assets/icons/add.png';
 
+// =============================================================================
+// ASSET IMPORTS - Dark Theme Icons
+// =============================================================================
+
 // ✅ Dark theme icons
 import searchIconDark from '../../assets/darkIcons/search.png';
 import filterIconDark from '../../assets/darkIcons/filter.png';
 import sortIconDark from '../../assets/darkIcons/sort.png';
 import addIconDark from '../../assets/darkIcons/add.png';
+
+// =============================================================================
+// ASSET IMPORTS - User Avatar Images (Theme Independent)
+// =============================================================================
 
 // Import avatars (these don't change with theme)
 import avatar1 from '../../assets/avatars/avatar1.png';
@@ -23,7 +71,28 @@ import avatar4 from '../../assets/avatars/avatar4.png';
 import avatar5 from '../../assets/avatars/avatar5.png';
 import avatar6 from '../../assets/avatars/avatar6.png';
 
-// Sample data with proper date sorting values
+// =============================================================================
+// SAMPLE DATA CONFIGURATION - Order Records
+// =============================================================================
+
+/**
+ * Sample order data with comprehensive order information
+ * 
+ * Contains realistic order data for demonstration and development.
+ * Each order includes user info, project details, location, timestamps,
+ * and status information. Date objects are provided for proper sorting.
+ * 
+ * @type {Array<Object>}
+ * @property {string} id - Unique order identifier with # prefix
+ * @property {Object} user - User information object
+ * @property {string} user.name - Full name of the user
+ * @property {string} user.avatar - Path to user's avatar image
+ * @property {string} project - Project name/description
+ * @property {string} address - User's address information
+ * @property {string} date - Human-readable date string
+ * @property {Date} dateValue - Date object for accurate sorting
+ * @property {string} status - Order status for filtering and display
+ */
 const sampleOrders = [
   {
     id: '#CM9801',
@@ -162,30 +231,75 @@ const sampleOrders = [
   }
 ];
 
+/**
+ * OrdersTable functional component
+ * 
+ * Main component that renders the complete orders management interface
+ * with all interactive features and responsive behavior.
+ * 
+ * @returns {JSX.Element} The rendered orders table component
+ */
 const OrdersTable = () => {
+  // ===========================================================================
+  // HOOKS & STATE MANAGEMENT
+  // ===========================================================================
+  
+  /** Get current theme from Redux store */
   const theme = useSelector((state) => state.theme.theme); // ✅ Get current theme
+  
+  /** Search input state - immediate UI feedback */
   const [searchTerm, setSearchTerm] = useState('');
+  
+  /** Debounced search term for actual filtering */
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
+  
+  /** Sorting configuration with column and direction */
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
+  
+  /** Current status filter selection */
   const [statusFilter, setStatusFilter] = useState('All');
+  
+  /** Current pagination page number */
   const [currentPage, setCurrentPage] = useState(1);
+  
+  /** Array of selected order IDs for bulk operations */
   const [selectedOrders, setSelectedOrders] = useState([]);
+  
+  /** Currently hovered row for checkbox visibility */
   const [hoveredRow, setHoveredRow] = useState(null);
+  
+  /** Filter dropdown visibility state */
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
+  
+  /** Sort dropdown visibility state */
   const [showSortDropdown, setShowSortDropdown] = useState(false);
+  
+  /** Number of items displayed per page */
   const itemsPerPage = 10;
 
+  /** Reference to debounce timeout for search input */
   const debounceTimeoutRef = useRef(null);
+
+  // ===========================================================================
+  // UTILITY FUNCTIONS
+  // ===========================================================================
 
   // ✅ Helper function to get correct icon based on theme
   const getIcon = (lightIcon, darkIcon) => {
     return theme === 'dark' ? darkIcon : lightIcon;
   };
 
-  // Status options for filtering
+  // ===========================================================================
+  // CONFIGURATION DATA - Filter and Sort Options
+  // ===========================================================================
+
+  /** Available status options for filtering */
   const statusOptions = ['All', 'In Progress', 'Complete', 'Pending', 'Approved', 'Rejected'];
   
-  // Sort options
+  /** 
+   * Available sort options with column mappings
+   * @type {Array<Object>}
+   */
   const sortOptions = [
     { key: 'id', label: 'Order ID' },
     { key: 'user', label: 'User Name' },
@@ -195,6 +309,10 @@ const OrdersTable = () => {
     { key: 'status', label: 'Status' }
   ];
 
+  // ===========================================================================
+  // SEARCH FUNCTIONALITY - Debounced Search Implementation
+  // ===========================================================================
+
   // ✅ Debouncing logic for search
   const debouncedSearch = useCallback((value) => {
     if (debounceTimeoutRef.current) {
@@ -203,17 +321,31 @@ const OrdersTable = () => {
     
     debounceTimeoutRef.current = setTimeout(() => {
       setDebouncedSearchTerm(value);
-      setCurrentPage(1);
-    }, 300);
+      setCurrentPage(1); // Reset to first page on search
+    }, 300); // 300ms debounce delay for optimal UX
   }, []);
 
+  /**
+   * Handles search input changes with debouncing
+   * Updates UI immediately but delays actual filtering
+   */
   const handleSearchChange = (e) => {
     const value = e.target.value;
     setSearchTerm(value);
     debouncedSearch(value);
   };
 
-  // Get status class for styling
+  // ===========================================================================
+  // STYLING HELPERS
+  // ===========================================================================
+
+  /**
+   * Returns appropriate CSS class for status styling
+   * Maps status strings to corresponding CSS classes
+   * 
+   * @param {string} status - Order status
+   * @returns {string} CSS class name
+   */
   const getStatusClass = (status) => {
     switch (status) {
       case 'In Progress': return styles.statusInProgress;
@@ -225,52 +357,71 @@ const OrdersTable = () => {
     }
   };
 
+  // ===========================================================================
+  // EVENT HANDLERS - User Interactions
+  // ===========================================================================
+
   // ✅ Add new order handler
   const handleAddOrder = () => {
     console.log('Add new order clicked');
-    // Implement add order functionality
+    // TODO: Implement add order functionality
+    // This would typically open a modal or navigate to an add order form
   };
 
   // ✅ Filter handler
   const handleFilterChange = (status) => {
     setStatusFilter(status);
     setShowFilterDropdown(false);
-    setCurrentPage(1);
+    setCurrentPage(1); // Reset pagination on filter change
   };
 
   // ✅ Sort handler from dropdown
   const handleSortChange = (key, direction = 'asc') => {
     setSortConfig({ key, direction });
     setShowSortDropdown(false);
-    setCurrentPage(1);
+    setCurrentPage(1); // Reset pagination on sort change
   };
 
-  // Filter and search logic with debounced search term
+  // ===========================================================================
+  // DATA PROCESSING - Filtering, Sorting, and Pagination
+  // ===========================================================================
+
+  /**
+   * Filter and search logic with debounced search term
+   * Filters orders based on search term and status selection
+   */
   const filteredOrders = useMemo(() => {
     return sampleOrders.filter(order => {
+      // Multi-column search across ID, user name, project, and address
       const matchesSearch = 
         order.id.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
         order.user.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
         order.project.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
         order.address.toLowerCase().includes(debouncedSearchTerm.toLowerCase());
       
+      // Status filter logic
       const matchesStatus = statusFilter === 'All' || order.status === statusFilter;
       
       return matchesSearch && matchesStatus;
     });
   }, [debouncedSearchTerm, statusFilter]);
 
-  // Enhanced sorting logic with proper date sorting
+  /**
+   * Enhanced sorting logic with proper date sorting
+   * Handles different data types including Date objects and strings
+   */
   const sortedOrders = useMemo(() => {
     if (!sortConfig.key) return filteredOrders;
 
     return [...filteredOrders].sort((a, b) => {
       let aValue, bValue;
 
+      // Handle special column mappings
       if (sortConfig.key === 'user') {
         aValue = a.user.name;
         bValue = b.user.name;
       } else if (sortConfig.key === 'date') {
+        // Use Date objects for accurate chronological sorting
         aValue = a.dateValue;
         bValue = b.dateValue;
       } else {
@@ -278,14 +429,14 @@ const OrdersTable = () => {
         bValue = b[sortConfig.key];
       }
 
-      // Handle Date objects
+      // Handle Date objects with proper time comparison
       if (aValue instanceof Date && bValue instanceof Date) {
         return sortConfig.direction === 'asc' 
           ? aValue.getTime() - bValue.getTime()
           : bValue.getTime() - aValue.getTime();
       }
 
-      // Handle strings and other types
+      // Handle strings and other types with locale-aware comparison
       if (aValue < bValue) {
         return sortConfig.direction === 'asc' ? -1 : 1;
       }
@@ -296,14 +447,27 @@ const OrdersTable = () => {
     });
   }, [filteredOrders, sortConfig]);
 
-  // Pagination logic
+  // ===========================================================================
+  // PAGINATION LOGIC
+  // ===========================================================================
+
+  /** Calculate total pages based on filtered results */
   const totalPages = Math.ceil(sortedOrders.length / itemsPerPage);
+  
+  /** Get current page's data slice */
   const paginatedOrders = sortedOrders.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
 
-  // Handle sorting from table headers
+  // ===========================================================================
+  // TABLE INTERACTION HANDLERS
+  // ===========================================================================
+
+  /**
+   * Handle sorting from table headers
+   * Toggles sort direction if same column is clicked
+   */
   const handleSort = (key) => {
     setSortConfig(prevConfig => ({
       key,
@@ -311,7 +475,10 @@ const OrdersTable = () => {
     }));
   };
 
-  // Handle row selection
+  /**
+   * Handle individual row selection
+   * Adds or removes order ID from selection array
+   */
   const handleSelectOrder = (orderId) => {
     setSelectedOrders(prev => 
       prev.includes(orderId) 
@@ -320,7 +487,10 @@ const OrdersTable = () => {
     );
   };
 
-  // Handle select all
+  /**
+   * Handle select all checkbox
+   * Selects all visible orders or deselects all
+   */
   const handleSelectAll = () => {
     if (selectedOrders.length === paginatedOrders.length) {
       setSelectedOrders([]);
@@ -329,23 +499,33 @@ const OrdersTable = () => {
     }
   };
 
+  // ===========================================================================
+  // COMPONENT RENDER
+  // ===========================================================================
+
   return (
     <div className={styles.ordersTable}>
+      {/* =====================================================================
+          TABLE HEADER - Action Controls and Search
+          ===================================================================== */}
+      
       {/* Header Section */}
       <div className={styles.tableHeader}>
         <div className={styles.leftActions}>
+          {/* Add New Order Button */}
           {/* ✅ Add Button with dynamic icon */}
           <button className={styles.actionButton} onClick={handleAddOrder}>
             <img src={getIcon(addIcon, addIconDark)} alt="Add" className={styles.icon} />
           </button>
           
+          {/* Filter Dropdown Control */}
           {/* ✅ Filter Button with Dropdown */}
           <div className={styles.dropdown}>
             <button 
               className={`${styles.actionButton} ${showFilterDropdown ? styles.active : ''}`}
               onClick={() => {
                 setShowFilterDropdown(!showFilterDropdown);
-                setShowSortDropdown(false);
+                setShowSortDropdown(false); // Close other dropdown
               }}
             >
               <img src={getIcon(filterIcon, filterIconDark)} alt="Filter" className={styles.icon} />
@@ -367,13 +547,14 @@ const OrdersTable = () => {
             )}
           </div>
           
+          {/* Sort Dropdown Control */}
           {/* ✅ Sort Button with Dropdown */}
           <div className={styles.dropdown}>
             <button 
               className={`${styles.actionButton} ${showSortDropdown ? styles.active : ''}`}
               onClick={() => {
                 setShowSortDropdown(!showSortDropdown);
-                setShowFilterDropdown(false);
+                setShowFilterDropdown(false); // Close other dropdown
               }}
             >
               <img src={getIcon(sortIcon, sortIconDark)} alt="Sort" className={styles.icon} />
@@ -402,6 +583,7 @@ const OrdersTable = () => {
           </div>
         </div>
 
+        {/* Search Control */}
         <div className={styles.rightActions}>
           <div className={styles.searchContainer}>
             <img src={getIcon(searchIcon, searchIconDark)} alt="Search" className={styles.searchIcon} />
@@ -416,11 +598,17 @@ const OrdersTable = () => {
         </div>
       </div>
 
+      {/* =====================================================================
+          DATA TABLE - Orders Display with Custom Checkboxes
+          ===================================================================== */}
+
       {/* Table */}
       <div className={styles.tableContainer}>
         <table className={styles.table}>
+          {/* Table Header with Sortable Columns */}
           <thead>
             <tr>
+              {/* Select All Checkbox */}
               <th className={styles.checkboxHeader}>
                 <div className={styles.customCheckbox}>
                   <input
@@ -438,6 +626,8 @@ const OrdersTable = () => {
                   </div>
                 </div>
               </th>
+              
+              {/* Sortable Column Headers */}
               <th className={styles.headerCell} onClick={() => handleSort('id')}>
                 Order ID
                 {sortConfig.key === 'id' && (
@@ -486,9 +676,11 @@ const OrdersTable = () => {
                   </span>
                 )}
               </th>
-              <th className={styles.headerCell}></th>
+              <th className={styles.headerCell}></th> {/* Actions column */}
             </tr>
           </thead>
+          
+          {/* Table Body with Order Rows */}
           <tbody>
             {paginatedOrders.map((order) => (
               <tr 
@@ -497,6 +689,7 @@ const OrdersTable = () => {
                 onMouseEnter={() => setHoveredRow(order.id)}
                 onMouseLeave={() => setHoveredRow(null)}
               >
+                {/* Row Selection Checkbox */}
                 <td className={styles.checkboxCell}>
                   <div className={`${styles.customCheckbox} ${
                     hoveredRow === order.id || selectedOrders.includes(order.id) 
@@ -518,6 +711,8 @@ const OrdersTable = () => {
                     </div>
                   </div>
                 </td>
+                
+                {/* Order Data Columns */}
                 <td className={styles.tableCell}>
                   <span className={styles.orderId}>{order.id}</span>
                 </td>
@@ -561,8 +756,13 @@ const OrdersTable = () => {
         </table>
       </div>
 
+      {/* =====================================================================
+          PAGINATION CONTROLS - Page Navigation
+          ===================================================================== */}
+
       {/* Pagination */}
       <div className={styles.pagination}>
+        {/* Previous Page Button */}
         <button 
           className={styles.paginationNav}
           onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
@@ -571,6 +771,7 @@ const OrdersTable = () => {
           ←
         </button>
         
+        {/* Page Number Buttons */}
         {Array.from({ length: totalPages }, (_, i) => i + 1).map(pageNum => (
           <button
             key={pageNum}
@@ -581,6 +782,7 @@ const OrdersTable = () => {
           </button>
         ))}
         
+        {/* Next Page Button */}
         <button 
           className={styles.paginationNav}
           onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
@@ -589,6 +791,10 @@ const OrdersTable = () => {
           →
         </button>
       </div>
+
+      {/* =====================================================================
+          OVERLAY - Dropdown Backdrop for Mobile
+          ===================================================================== */}
 
       {/* ✅ Click outside to close dropdowns */}
       {(showFilterDropdown || showSortDropdown) && (

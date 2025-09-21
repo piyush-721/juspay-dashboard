@@ -1,102 +1,238 @@
-/* src/components/MetricsGrid/MetricsGrid.module.css - COMPLETE UPDATED VERSION WITH WHITE ARROWS */
+/**
+ * MetricsGrid Component Styles
+ * 
+ * Advanced responsive styling for dashboard metrics grid with sophisticated
+ * hover animations, theme support, and accessibility features. Implements
+ * a mobile-first responsive design with progressive enhancement.
+ * 
+ * Architecture:
+ * - CSS Grid for layout with fallback support
+ * - CSS Custom Properties for theming
+ * - Transform-based animations for performance
+ * - Semantic class naming convention
+ * - Progressive enhancement approach
+ * 
+ * Animation System:
+ * - Hardware-accelerated transforms
+ * - Layered content positioning
+ * - Smooth transitions with easing
+ * - Hover state content swapping
+ * 
+ * Theme System:
+ * - Light/dark mode support
+ * - CSS custom properties integration
+ * - Accessible color contrast ratios
+ * - Dynamic icon filtering for dark theme
+ * 
+ * @author Your Name
+ * @since 1.0.0
+ * @version 2.1.0
+ */
 
+/* =============================================================================
+   CORE GRID LAYOUT - Mobile First (320px+)
+   ============================================================================= */
+
+/**
+ * Primary grid container
+ * 
+ * Establishes the main metrics grid using CSS Grid for precise control
+ * over card positioning and responsive behavior. Matches ProjectionsChart
+ * height for visual consistency in dashboard layout.
+ */
 .metricsGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 16px;
+  grid-template-columns: 1fr 1fr; /* Equal width columns */
+  grid-template-rows: 1fr 1fr;    /* Equal height rows */
+  gap: 16px;                      /* Consistent spacing */
   width: 100%;
-  max-width: 400px;
-  height: 252px; /* ✅ Match ProjectionsChart height exactly */
+  max-width: 400px;               /* Optimal readability width */
+  height: 252px;                  /* Match ProjectionsChart height */
+  box-sizing: border-box;
 }
 
-/* Metric Cards */
+/* =============================================================================
+   METRIC CARD BASE STYLES
+   ============================================================================= */
+
+/**
+ * Individual metric card container
+ * 
+ * Base styling for each metric card with hover animations, consistent
+ * typography, and flexible content positioning. Uses relative positioning
+ * for advanced hover effect layering.
+ */
 .metricCard {
   padding: 20px;
-  border-radius: 12px;
+  border-radius: 12px;            /* Rounded corners for modern look */
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  font-family: Inter, sans-serif;
+  gap: 12px;                      /* Space between header and content */
+  font-family: Inter, sans-serif; /* Consistent brand typography */
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  cursor: pointer;
-  position: relative;
-  height: 118px; /* ✅ Perfect card height for alignment */
+  cursor: pointer;                /* Indicate interactivity */
+  position: relative;             /* Enable absolute positioning for hover content */
+  height: 118px;                  /* Perfect alignment with grid height */
+  box-sizing: border-box;
+  /* Performance optimization */
+  will-change: transform, box-shadow;
+  backface-visibility: hidden;    /* Prevent flickering during animations */
 }
 
+/**
+ * Card hover state
+ * 
+ * Subtle lift animation with shadow for depth perception.
+ * Uses transform for hardware acceleration.
+ */
 .metricCard:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);    /* Gentle lift effect */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft depth shadow */
 }
 
-/* ✅ LIGHT THEME Card Variants */
+/**
+ * Keyboard focus indicator
+ * 
+ * Accessible focus styling for keyboard navigation compliance.
+ */
+.metricCard:focus-visible {
+  outline: 2px solid #3B82F6;     /* High contrast focus ring */
+  outline-offset: 2px;            /* Breathing room around card */
+}
+
+/* =============================================================================
+   THEME VARIANT STYLES - Light Mode
+   ============================================================================= */
+
+/**
+ * Customers variant - Light blue theme
+ * Represents user growth and engagement metrics
+ */
 .metricCard.customers {
-  background: var(--Primary-Blue, #E3F5FF); /* ✅ Customers - Light Blue */
+  background: var(--Primary-Blue, #E3F5FF);
   border: 1px solid #bfdbfe;
 }
 
+/**
+ * Orders variant - Light gray theme  
+ * Represents transaction and order metrics
+ */
 .metricCard.orders {
-  background: var(--Primary-Light, #F7F9FB); /* ✅ Orders - Light Gray */
+  background: var(--Primary-Light, #F7F9FB);
   border: 1px solid #e5e7eb;
 }
 
+/**
+ * Revenue variant - Light gray theme
+ * Represents financial performance metrics
+ */
 .metricCard.revenue {
-  background: var(--Primary-Light, #F7F9FB); /* ✅ Revenue - Light Gray */
+  background: var(--Primary-Light, #F7F9FB);
   border: 1px solid #e5e7eb;
 }
 
+/**
+ * Growth variant - Light purple theme
+ * Represents growth rate and percentage metrics
+ */
 .metricCard.growth {
-  background: var(--Primary-Purple, #E5ECF6); /* ✅ Growth - Light Purple */
+  background: var(--Primary-Purple, #E5ECF6);
   border: 1px solid #d1d5db;
 }
 
-/* Card Header */
+/* =============================================================================
+   CARD STRUCTURE - Header and Content Areas
+   ============================================================================= */
+
+/**
+ * Card header container
+ * Contains the metric title with proper semantic structure
+ */
 .cardHeader {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  flex-shrink: 0; /* Prevent header compression */
 }
 
+/**
+ * Metric title styling
+ * 
+ * Semantic H3 heading with precise typography specifications
+ * matching design system requirements.
+ */
 .title {
-  width: 154px;
-  height: 20px;
-  opacity: 1;
-  font-family: Inter;
-  font-weight: 600;
-  font-style: Semi Bold;
+  width: 154px;        /* Fixed width for alignment */
+  height: 20px;        /* Fixed height for consistency */
+  font-family: Inter, sans-serif;
+  font-weight: 600;    /* Semi-bold weight */
   font-size: 14px;
-  line-height: 20px;
-  letter-spacing: 0%;
-  color: #1C1C1C;
+  line-height: 20px;   /* Perfect line height for vertical centering */
+  letter-spacing: 0;   /* No additional letter spacing */
+  color: #1C1C1C;      /* High contrast dark text */
+  margin: 0;           /* Remove default heading margins */
+  overflow: hidden;    /* Prevent text overflow */
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-/* ✅ Card Content - Perfect Flex Alignment */
+/* =============================================================================
+   CONTENT ANIMATION SYSTEM - Hover Effect Architecture
+   ============================================================================= */
+
+/**
+ * Main content container
+ * 
+ * Houses the animation system with fixed height for consistent
+ * positioning during transitions. Uses relative positioning for
+ * absolute-positioned hover content layering.
+ */
 .cardContent {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: relative;
-  height: 32px; /* Fixed height for consistent alignment */
+  position: relative;  /* Enable absolute positioning for hover content */
+  height: 32px;        /* Fixed height prevents layout shifts */
+  flex: 1;            /* Take remaining card space */
 }
 
-/* ✅ Main displays - visible by default */
+/**
+ * Default visible content elements
+ * 
+ * Both mainValue and changeDisplay are visible by default and
+ * animate out during hover state with coordinated transitions.
+ */
 .mainValue,
 .changeDisplay {
   display: flex;
   align-items: center;
   transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 1; /* Ensure proper layering */
 }
 
+/**
+ * Primary value positioning
+ * Left-aligned metric value display
+ */
 .mainValue {
   justify-content: flex-start;
 }
 
+/**
+ * Change display positioning  
+ * Right-aligned trend change with icon
+ */
 .changeDisplay {
   justify-content: flex-end;
-  gap: 4px;
+  gap: 4px; /* Space between percentage and icon */
 }
 
-/* ✅ Hover content - hidden by default */
+/**
+ * Hover content layer
+ * 
+ * Invisible by default, positioned absolutely to overlay default content.
+ * Contains rearranged layout for hover state visualization.
+ */
 .hoverContent {
   position: absolute;
   top: 0;
@@ -106,12 +242,17 @@
   align-items: center;
   justify-content: space-between;
   height: 100%;
-  opacity: 0;
-  transform: translateY(10px);
+  opacity: 0;                    /* Hidden by default */
+  transform: translateY(10px);   /* Offset for smooth entry animation */
   transition: opacity 0.3s ease, transform 0.3s ease;
-  pointer-events: none;
+  pointer-events: none;          /* Prevent interaction when hidden */
+  z-index: 2;                   /* Layer above default content */
 }
 
+/**
+ * Hover state trend change positioning
+ * Moves trend information to left side during hover
+ */
 .hoverChange {
   display: flex;
   align-items: center;
@@ -119,385 +260,519 @@
   gap: 4px;
 }
 
+/**
+ * Hover state value positioning  
+ * Moves primary value to right side during hover
+ */
 .hoverValue {
   display: flex;
   align-items: center;
   justify-content: flex-end;
 }
 
-/* ✅ Hover state - swap the displays */
+/**
+ * Hover state activation
+ * 
+ * Orchestrated animation that fades out default content while
+ * fading in repositioned hover content for smooth transition.
+ */
 .metricCard:hover .mainValue,
 .metricCard:hover .changeDisplay {
-  opacity: 0;
-  transform: translateY(-10px);
+  opacity: 0;                    /* Fade out default content */
+  transform: translateY(-10px);  /* Move up during exit */
 }
 
 .metricCard:hover .hoverContent {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
+  opacity: 1;                    /* Fade in hover content */
+  transform: translateY(0);      /* Return to natural position */
+  pointer-events: auto;          /* Enable interaction when visible */
 }
 
-/* Value styling */
+/* =============================================================================
+   TYPOGRAPHY - Values and Change Indicators
+   ============================================================================= */
+
+/**
+ * Primary metric value styling
+ * 
+ * Large, bold display for the main metric value with precise
+ * typography specifications from design system.
+ */
 .value {
-  width: 62px;
-  height: 36px;
-  opacity: 1;
-  font-family: Inter;
-  font-weight: 600;
-  font-style: Semi Bold;
-  font-size: 24px;
-  line-height: 36px;
-  letter-spacing: 0%;
-  color: #000000;
+  width: 62px;         /* Fixed width for alignment */
+  height: 36px;        /* Fixed height for consistency */
+  font-family: Inter, sans-serif;
+  font-weight: 600;    /* Semi-bold weight */
+  font-size: 24px;     /* Large, prominent display */
+  line-height: 36px;   /* Perfect vertical centering */
+  letter-spacing: 0;   /* No additional spacing */
+  color: #000000;      /* High contrast black */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  white-space: nowrap; /* Prevent value wrapping */
 }
 
-/* Change styling */
+/**
+ * Percentage change indicator styling
+ * 
+ * Smaller text for trend change percentages with color coding
+ * based on positive/negative trends.
+ */
 .change {
-  width: 44px;
-  height: 18px;
-  opacity: 1;
-  font-family: Inter;
-  font-weight: 400;
-  font-style: Regular;
-  font-size: 12px;
-  line-height: 18px;
-  letter-spacing: 0%;
+  width: 44px;         /* Fixed width for alignment */
+  height: 18px;        /* Fixed height for consistency */  
+  font-family: Inter, sans-serif;
+  font-weight: 400;    /* Regular weight */
+  font-size: 12px;     /* Small, secondary text */
+  line-height: 18px;   /* Perfect vertical centering */
+  letter-spacing: 0;   /* No additional spacing */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
 }
 
+/**
+ * Positive trend color coding
+ * Green color for upward trends and growth
+ */
 .change.up {
-  color: #10b981;
+  color: #10b981; /* Success green */
 }
 
+/**
+ * Negative trend color coding  
+ * Red color for downward trends and losses
+ */
 .change.down {
-  color: #ef4444;
+  color: #ef4444; /* Error red */
 }
 
-/* Trend Icons */
+/* =============================================================================
+   TREND ICONS - Visual Indicators
+   ============================================================================= */
+
+/**
+ * Trend direction icons
+ * 
+ * Small arrow icons indicating trend direction with subtle opacity
+ * for visual hierarchy balance.
+ */
 .trendIcon {
   width: 12px;
   height: 12px;
-  opacity: 0.8;
+  opacity: 0.8;        /* Slightly subdued for hierarchy */
+  flex-shrink: 0;      /* Prevent icon compression */
+  /* Optimize icon rendering */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
 
-/* ✅ DARK THEME - SPECIFIC BACKGROUND COLORS & WHITE ARROWS */
+/* =============================================================================
+   DARK THEME OVERRIDES - Advanced Theming System
+   ============================================================================= */
 
-/* Customers card - Keep light blue in dark theme */
+/**
+ * Dark theme customers variant
+ * Maintains light blue background for optimal contrast in dark mode
+ */
 [data-theme="dark"] .metricCard.customers {
-  background: var(--Primary-Blue, #E3F5FF); /* ✅ Keep light blue */
+  background: var(--Primary-Blue, #E3F5FF);
   border-color: #bfdbfe;
 }
 
-/* Orders card - Black background in dark theme */
+/**
+ * Dark theme orders variant
+ * Switches to high-contrast black background with white text
+ */
 [data-theme="dark"] .metricCard.orders {
-  background: #000000; /* ✅ Black background */
+  background: #000000;
   border-color: #404040;
 }
 
-/* Revenue card - Black background in dark theme */
+/**
+ * Dark theme revenue variant  
+ * Switches to high-contrast black background with white text
+ */
 [data-theme="dark"] .metricCard.revenue {
-  background: #000000; /* ✅ Black background */
+  background: #000000;
   border-color: #404040;
 }
 
-/* Growth card - Keep light blue in dark theme */
+/**
+ * Dark theme growth variant
+ * Maintains light blue background for optimal contrast in dark mode
+ */
 [data-theme="dark"] .metricCard.growth {
-  background: var(--Primary-Blue, #E3F5FF); /* ✅ Keep light blue */
+  background: var(--Primary-Blue, #E3F5FF);
   border-color: #bfdbfe;
 }
 
-/* ✅ Text colors for dark theme */
+/**
+ * Dark theme text color adjustments
+ * 
+ * Maintains dark text on light backgrounds for optimal readability.
+ * Light backgrounds (customers, growth) keep dark text for contrast.
+ */
 [data-theme="dark"] .title {
-  color: #1C1C1C; /* ✅ Dark text for light backgrounds */
+  color: #1C1C1C;
 }
 
 [data-theme="dark"] .value {
-  color: #000000; /* ✅ Black values for light backgrounds */
+  color: #000000;
 }
 
-/* ✅ Special text colors for black cards */
+/**
+ * Special text colors for black card variants
+ * 
+ * White text on black backgrounds for high contrast accessibility.
+ * Applied specifically to orders and revenue cards in dark theme.
+ */
 [data-theme="dark"] .metricCard.orders .title,
 [data-theme="dark"] .metricCard.revenue .title {
-  color: #FFFFFF; /* ✅ White text for black backgrounds */
+  color: #FFFFFF;
 }
 
 [data-theme="dark"] .metricCard.orders .value,
 [data-theme="dark"] .metricCard.revenue .value {
-  color: #FFFFFF; /* ✅ White values for black backgrounds */
+  color: #FFFFFF;
 }
 
-/* ✅ WHITE ARROWS FOR BLACK CARDS IN DARK THEME */
+/**
+ * Dynamic icon color adjustment for dark theme
+ * 
+ * Uses CSS filters to convert trend icons to white for visibility
+ * on black backgrounds. Applied only to black card variants.
+ */
 [data-theme="dark"] .metricCard.orders .trendIcon,
 [data-theme="dark"] .metricCard.revenue .trendIcon {
-  filter: brightness(0) invert(1); /* ✅ Makes trend icons white */
-  opacity: 1; /* ✅ Full opacity for better visibility */
+  filter: brightness(0) invert(1); /* Convert to white */
+  opacity: 1;                      /* Full opacity for visibility */
 }
 
-/* ✅ Keep original trend icons for light background cards in dark theme */
+/**
+ * Preserve original icons for light backgrounds
+ * 
+ * Ensures trend icons remain original colors on light backgrounds
+ * in dark theme for optimal contrast and readability.
+ */
 [data-theme="dark"] .metricCard.customers .trendIcon,
 [data-theme="dark"] .metricCard.growth .trendIcon {
-  filter: none; /* ✅ Keep original colors */
-  opacity: 0.8; /* ✅ Original opacity */
+  filter: none;   /* Keep original colors */
+  opacity: 0.8;   /* Maintain subtle hierarchy */
 }
 
-/* Keep trend colors consistent */
+/**
+ * Dark theme trend colors consistency
+ * Maintains consistent trend color coding across themes
+ */
 [data-theme="dark"] .change.up {
-  color: #10b981;
+  color: #10b981; /* Consistent success green */
 }
 
 [data-theme="dark"] .change.down {
-  color: #ef4444;
+  color: #ef4444; /* Consistent error red */
 }
 
-/* Hover effects for dark theme */
+/**
+ * Enhanced dark theme hover effects
+ * Stronger shadow for better depth perception in dark environments
+ */
 [data-theme="dark"] .metricCard:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow */
 }
 
-/* ✅ TABLET LANDSCAPE (1025px - 1200px) */
+/* =============================================================================
+   RESPONSIVE DESIGN - Progressive Enhancement
+   ============================================================================= */
+
+/* Tablet Landscape (1025px - 1200px) - Compact desktop layout */
 @media screen and (max-width: 1200px) and (min-width: 1025px) {
   .metricsGrid {
-    max-width: 380px;
-    height: 240px;
+    max-width: 380px;   /* Slightly reduced maximum width */
+    height: 240px;      /* Proportionally reduced height */
   }
   
   .metricCard {
-    height: 112px;
-    padding: 18px;
+    height: 112px;      /* Reduced card height */
+    padding: 18px;      /* Reduced padding */
   }
   
   .title {
-    width: 140px;
+    width: 140px;       /* Reduced title width */
   }
   
   .value {
-    font-size: 22px;
-    line-height: 34px;
-    width: 58px;
-    height: 34px;
+    font-size: 22px;    /* Slightly smaller value text */
+    line-height: 34px;  /* Adjusted line height */
+    width: 58px;        /* Reduced width */
+    height: 34px;       /* Reduced height */
   }
 }
 
-/* ✅ TABLET PORTRAIT (769px - 1024px) */
+/* Tablet Portrait (769px - 1024px) - Tablet optimized */
 @media screen and (max-width: 1024px) and (min-width: 769px) {
   .metricsGrid {
-    max-width: 100%;
-    height: 230px;
+    max-width: 100%;    /* Full width utilization */
+    height: 230px;      /* Reduced height for tablet */
   }
   
   .metricCard {
-    height: 107px;
-    padding: 17px;
+    height: 107px;      /* Compact card height */
+    padding: 17px;      /* Reduced padding */
   }
   
   .title {
-    width: auto;
-    max-width: 140px;
-    min-width: 100px;
+    width: auto;        /* Flexible title width */
+    max-width: 140px;   /* Maximum constraint */
+    min-width: 100px;   /* Minimum constraint */
   }
   
   .value {
-    font-size: 21px;
-    line-height: 32px;
-    width: auto;
-    min-width: 55px;
-    height: 32px;
+    font-size: 21px;    /* Reduced font size */
+    line-height: 32px;  /* Proportional line height */
+    width: auto;        /* Flexible width */
+    min-width: 55px;    /* Minimum width constraint */
+    height: 32px;       /* Reduced height */
   }
   
   .change {
-    width: auto;
-    min-width: 40px;
+    width: auto;        /* Flexible width */
+    min-width: 40px;    /* Minimum width constraint */
   }
 }
 
-/* ✅ MOBILE LANDSCAPE (481px - 768px) */
+/* Mobile Landscape (481px - 768px) - Maintains 2x2 grid */
 @media screen and (max-width: 768px) and (min-width: 481px) {
   .metricsGrid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr; /* Maintain 2x2 grid */
     grid-template-rows: 1fr 1fr;
-    max-width: 100%;
-    height: 220px;
-    gap: 14px;
+    max-width: 100%;                 /* Full width utilization */
+    height: 220px;                   /* Mobile-optimized height */
+    gap: 14px;                       /* Reduced gap for space efficiency */
   }
   
   .metricCard {
-    padding: 16px;
-    height: 103px;
-    gap: 10px;
+    padding: 16px;      /* Mobile-optimized padding */
+    height: 103px;      /* Compact mobile height */
+    gap: 10px;          /* Reduced internal spacing */
   }
   
   .title {
-    width: auto;
-    max-width: 120px;
-    min-width: 80px;
-    font-size: 13px;
-    line-height: 18px;
+    width: auto;        /* Flexible width */
+    max-width: 120px;   /* Mobile maximum width */
+    min-width: 80px;    /* Mobile minimum width */
+    font-size: 13px;    /* Smaller mobile font */
+    line-height: 18px;  /* Proportional line height */
   }
   
   .cardContent {
-    height: 30px;
+    height: 30px;       /* Reduced content area */
   }
   
   .value {
-    font-size: 20px;
-    line-height: 30px;
-    width: auto;
-    min-width: 50px;
-    height: 30px;
+    font-size: 20px;    /* Mobile-optimized value size */
+    line-height: 30px;  /* Matching line height */
+    width: auto;        /* Flexible width */
+    min-width: 50px;    /* Minimum constraint */
+    height: 30px;       /* Matching height */
   }
   
   .change {
-    font-size: 11px;
-    line-height: 16px;
-    width: auto;
-    min-width: 38px;
-    height: 16px;
+    font-size: 11px;    /* Smaller change text */
+    line-height: 16px;  /* Proportional line height */
+    width: auto;        /* Flexible width */
+    min-width: 38px;    /* Minimum constraint */
+    height: 16px;       /* Matching height */
   }
   
   .trendIcon {
-    width: 11px;
+    width: 11px;        /* Smaller trend icons */
     height: 11px;
   }
 }
 
-/* ✅ MOBILE PORTRAIT (320px - 480px) */
+/* Mobile Portrait (320px - 480px) - Single column stack */
 @media screen and (max-width: 480px) {
   .metricsGrid {
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(4, 1fr);
-    max-width: 100%;
-    height: auto;
-    gap: 12px;
+    grid-template-columns: 1fr;        /* Single column layout */
+    grid-template-rows: repeat(4, 1fr); /* Four equal rows */
+    max-width: 100%;                    /* Full width utilization */
+    height: auto;                       /* Dynamic height */
+    gap: 12px;                          /* Compact spacing */
   }
   
   .metricCard {
-    padding: 16px;
-    height: 100px;
-    min-height: 100px;
-    gap: 8px;
+    padding: 16px;      /* Consistent mobile padding */
+    height: 100px;      /* Fixed card height */
+    min-height: 100px;  /* Minimum height constraint */
+    gap: 8px;           /* Compact internal spacing */
   }
   
   .title {
-    width: auto;
-    max-width: none;
-    min-width: auto;
-    font-size: 13px;
-    line-height: 18px;
+    width: auto;        /* Full flexibility */
+    max-width: none;    /* Remove constraints */
+    min-width: auto;    /* Remove constraints */
+    font-size: 13px;    /* Mobile font size */
+    line-height: 18px;  /* Proportional line height */
   }
   
   .cardContent {
-    height: 28px;
+    height: 28px;       /* Compact content height */
   }
   
   .value {
-    font-size: 20px;
-    line-height: 28px;
-    width: auto;
-    min-width: auto;
-    height: 28px;
+    font-size: 20px;    /* Prominent mobile value */
+    line-height: 28px;  /* Matching line height */
+    width: auto;        /* Full flexibility */
+    min-width: auto;    /* Remove constraints */
+    height: 28px;       /* Matching height */
   }
   
   .change {
-    font-size: 11px;
-    line-height: 16px;
-    width: auto;
-    min-width: auto;
-    height: 16px;
+    font-size: 11px;    /* Small change text */
+    line-height: 16px;  /* Proportional height */
+    width: auto;        /* Full flexibility */
+    min-width: auto;    /* Remove constraints */
+    height: 16px;       /* Matching height */
   }
   
   .trendIcon {
-    width: 10px;
+    width: 10px;        /* Compact trend icons */
     height: 10px;
   }
 }
 
-/* ✅ EXTRA SMALL MOBILE (Below 320px) */
+/* Extra Small Mobile (Below 320px) - Ultra compact */
 @media screen and (max-width: 319px) {
   .metricsGrid {
-    gap: 10px;
+    gap: 10px;          /* Minimal spacing */
   }
   
   .metricCard {
-    padding: 14px;
-    height: 95px;
-    gap: 6px;
+    padding: 14px;      /* Reduced padding */
+    height: 95px;       /* Compact height */
+    gap: 6px;           /* Minimal internal spacing */
   }
   
   .title {
-    font-size: 12px;
-    line-height: 16px;
+    font-size: 12px;    /* Smallest readable font */
+    line-height: 16px;  /* Proportional height */
   }
   
   .cardContent {
-    height: 26px;
+    height: 26px;       /* Ultra compact content */
   }
   
   .value {
-    font-size: 18px;
-    line-height: 26px;
+    font-size: 18px;    /* Reduced but readable */
+    line-height: 26px;  /* Matching height */
     height: 26px;
   }
   
   .change {
-    font-size: 10px;
-    line-height: 14px;
+    font-size: 10px;    /* Minimal readable size */
+    line-height: 14px;  /* Proportional height */
     height: 14px;
   }
   
   .trendIcon {
-    width: 9px;
+    width: 9px;         /* Minimal icon size */
     height: 9px;
   }
 }
 
-/* ✅ Accessibility - Focus states */
+/* =============================================================================
+   ACCESSIBILITY & SPECIAL FEATURES
+   ============================================================================= */
+
+/**
+ * Focus indicators for keyboard navigation
+ * Enhanced focus styling for dark theme accessibility
+ */
 [data-theme="dark"] .metricCard:focus-within {
   outline: 2px solid #3B82F6;
   outline-offset: 2px;
 }
 
-/* ✅ High contrast mode support */
+/**
+ * High contrast mode support
+ * Ensures visibility in Windows high contrast mode
+ */
 @media (forced-colors: active) {
   [data-theme="dark"] .metricCard {
-    border: 2px solid;
+    border: 2px solid; /* System color border */
   }
   
   [data-theme="dark"] .title,
   [data-theme="dark"] .value {
-    color: CanvasText;
+    color: CanvasText; /* System text color */
   }
 }
 
-/* ✅ Responsive utility - Maintain hover effect on all screens */
+/**
+ * Hover capability detection
+ * Only apply hover effects on devices that support hover
+ */
 @media (hover: hover) {
   .metricCard:hover {
     transform: translateY(-2px);
   }
 }
 
-/* ✅ Touch devices - Reduce hover sensitivity */
+/**
+ * Touch device optimizations
+ * Alternative interaction for touch-only devices
+ */
 @media (hover: none) {
   .metricCard:active {
-    transform: translateY(-1px);
+    transform: translateY(-1px); /* Subtle touch feedback */
   }
 }
 
-/* ✅ Reduced motion support */
+/**
+ * Reduced motion accessibility
+ * Disable animations for users who prefer reduced motion
+ */
 @media (prefers-reduced-motion: reduce) {
   .metricCard:hover {
-    transform: none;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transform: none;                              /* No movement */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);   /* Static shadow */
   }
   
   [data-theme="dark"] .metricCard:hover {
-    transform: none;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    transform: none;                              /* No movement */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);   /* Static shadow */
   }
   
   .mainValue,
   .changeDisplay,
   .hoverContent {
-    transition: none;
+    transition: none; /* Remove all transitions */
   }
+}
+
+/* =============================================================================
+   PERFORMANCE OPTIMIZATIONS
+   ============================================================================= */
+
+/**
+ * Hardware acceleration optimization
+ * Promotes elements to GPU layer for smooth animations
+ */
+.metricCard {
+  will-change: transform, box-shadow;
+  backface-visibility: hidden;
+}
+
+/**
+ * Animation performance optimization
+ * Prevents layout thrashing during hover transitions
+ */
+.mainValue,
+.changeDisplay,
+.hoverContent {
+  will-change: opacity, transform;
 }

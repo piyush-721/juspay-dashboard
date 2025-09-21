@@ -1,32 +1,87 @@
+/**
+ * OrdersPage Component Styles
+ * 
+ * Responsive layout styling for the order management page, implementing
+ * the same sophisticated layout system as DashboardPage with dynamic
+ * width calculations and mobile overlay functionality.
+ * 
+ * Key Features:
+ * - Dynamic width calculations based on panel states
+ * - Consistent layout architecture with dashboard
+ * - Mobile overlay system with backdrop blur effects
+ * - Smooth panel transitions and animations
+ * - Theme-aware styling with dark mode support
+ * - Accessibility support for reduced motion
+ * - Progressive mobile optimization strategy
+ * 
+ * Layout Architecture:
+ * - Desktop: Fixed panels with calculated main area width
+ * - Mobile: Full-width main area with overlay panels
+ * - Content: Focused on OrdersTable component presentation
+ * - Consistent spacing and typography with dashboard
+ * 
+ * Width Calculations:
+ * - Sidebar: 212px
+ * - Notifications: 280px
+ * - Main Area: calc(100% - panel widths)
+ * 
+ * @author Your Name
+ * @since 1.0.0
+ * @version 2.8.0
+ */
+
 /* src/pages/OrdersPage/OrdersPage.module.css */
 
+/* =============================================================================
+   BASE ORDERS PAGE LAYOUT - Foundational Structure
+   ============================================================================= */
+
+/**
+ * Primary orders page container with full viewport coverage
+ */
 .ordersPage {
-  display: flex;
-  min-height: 100vh;
-  overflow-x: hidden;
+  display: flex;                    /* Flexbox layout for panel arrangement */
+  min-height: 100vh;                /* Full viewport height minimum */
+  overflow-x: hidden;               /* Prevent horizontal scroll issues */
 }
 
+/**
+ * Main layout wrapper for all page elements
+ */
 .layout {
-  display: flex;
-  width: 100%;
-  min-height: 100vh;
-  position: relative;
+  display: flex;                    /* Horizontal panel arrangement */
+  width: 100%;                      /* Full available width */
+  min-height: 100vh;                /* Full viewport height minimum */
+  position: relative;               /* Enable absolute positioning for overlays */
 }
 
+/* =============================================================================
+   MAIN AREA - Dynamic Width Management System
+   ============================================================================= */
+
+/**
+ * Main content area with intelligent width calculations
+ * 
+ * Dynamically adjusts width based on panel states using CSS calc()
+ * functions and data attributes for precise layout control.
+ */
 /* ✅ MAIN AREA WITH PROPER WIDTH CALCULATIONS */
 .mainArea {
-  flex: 1;
+  flex: 1;                          /* Take remaining space */
   display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  min-width: 0;
-  width: 100%;
-  transition: width 0.3s ease;
+  flex-direction: column;           /* Vertical layout: header + content */
+  min-height: 100vh;                /* Full viewport height */
+  min-width: 0;                     /* Allow shrinking in constrained layouts */
+  width: 100%;                      /* Default full width */
+  transition: width 0.3s ease;      /* Smooth width transitions */
 }
 
+/**
+ * Width adjustments based on panel states using data attributes
+ */
 /* ✅ When notifications panel is open - Reduce main area width */
 .ordersPage[data-notifications-open="true"] .mainArea {
-  width: calc(100% - 280px); /* Subtract notifications panel width */
+  width: calc(100% - 280px);        /* Subtract notifications panel width */
 }
 
 /* ✅ When both sidebar and notifications are open */
@@ -36,72 +91,116 @@
 
 /* ✅ When only sidebar is open */
 .ordersPage[data-sidebar-open="true"] .mainArea {
-  width: calc(100% - 212px); /* Subtract only sidebar */
+  width: calc(100% - 212px);        /* Subtract only sidebar */
 }
 
+/**
+ * Main content area styling and behavior
+ */
 .content {
-  flex: 1;
-  padding: 24px;
-  background: #f8f9fa;
-  min-height: calc(100vh - 64px);
-  width: 100%;
-  overflow-x: auto;
-  background-color: white;
-  box-sizing: border-box;
+  flex: 1;                          /* Take remaining vertical space */
+  padding: 24px;                    /* Internal spacing */
+  background: #f8f9fa;              /* Light background (overridden below) */
+  min-height: calc(100vh - 64px);   /* Account for header height */
+  width: 100%;                      /* Full area width */
+  overflow-x: auto;                 /* Allow horizontal scrolling if needed */
+  background-color: white;          /* Clean white background */
+  box-sizing: border-box;           /* Include padding in width calculations */
 }
 
+/* =============================================================================
+   PANEL CONTAINERS - Sidebar and Notifications Wrappers
+   ============================================================================= */
+
+/**
+ * Panel containers with responsive behavior
+ * Desktop: Transparent wrappers | Mobile: Overlay backgrounds
+ */
 /* ✅ Sidebar and Notifications Panel Containers */
 .sidebarContainer {
-  display: contents; /* 🖥️ Desktop: No wrapper */
+  display: contents;                /* 🖥️ Desktop: No wrapper interference */
 }
 
 .notificationsContainer {
-  display: contents; /* 🖥️ Desktop: No wrapper */
+  display: contents;                /* 🖥️ Desktop: No wrapper interference */
 }
 
-/* Page Header */
+/* =============================================================================
+   PAGE HEADER - Title and Navigation
+   ============================================================================= */
+
+/**
+ * Page header section with title spacing
+ */
 .pageHeader {
-  margin-bottom: 24px;
+  margin-bottom: 24px;              /* Space before orders content */
 }
 
+/**
+ * Page title with precise design specifications
+ * 
+ * Displays "Order List" title with consistent typography and
+ * spacing that matches the dashboard page styling patterns.
+ */
 .pageTitle {
-  opacity: 1;
-  font-family: Inter;
-  font-weight: 600;
+  opacity: 1;                       /* Full visibility */
+  font-family: Inter;               /* Brand typography */
+  font-weight: 600;                 /* Semi-bold weight */
   font-style: Semi Bold;
-  font-size: 14px;
-  line-height: 20px;
-  letter-spacing: 0%;
-  color: #1C1C1C;
-  margin-left: 5px;
-  min-width: 83px;
-  min-height: 20px;
+  font-size: 14px;                  /* Readable title size */
+  line-height: 20px;                /* Perfect vertical alignment */
+  letter-spacing: 0%;               /* No additional spacing */
+  color: #1C1C1C;                   /* High contrast dark text */
+  margin-left: 5px;                 /* Slight left margin for alignment */
+  min-width: 83px;                  /* Minimum width from design */
+  min-height: 20px;                 /* Minimum height for consistency */
 }
 
-/* Orders Content */
+/* =============================================================================
+   ORDERS CONTENT - Order Management Area
+   ============================================================================= */
+
+/**
+ * Orders content container for OrdersTable component
+ * 
+ * Provides flexible layout container for the main OrdersTable
+ * component with consistent spacing and full-width behavior.
+ */
 .ordersContent {
   display: flex;
-  flex-direction: column;
-  gap: 24px;
-  width: 100%;
-  max-width: 100%;
+  flex-direction: column;           /* Vertical stacking for future expansion */
+  gap: 24px;                        /* Space between potential multiple components */
+  width: 100%;                      /* Full available width */
+  max-width: 100%;                  /* Prevent overflow */
 }
 
+/* =============================================================================
+   RESPONSIVE DESIGN - Desktop Breakpoints with Panel Management
+   ============================================================================= */
+
+/**
+ * Large desktop optimization (1441px+)
+ * Perfect panel layout with full viewport width calculations
+ */
 /* ✅ LARGE DESKTOP (1441px+) */
 @media screen and (min-width: 1441px) {
   .ordersPage[data-notifications-open="true"] .mainArea {
-    width: calc(100vw - 280px);
+    width: calc(100vw - 280px);      /* Viewport-based calculation */
   }
   
   .ordersPage[data-sidebar-open="true"][data-notifications-open="true"] .mainArea {
-    width: calc(100vw - 212px - 280px);
+    width: calc(100vw - 212px - 280px); /* Both panels subtracted */
   }
   
   .ordersPage[data-sidebar-open="true"] .mainArea {
-    width: calc(100vw - 212px);
+    width: calc(100vw - 212px);      /* Sidebar width subtracted */
   }
 }
 
+/**
+ * Standard desktop layout (1301px - 1440px)
+ * Maintains panel system with viewport-based calculations
+ */
 /* ✅ DESKTOP (1301px - 1440px) */
 @media screen and (max-width: 1440px) and (min-width: 1301px) {
   .ordersPage[data-notifications-open="true"] .mainArea {
@@ -117,97 +216,119 @@
   }
 }
 
+/* =============================================================================
+   RESPONSIVE DESIGN - Mobile Transformation System
+   ============================================================================= */
+
+/**
+ * Critical breakpoint: Mobile overlay transformation (≤1300px)
+ * 
+ * Major layout change from fixed panels to full-width main area
+ * with overlay panels for optimal mobile experience.
+ */
 /* ✅ CRITICAL FIX: Under 1300px - Full width with overlays */
 @media screen and (max-width: 1300px) {
+  /* Force full width regardless of panel states */
   .ordersPage[data-notifications-open="true"] .mainArea,
   .ordersPage[data-sidebar-open="true"] .mainArea,
   .ordersPage[data-sidebar-open="true"][data-notifications-open="true"] .mainArea {
-    width: 100% !important;
+    width: 100% !important;          /* Override width calculations */
   }
   
   .mainArea {
-    width: 100%;
+    width: 100%;                     /* Full width for mobile */
   }
   
   .content {
-    padding: 20px;
+    padding: 20px;                   /* Reduced padding for smaller screens */
   }
 }
 
+/**
+ * Tablet landscape with mobile overlays (769px - 1024px)
+ * Introduction of overlay system for panels with backdrop effects
+ */
 /* ✅ TABLET LANDSCAPE (769px - 1024px) - Mobile overlay starts */
 @media screen and (max-width: 1024px) and (min-width: 769px) {
   .content {
-    padding: 18px;
+    padding: 18px;                   /* Tablet-appropriate padding */
   }
   
   .ordersContent {
-    gap: 18px;
+    gap: 18px;                       /* Reduced content spacing */
   }
   
+  /* Mobile overlay system begins */
   /* 📱 Sidebar overlay */
   .sidebarContainer {
-    position: fixed;
+    position: fixed;                 /* Fixed overlay positioning */
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    width: 100vw;
+    width: 100vw;                    /* Full viewport coverage */
     height: 100vh;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 1500;
-    backdrop-filter: blur(2px);
+    background: rgba(0, 0, 0, 0.4);  /* Semi-transparent backdrop */
+    z-index: 1500;                   /* High z-index for modal behavior */
+    backdrop-filter: blur(2px);      /* Modern backdrop blur */
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-start;     /* Sidebar slides from left */
   }
   
   /* 📱 Notifications Panel overlay */
   .notificationsContainer {
-    position: fixed;
+    position: fixed;                 /* Fixed overlay positioning */
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    width: 100vw;
+    width: 100vw;                    /* Full viewport coverage */
     height: 100vh;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 1500;
-    backdrop-filter: blur(2px);
+    background: rgba(0, 0, 0, 0.4);  /* Semi-transparent backdrop */
+    z-index: 1500;                   /* High z-index for modal behavior */
+    backdrop-filter: blur(2px);      /* Modern backdrop blur */
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-end;       /* Notifications slide from right */
   }
   
+  /* Force full width main area */
   /* 🖥️ Full width main area when panels are hidden */
   .mainArea {
-    width: 100% !important;
+    width: 100% !important;          /* Always full width on tablet */
   }
 }
 
+/**
+ * Mobile landscape optimization (481px - 768px)
+ * Enhanced mobile experience with increased blur effects
+ */
 /* ✅ MOBILE LANDSCAPE (481px - 768px) */
 @media screen and (max-width: 768px) and (min-width: 481px) {
   .layout {
-    position: relative;
+    position: relative;              /* Enable overlay positioning */
   }
   
   .mainArea {
-    width: 100% !important;
+    width: 100% !important;          /* Force full width */
   }
   
   .content {
-    padding: 18px;
+    padding: 18px;                   /* Mobile-appropriate padding */
   }
   
   .ordersContent {
-    gap: 16px;
+    gap: 16px;                       /* Mobile content spacing */
   }
   
   .pageHeader {
-    margin-bottom: 20px;
+    margin-bottom: 20px;             /* Adjusted header spacing */
   }
   
   .pageTitle {
-    font-size: 14px;
+    font-size: 14px;                 /* Maintain readable title size */
   }
   
+  /* Enhanced mobile overlays */
   /* 📱 Mobile overlays */
   .sidebarContainer,
   .notificationsContainer {
@@ -218,22 +339,26 @@
     bottom: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 2000;
-    backdrop-filter: blur(3px);
+    background: rgba(0, 0, 0, 0.5);  /* Darker backdrop for mobile */
+    z-index: 2000;                   /* Higher z-index */
+    backdrop-filter: blur(3px);      /* Enhanced blur effect */
   }
   
   .sidebarContainer {
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-start;     /* Sidebar from left */
   }
   
   .notificationsContainer {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-end;       /* Notifications from right */
   }
 }
 
+/**
+ * Mobile portrait optimization (320px - 480px)
+ * Maximum mobile optimization with strongest visual effects
+ */
 /* ✅ MOBILE PORTRAIT (320px - 480px) */
 @media screen and (max-width: 480px) {
   .layout {
@@ -245,22 +370,23 @@
   }
   
   .content {
-    padding: 16px;
+    padding: 16px;                   /* Minimal mobile padding */
   }
   
   .ordersContent {
-    gap: 14px;
+    gap: 14px;                       /* Compact mobile spacing */
   }
   
   .pageHeader {
-    margin-bottom: 16px;
+    margin-bottom: 16px;             /* Compact header spacing */
   }
   
   .pageTitle {
     font-size: 14px;
-    min-width: auto;
+    min-width: auto;                 /* Remove width constraints */
   }
   
+  /* Maximum mobile overlay effects */
   /* 📱 Full mobile overlays */
   .sidebarContainer,
   .notificationsContainer {
@@ -271,9 +397,9 @@
     bottom: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 2500;
-    backdrop-filter: blur(4px);
+    background: rgba(0, 0, 0, 0.6);  /* Strongest backdrop opacity */
+    z-index: 2500;                   /* Maximum z-index */
+    backdrop-filter: blur(4px);      /* Strongest blur effect */
   }
   
   .sidebarContainer {
@@ -287,34 +413,126 @@
   }
 }
 
+/* =============================================================================
+   MOBILE OPTIMIZATIONS - Scroll and Animation Management
+   ============================================================================= */
+
+/**
+ * Prevent body scroll when panels are open on mobile
+ * Improves mobile user experience by preventing background scrolling
+ */
 /* ✅ Prevent body scroll when panels open on mobile */
 @media screen and (max-width: 1024px) {
   .ordersPage[data-sidebar-open="true"],
   .ordersPage[data-notifications-open="true"] {
-    overflow: hidden;
+    overflow: hidden;                /* Prevent main container scroll */
   }
 }
 
+/* =============================================================================
+   ANIMATIONS AND TRANSITIONS
+   ============================================================================= */
+
+/**
+ * Smooth animation system for panel transitions
+ */
 /* ✅ Smooth animations */
 .sidebarContainer,
 .notificationsContainer {
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;    /* Smooth overlay fade */
 }
 
+/* =============================================================================
+   THEME SUPPORT - Dark Mode Styling
+   ============================================================================= */
+
+/**
+ * Dark theme styling for orders page
+ */
 /* ✅ Dark theme support */
 [data-theme="dark"] .content {
-  background: #111827;
+  background: #111827;              /* Dark background for content area */
 }
 
 [data-theme="dark"] .pageTitle {
-  color: #f9fafb;
+  color: #f9fafb;                   /* Light page title for dark theme */
 }
 
+/* =============================================================================
+   ACCESSIBILITY FEATURES
+   ============================================================================= */
+
+/**
+ * Accessibility support for users with motion preferences
+ */
 /* ✅ Accessibility - Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   .sidebarContainer,
   .notificationsContainer,
   .mainArea {
-    transition: none;
+    transition: none;                /* Disable animations */
   }
+}
+
+/**
+ * High contrast mode support
+ */
+@media (forced-colors: active) {
+  .ordersPage {
+    border: 1px solid;              /* Ensure visible borders */
+  }
+  
+  .sidebarContainer,
+  .notificationsContainer {
+    background: Canvas;              /* System background color */
+    border: 2px solid;              /* Visible overlay borders */
+  }
+}
+
+/**
+ * Print styles for orders page
+ */
+@media print {
+  .sidebarContainer,
+  .notificationsContainer {
+    display: none;                  /* Hide overlays in print */
+  }
+  
+  .mainArea {
+    width: 100% !important;         /* Full width for print */
+  }
+  
+  .content {
+    background: white !important;   /* White background for print */
+    padding: 0;                     /* No padding for print */
+  }
+  
+  .pageTitle {
+    color: #000 !important;         /* Black text for print */
+  }
+}
+
+/**
+ * Focus management for keyboard navigation
+ */
+.ordersContent:focus-within {
+  outline: 2px solid #3b82f6;       /* Blue focus outline */
+  outline-offset: 4px;              /* Space around focus outline */
+}
+
+/**
+ * Loading state support (for future enhancement)
+ */
+.ordersContent[data-loading="true"] {
+  opacity: 0.6;                     /* Reduced opacity during loading */
+  pointer-events: none;             /* Disable interactions while loading */
+}
+
+/**
+ * Error state support (for future enhancement)
+ */
+.ordersContent[data-error="true"] {
+  border: 1px solid #ef4444;        /* Red border for error state */
+  border-radius: 8px;               /* Rounded error container */
+  padding: 16px;                    /* Padding for error message */
 }

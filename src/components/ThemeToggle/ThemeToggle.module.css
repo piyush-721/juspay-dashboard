@@ -1,92 +1,314 @@
+/**
+ * ThemeToggle Component Styles
+ * 
+ * Advanced styling for a theme toggle button with smooth animations,
+ * responsive sizing, and comprehensive accessibility support. Features
+ * sophisticated hover effects with scaling and rotation animations.
+ * 
+ * Key Features:
+ * - Smooth scaling animations on hover and press
+ * - Icon rotation effects for visual feedback
+ * - Responsive sizing across different screen sizes
+ * - Theme-aware color schemes for light/dark modes
+ * - Accessibility support for reduced motion and high contrast
+ * - Hardware-accelerated animations for performance
+ * - Touch-optimized sizing for mobile devices
+ * 
+ * Animation System:
+ * - Hover: 5% scale up + 15° icon rotation
+ * - Press: 5% scale down + background change
+ * - Duration: 0.2s for button, 0.3s for icons
+ * - Easing: ease function for natural motion
+ * 
+ * @author Your Name
+ * @since 1.0.0
+ * @version 1.5.0
+ */
+
 /* src/components/ThemeToggle/ThemeToggle.module.css */
+
+/* =============================================================================
+   MAIN TOGGLE BUTTON - Base Styling and Layout
+   ============================================================================= */
+
+/**
+ * Primary theme toggle button styling
+ * 
+ * Creates a circular-ish button with transparent background that adapts
+ * to current theme colors. Uses flexbox for perfect icon centering.
+ */
 .themeToggle {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
+  align-items: center;              /* Perfect vertical centering */
+  justify-content: center;          /* Perfect horizontal centering */
+  width: 32px;                      /* Desktop button size */
   height: 32px;
-  border: none;
-  background: transparent;
-  border-radius: 8px;
-  color: #374151;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  position: relative;
-  overflow: hidden;
+  border: none;                     /* Clean borderless appearance */
+  background: transparent;          /* Transparent until hover */
+  border-radius: 8px;               /* Rounded button shape */
+  color: #374151;                   /* Default icon color (gray) */
+  cursor: pointer;                  /* Indicate clickability */
+  transition: all 0.2s ease;       /* Smooth state transitions */
+  position: relative;               /* Enable advanced positioning if needed */
+  overflow: hidden;                 /* Contain any overflow effects */
+  box-sizing: border-box;           /* Include border/padding in size */
 }
 
+/* =============================================================================
+   INTERACTIVE STATES - Hover and Press Effects
+   ============================================================================= */
+
+/**
+ * Hover state with subtle background and scaling effect
+ * 
+ * Provides visual feedback on hover with background change,
+ * color adjustment, and gentle scaling animation.
+ */
 .themeToggle:hover {
-  background: #f3f4f6;
-  color: #111827;
-  transform: scale(1.05);
+  background: #f3f4f6;              /* Light gray hover background */
+  color: #111827;                   /* Darker icon color on hover */
+  transform: scale(1.05);           /* 5% scale up for emphasis */
 }
 
+/**
+ * Active/pressed state with scale down effect
+ * 
+ * Creates satisfying press feedback with darker background
+ * and scale down animation.
+ */
 .themeToggle:active {
-  background: #e5e7eb;
-  transform: scale(0.95);
+  background: #e5e7eb;              /* Darker pressed background */
+  transform: scale(0.95);           /* 5% scale down for press effect */
 }
 
+/**
+ * Focus state for keyboard accessibility
+ */
+.themeToggle:focus-visible {
+  outline: 2px solid #3b82f6;       /* Blue focus ring */
+  outline-offset: 2px;              /* Space around focus ring */
+}
+
+/* =============================================================================
+   ICON ANIMATION SYSTEM - SVG Transition Effects
+   ============================================================================= */
+
+/**
+ * Smooth icon transition for theme switching
+ * 
+ * Applies smooth transitions to SVG icons for seamless
+ * theme switching animations.
+ */
 /* Smooth icon transition */
 .themeToggle svg {
-  transition: all 0.3s ease;
+  transition: all 0.3s ease;        /* Longer transition for icon changes */
+  will-change: transform;           /* Optimize for transform animations */
 }
 
+/**
+ * Icon rotation effect on button hover
+ * 
+ * Adds playful rotation animation to the icon when
+ * button is hovered, enhancing interactivity.
+ */
 .themeToggle:hover svg {
-  transform: rotate(15deg);
+  transform: rotate(15deg);         /* Subtle 15-degree rotation */
 }
 
+/* =============================================================================
+   THEME SUPPORT - Dark Mode Styling
+   ============================================================================= */
+
+/**
+ * Dark theme button styling
+ * 
+ * Overrides default colors for dark mode with appropriate
+ * contrast and visual hierarchy.
+ */
 /* Dark theme support */
 [data-theme="dark"] .themeToggle {
-  color: #9ca3af;
+  color: #9ca3af;                   /* Muted light color for dark theme */
 }
 
+/**
+ * Dark theme hover state
+ */
 [data-theme="dark"] .themeToggle:hover {
-  background: #374151;
-  color: #f9fafb;
+  background: #374151;              /* Dark hover background */
+  color: #f9fafb;                   /* Light icon color on hover */
 }
 
+/**
+ * Dark theme active state
+ */
 [data-theme="dark"] .themeToggle:active {
-  background: #4b5563;
+  background: #4b5563;              /* Darker pressed background */
 }
 
+/**
+ * Dark theme focus state
+ */
+[data-theme="dark"] .themeToggle:focus-visible {
+  outline-color: #60a5fa;           /* Lighter blue for dark theme */
+}
+
+/* =============================================================================
+   RESPONSIVE DESIGN - Mobile Optimizations
+   ============================================================================= */
+
+/**
+ * Tablet responsiveness (768px and below)
+ * 
+ * Slightly smaller button size for tablet interfaces
+ * while maintaining touch-friendly proportions.
+ */
 /* Responsive adjustments */
 @media screen and (max-width: 768px) {
   .themeToggle {
-    width: 28px;
+    width: 28px;                    /* Smaller tablet size */
     height: 28px;
   }
 }
 
+/**
+ * Mobile responsiveness (480px and below)
+ * 
+ * Further reduced size for mobile devices while
+ * ensuring adequate touch target size.
+ */
 @media screen and (max-width: 480px) {
   .themeToggle {
-    width: 26px;
+    width: 26px;                    /* Compact mobile size */
     height: 26px;
   }
 }
 
+/* =============================================================================
+   ACCESSIBILITY SUPPORT - Motion and Contrast Preferences
+   ============================================================================= */
+
+/**
+ * Reduced motion accessibility support
+ * 
+ * Disables animations for users who prefer reduced motion,
+ * improving accessibility and reducing motion sickness.
+ */
 /* Accessibility */
 @media (prefers-reduced-motion: reduce) {
   .themeToggle,
   .themeToggle svg {
-    transition: none;
+    transition: none;               /* Disable all transitions */
   }
   
   .themeToggle:hover {
-    transform: none;
+    transform: none;                /* Disable hover scaling */
   }
   
   .themeToggle:active {
-    transform: none;
+    transform: none;                /* Disable press scaling */
   }
   
   .themeToggle:hover svg {
-    transform: none;
+    transform: none;                /* Disable icon rotation */
   }
 }
 
+/**
+ * High contrast mode support
+ * 
+ * Ensures button visibility in Windows high contrast mode
+ * by adding a visible border.
+ */
 /* High contrast mode support */
 @media (forced-colors: active) {
   .themeToggle {
-    border: 1px solid;
+    border: 1px solid;              /* System color border */
   }
+}
+
+/* =============================================================================
+   PERFORMANCE OPTIMIZATIONS
+   ============================================================================= */
+
+/**
+ * Performance optimizations for smooth animations
+ * 
+ * Utilizes hardware acceleration and optimizes for
+ * transform properties to ensure smooth 60fps animations.
+ */
+@media screen and (min-width: 769px) {
+  .themeToggle {
+    will-change: transform, background-color; /* Optimize for common changes */
+  }
+  
+  .themeToggle:hover {
+    backface-visibility: hidden;    /* Prevent flickering during transforms */
+  }
+}
+
+/* =============================================================================
+   PRINT STYLES - Print Media Optimization
+   ============================================================================= */
+
+/**
+ * Print styles for theme toggle
+ * 
+ * Hides the theme toggle button in print media since
+ * theme switching is not relevant for printed documents.
+ */
+@media print {
+  .themeToggle {
+    display: none;                  /* Hide in print layouts */
+  }
+}
+
+/* =============================================================================
+   ADVANCED INTERACTION STATES
+   ============================================================================= */
+
+/**
+ * Touch device optimizations
+ * 
+ * Enhances touch interactions on mobile devices with
+ * appropriate feedback and sizing.
+ */
+@media (hover: none) and (pointer: coarse) {
+  .themeToggle {
+    min-width: 44px;                /* Ensure minimum touch target size */
+    min-height: 44px;
+  }
+  
+  .themeToggle:active {
+    background: #e5e7eb;            /* More prominent press feedback */
+  }
+  
+  [data-theme="dark"] .themeToggle:active {
+    background: #4b5563;            /* Dark theme press feedback */
+  }
+}
+
+/**
+ * Keyboard navigation enhancements
+ * 
+ * Improves keyboard interaction experience with
+ * enhanced focus states and keyboard-specific styling.
+ */
+.themeToggle:focus:not(:focus-visible) {
+  outline: none;                    /* Hide focus for mouse clicks */
+}
+
+/**
+ * Button disabled state (if needed in future)
+ * 
+ * Prepared styling for potential disabled state
+ * with reduced opacity and no interactions.
+ */
+.themeToggle:disabled {
+  opacity: 0.5;                     /* Reduced opacity for disabled state */
+  cursor: not-allowed;              /* Indicate non-interactive state */
+  pointer-events: none;             /* Disable all interactions */
+}
+
+[data-theme="dark"] .themeToggle:disabled {
+  opacity: 0.4;                     /* Slightly more transparent in dark mode */
 }

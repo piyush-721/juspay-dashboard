@@ -1,5 +1,40 @@
-/* Header.module.css */
+/**
+ * Header Component Styles
+ * 
+ * Comprehensive responsive styling for the application header component.
+ * Implements mobile-first responsive design with progressive enhancement.
+ * 
+ * Architecture:
+ * - Mobile-first responsive design (320px+)
+ * - CSS Grid and Flexbox for layout
+ * - CSS Custom Properties for theming
+ * - Semantic class naming (BEM-inspired)
+ * 
+ * Browser Support:
+ * - Modern browsers with CSS Grid support
+ * - Fallbacks for older browsers where needed
+ * - Progressive enhancement approach
+ * 
+ * Performance:
+ * - Hardware acceleration for animations
+ * - Efficient CSS selectors
+ * - Minimal repaints and reflows
+ * 
+ * @author Your Name
+ * @since 1.0.0
+ * @version 1.2.0
+ */
 
+/* =============================================================================
+   BASE HEADER STYLES - Mobile First (320px+)
+   ============================================================================= */
+
+/**
+ * Primary header container
+ * 
+ * Establishes the main header layout using Flexbox for optimal cross-browser
+ * support. Positioned sticky for persistent navigation access.
+ */
 .header {
   display: flex;
   align-items: center;
@@ -9,30 +44,50 @@
   border-bottom: 1px solid #e5e7eb;
   height: 64px;
   width: 100%;
-  min-width: 0; /* ✅ Allow shrinking */
+  min-width: 0; /* Enable flexible shrinking */
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 100; /* Ensure header stays above other content */
+  box-sizing: border-box;
 }
 
-/* Left Section */
+/* =============================================================================
+   LAYOUT SECTIONS - Left & Right Areas
+   ============================================================================= */
+
+/**
+ * Left section container
+ * Contains navigation controls and breadcrumb
+ */
 .leftSection {
   display: flex;
   align-items: center;
   gap: 16px;
-  min-width: 0; /* ✅ Allow left section to shrink if needed */
-  flex: 1;
+  min-width: 0; /* Allow section to shrink gracefully */
+  flex: 1; /* Take available space */
 }
 
-/* Right Section */
+/**
+ * Right section container
+ * Contains search, theme toggle, and action buttons
+ */
 .rightSection {
   display: flex;
   align-items: center;
   gap: 12px;
-  flex-shrink: 0; /* ✅ Prevent icons from hiding */
+  flex-shrink: 0; /* Prevent critical controls from hiding */
 }
 
-/* Icon Buttons */
+/* =============================================================================
+   INTERACTIVE ELEMENTS - Buttons & Controls
+   ============================================================================= */
+
+/**
+ * Base icon button styling
+ * 
+ * Provides consistent styling for all header action buttons with
+ * accessible touch targets and smooth interactions.
+ */
 .iconButton {
   display: flex;
   align-items: center;
@@ -43,74 +98,142 @@
   background: transparent;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
-  flex-shrink: 0; /* ✅ Prevent buttons from shrinking */
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  flex-shrink: 0; /* Prevent button collapse */
+  /* Accessibility: Ensure minimum touch target size */
+  min-width: 32px;
+  min-height: 32px;
 }
 
+/**
+ * Button hover state
+ * Provides visual feedback for interactive elements
+ */
 .iconButton:hover {
   background: #f3f4f6;
 }
 
+/**
+ * Button active state
+ * Provides tactile feedback with subtle scale animation
+ */
 .iconButton:active {
   background: #e5e7eb;
   transform: scale(0.95);
 }
 
-/* Icon Images */
+/**
+ * Button focus state for keyboard navigation
+ * Ensures accessibility compliance
+ */
+.iconButton:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* =============================================================================
+   ICON STYLING - SVG & Image Icons
+   ============================================================================= */
+
+/**
+ * Standard icon sizing and opacity
+ * Consistent visual weight across all icons
+ */
 .icon {
   width: 20px;
   height: 20px;
   opacity: 0.7;
   transition: opacity 0.2s ease;
+  /* Optimize rendering for crisp icons */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
 
+/**
+ * Icon hover effect
+ * Increases visibility on interaction
+ */
 .iconButton:hover .icon {
   opacity: 1;
 }
 
-/* Search Icon (specific styling) */
+/**
+ * Search-specific icon styling
+ * Smaller size within search container
+ */
 .searchIcon {
   width: 16px;
   height: 16px;
   opacity: 0.5;
   flex-shrink: 0;
+  image-rendering: -webkit-optimize-contrast;
 }
 
-/* Breadcrumb styles */
+/* =============================================================================
+   BREADCRUMB NAVIGATION
+   ============================================================================= */
+
+/**
+ * Breadcrumb container
+ * Handles text overflow gracefully with ellipsis
+ */
 .breadcrumb {
   display: flex;
   align-items: center;
   gap: 8px;
   margin-left: 8px;
-  overflow: hidden; /* ✅ Prevent overflow */
+  overflow: hidden; /* Prevent layout breaks */
+  max-width: 300px; /* Reasonable maximum width */
 }
 
+/**
+ * Breadcrumb text elements
+ * Consistent typography with overflow handling
+ */
 .breadcrumbText {
   font-family: Inter, sans-serif;
   font-size: 14px;
   font-weight: 400;
   color: #9ca3af;
-  white-space: nowrap; /* ✅ Prevent wrapping */
+  white-space: nowrap;
+  line-height: 1.2;
 }
 
+/**
+ * Breadcrumb separator
+ * Visual delimiter between breadcrumb levels
+ */
 .breadcrumbSeparator {
   font-family: Inter, sans-serif;
   font-size: 14px;
   color: #d1d5db;
   flex-shrink: 0;
+  line-height: 1.2;
 }
 
+/**
+ * Current page breadcrumb
+ * Emphasizes current location with text truncation
+ */
 .breadcrumbCurrent {
   font-family: Inter, sans-serif;
   font-size: 14px;
   font-weight: 500;
   color: #374151;
-  white-space: nowrap; /* ✅ Prevent wrapping */
+  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; /* ✅ Add ellipsis for long text */
+  text-overflow: ellipsis;
+  line-height: 1.2;
 }
 
-/* Search Container */
+/* =============================================================================
+   SEARCH FUNCTIONALITY
+   ============================================================================= */
+
+/**
+ * Search container
+ * Flexible search input with icon and keyboard shortcut indicator
+ */
 .searchContainer {
   display: flex;
   align-items: center;
@@ -122,15 +245,24 @@
   width: 240px;
   max-width: 280px;
   transition: all 0.2s ease;
-  flex-shrink: 0; /* ✅ Prevent search from shrinking too much */
+  flex-shrink: 0;
+  box-sizing: border-box;
 }
 
+/**
+ * Search focus state
+ * Enhanced visual feedback during interaction
+ */
 .searchContainer:focus-within {
   border-color: #3b82f6;
   background: #ffffff;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
+/**
+ * Search input field
+ * Clean, borderless input with proper typography
+ */
 .searchInput {
   flex: 1;
   border: none;
@@ -139,23 +271,36 @@
   font-family: Inter, sans-serif;
   font-size: 14px;
   color: #374151;
-  min-width: 0; /* ✅ Allow input to shrink */
+  min-width: 0; /* Allow shrinking */
+  line-height: 1.4;
 }
 
+/**
+ * Search input placeholder
+ * Subtle placeholder text styling
+ */
 .searchInput::placeholder {
   color: #9ca3af;
+  opacity: 1; /* Ensure consistent opacity across browsers */
 }
 
+/**
+ * Search keyboard shortcut indicator
+ * Visual cue for keyboard navigation
+ */
 .searchShortcut {
   width: 20px;
   height: 16px;
   opacity: 0.6;
   flex-shrink: 0;
+  image-rendering: -webkit-optimize-contrast;
 }
 
-/* ✅ RESPONSIVE BREAKPOINTS - Progressive Enhancement */
+/* =============================================================================
+   RESPONSIVE DESIGN - Mobile First Approach
+   ============================================================================= */
 
-/* ✅ LARGE DESKTOP (1441px+) - Full features */
+/* Large Desktop (1441px+) - Maximum features and spacing */
 @media screen and (min-width: 1441px) {
   .header {
     padding: 12px 24px;
@@ -174,7 +319,7 @@
   }
 }
 
-/* ✅ DESKTOP (1201px - 1440px) - Standard desktop */
+/* Desktop (1201px - 1440px) - Standard desktop experience */
 @media screen and (max-width: 1440px) and (min-width: 1201px) {
   .header {
     padding: 12px 22px;
@@ -193,7 +338,7 @@
   }
 }
 
-/* ✅ TABLET LANDSCAPE (1025px - 1200px) - Compact layout */
+/* Tablet Landscape (1025px - 1200px) - Compact desktop layout */
 @media screen and (max-width: 1200px) and (min-width: 1025px) {
   .header {
     padding: 12px 20px;
@@ -218,6 +363,7 @@
   
   .breadcrumb {
     margin-left: 6px;
+    max-width: 250px; /* Reduce max width for smaller screens */
   }
   
   .breadcrumbText,
@@ -226,7 +372,7 @@
   }
 }
 
-/* ✅ TABLET PORTRAIT (769px - 1024px) - Optimized for tablets */
+/* Tablet Portrait (769px - 1024px) - Tablet optimized */
 @media screen and (max-width: 1024px) and (min-width: 769px) {
   .header {
     padding: 12px 18px;
@@ -271,6 +417,7 @@
   
   .breadcrumb {
     margin-left: 4px;
+    max-width: 200px;
   }
   
   .breadcrumbText,
@@ -279,11 +426,11 @@
   }
 }
 
-/* ✅ MOBILE LANDSCAPE (481px - 768px) - Hide breadcrumb, compact search */
+/* Mobile Landscape (481px - 768px) - Progressive disclosure */
 @media screen and (max-width: 768px) and (min-width: 481px) {
   .header {
     padding: 10px 16px;
-    height: 56px;
+    height: 56px; /* Reduced height for mobile */
   }
   
   .searchContainer {
@@ -300,8 +447,9 @@
     height: 12px;
   }
   
+  /* Hide breadcrumb to save space */
   .breadcrumb {
-    display: none; /* ✅ Hide breadcrumb to save space */
+    display: none;
   }
   
   .leftSection {
@@ -329,15 +477,16 @@
   }
 }
 
-/* ✅ MOBILE PORTRAIT (376px - 480px) - Hide search, essential buttons only */
+/* Mobile Portrait (376px - 480px) - Essential features only */
 @media screen and (max-width: 480px) and (min-width: 376px) {
   .header {
     padding: 10px 14px;
     height: 54px;
   }
   
+  /* Hide search to preserve space for essential controls */
   .searchContainer {
-    display: none; /* ✅ Hide search to save space */
+    display: none;
   }
   
   .leftSection {
@@ -359,14 +508,14 @@
     height: 14px;
   }
   
-  /* ✅ Hide less important buttons on mobile */
+  /* Hide less critical buttons on mobile */
   .rightSection .iconButton:nth-child(2), /* Clock */
-  .rightSection .iconButton:nth-child(3) { /* Theme */
+  .rightSection .iconButton:nth-child(3) { /* Theme Toggle */
     display: none;
   }
 }
 
-/* ✅ SMALL MOBILE (320px - 375px) - Ultra compact */
+/* Small Mobile (320px - 375px) - Ultra compact interface */
 @media screen and (max-width: 375px) and (min-width: 320px) {
   .header {
     padding: 8px 12px;
@@ -392,15 +541,15 @@
     height: 12px;
   }
   
-  /* ✅ Keep only essential buttons */
+  /* Only keep essential navigation buttons */
   .rightSection .iconButton:nth-child(2), /* Clock */
-  .rightSection .iconButton:nth-child(3), /* Theme */
+  .rightSection .iconButton:nth-child(3), /* Theme Toggle */
   .rightSection .iconButton:nth-child(4) { /* Notification Bell */
     display: none;
   }
 }
 
-/* ✅ EXTRA SMALL MOBILE (Below 320px) - Minimal interface */
+/* Extra Small Mobile (<320px) - Minimal interface */
 @media screen and (max-width: 319px) {
   .header {
     padding: 8px 10px;
@@ -426,13 +575,17 @@
     height: 10px;
   }
   
-  /* ✅ Only keep menu toggle and panel toggle */
+  /* Only keep absolutely essential controls */
   .rightSection .iconButton:not(:last-child) {
     display: none;
   }
 }
 
-/* ✅ LANDSCAPE ORIENTATION on mobile devices */
+/* =============================================================================
+   DEVICE-SPECIFIC OPTIMIZATIONS
+   ============================================================================= */
+
+/* Landscape orientation on mobile devices */
 @media screen and (orientation: landscape) and (max-height: 500px) and (max-width: 900px) {
   .header {
     height: 48px;
@@ -464,19 +617,19 @@
   }
 }
 
-/* ✅ TOUCH DEVICE OPTIMIZATIONS */
+/* Touch device optimizations */
 @media (hover: none) and (pointer: coarse) {
   .iconButton {
-    min-height: 32px; /* ✅ Accessible touch target */
+    min-height: 32px; /* Accessible touch target */
     min-width: 32px;
   }
   
   .iconButton:active {
     background: #e5e7eb;
-    transform: none; /* ✅ Remove scale for touch devices */
+    transform: none; /* Remove scale animation for touch */
   }
   
-  /* ✅ Larger touch targets on mobile */
+  /* Larger touch targets on mobile */
   @media screen and (max-width: 768px) {
     .iconButton {
       min-height: 28px;
@@ -485,7 +638,7 @@
   }
 }
 
-/* ✅ HIGH DPI DISPLAY SUPPORT */
+/* High DPI display support */
 @media screen and (-webkit-min-device-pixel-ratio: 2),
        screen and (min-resolution: 192dpi) {
   .icon,
@@ -496,9 +649,14 @@
   }
 }
 
-/* ✅ DARK THEME SUPPORT */
-/* ADD TO: src/components/Header/Header.module.css */
+/* =============================================================================
+   THEME SUPPORT - Dark Mode
+   ============================================================================= */
 
+/**
+ * Dark theme overrides
+ * Maintains visual hierarchy while providing appropriate contrast
+ */
 [data-theme="dark"] .header {
   background: #2D2D2D;
   border-bottom-color: #404040;
@@ -538,7 +696,19 @@
   background: #404040;
 }
 
-/* ✅ PRINT STYLES */
+[data-theme="dark"] .iconButton:active {
+  background: #555555;
+}
+
+[data-theme="dark"] .iconButton:focus-visible {
+  outline-color: #60a5fa;
+}
+
+/* =============================================================================
+   ACCESSIBILITY & SPECIAL FEATURES
+   ============================================================================= */
+
+/* Print styles - Clean, minimal layout for printing */
 @media print {
   .header {
     background: white !important;
@@ -549,11 +719,11 @@
   }
   
   .rightSection {
-    display: none; /* ✅ Hide action buttons in print */
+    display: none; /* Hide interactive elements */
   }
   
   .searchContainer {
-    display: none; /* ✅ Hide search in print */
+    display: none;
   }
   
   .breadcrumbText,
@@ -562,7 +732,7 @@
   }
 }
 
-/* ✅ REDUCED MOTION PREFERENCE */
+/* Reduced motion preference support */
 @media (prefers-reduced-motion: reduce) {
   .iconButton,
   .searchContainer,
@@ -575,7 +745,7 @@
   }
 }
 
-/* ✅ FORCED COLORS MODE (Windows High Contrast) */
+/* High contrast mode support (Windows) */
 @media (forced-colors: active) {
   .header {
     border-bottom: 1px solid;
@@ -588,4 +758,23 @@
   .searchContainer {
     border: 1px solid;
   }
+}
+
+/* =============================================================================
+   PERFORMANCE OPTIMIZATIONS
+   ============================================================================= */
+
+/**
+ * Hardware acceleration for smooth animations
+ * Applied to frequently animated elements
+ */
+.iconButton {
+  will-change: transform, background-color;
+}
+
+/**
+ * Optimize repaints for hover effects
+ */
+.iconButton:hover {
+  backface-visibility: hidden;
 }

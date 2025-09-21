@@ -1,316 +1,470 @@
+/**
+ * RevenueChart Component Styles
+ * 
+ * Advanced responsive styling for a dual-line revenue chart with sophisticated
+ * line rendering (solid/dotted segments), custom legend, and progressive
+ * responsive design. Features smooth animations and theme support.
+ * 
+ * Key Features:
+ * - Fixed desktop dimensions with responsive breakpoints
+ * - Custom legend with color-coded dots and revenue values
+ * - Line styling with drop shadows for depth
+ * - Progressive scaling from desktop (650px) to mobile (250px)
+ * - Vertical legend stacking on smaller screens
+ * - Theme-aware color schemes
+ * 
+ * Layout Architecture:
+ * - Flexbox-based responsive design
+ * - Fixed aspect ratios with breakpoint adaptations
+ * - Custom legend positioning and responsive behavior
+ * - Recharts integration with custom styling overrides
+ * 
+ * @author Your Name
+ * @since 1.0.0
+ * @version 2.5.0
+ */
+
 /* src/components/RevenueChart/RevenueChart.module.css */
 
+/* =============================================================================
+   MAIN CHART CONTAINER - Desktop Base Configuration
+   ============================================================================= */
+
+/**
+ * Primary chart container with fixed desktop dimensions
+ * 
+ * Establishes the main chart layout with specific desktop dimensions and
+ * styling. Uses flexible layout system for responsive adaptation while
+ * maintaining optimal proportions across screen sizes.
+ */
 .revenueChart {
-  width: 650px;
-  height: 318px;
-  min-width: 650px; /* ✅ This will be overridden for smaller screens */
-  background: #F7F9FB;
-  border-radius: 16px;
-  padding: 24px;
-  font-family: Inter, sans-serif;
+  width: 650px;                     /* Fixed desktop width for optimal layout */
+  height: 318px;                    /* Fixed height maintaining aspect ratio */
+  min-width: 650px;                 /* ✅ This will be overridden for smaller screens */
+  background: #F7F9FB;              /* Light gray background */
+  border-radius: 16px;              /* Rounded corners */
+  padding: 24px;                    /* Internal spacing */
+  font-family: Inter, sans-serif;   /* Consistent brand typography */
   display: flex;
-  flex-direction: column;
-  gap: 16px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  flex-direction: column;           /* Vertical layout: header + chart */
+  gap: 16px;                        /* Space between header and chart */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Subtle depth */
 }
 
-/* Header */
+/* =============================================================================
+   CHART HEADER - Title and Legend Layout
+   ============================================================================= */
+
+/**
+ * Header container with title and legend positioning
+ */
 .chartHeader {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 12px;
+  justify-content: space-between;   /* Spread title and legend */
+  align-items: flex-start;          /* Top alignment for proper spacing */
+  margin-bottom: 12px;              /* Space before chart area */
 }
 
+/**
+ * Main chart title styling
+ */
 .chartTitle {
   font-size: 16px;
-  font-weight: 600;
-  color: #000000;
-  margin: 0;
-  line-height: 1.2;
-  font-family: Inter, sans-serif;
+  font-weight: 600;                 /* Semi-bold weight */
+  color: #000000;                   /* High contrast black */
+  margin: 0;                        /* Remove default margins */
+  line-height: 1.2;                 /* Tight line height */
+  font-family: Inter, sans-serif;   /* Consistent typography */
 }
 
+/* =============================================================================
+   CUSTOM LEGEND SYSTEM - Revenue Values and Color Coding
+   ============================================================================= */
+
+/**
+ * Custom legend container with flexible layout
+ * 
+ * Houses the revenue comparison legend with color dots and values.
+ * Adapts from horizontal (desktop) to vertical (mobile) layouts.
+ */
 /* ✅ Perfect Legend */
 .customLegend {
   display: flex;
-  align-items: center;
-  font-size: 12px;
-  font-family: Inter, sans-serif;
+  align-items: center;              /* Center align legend items */
+  font-size: 12px;                  /* Small, readable text */
+  font-family: Inter, sans-serif;   /* Consistent font family */
 }
 
+/**
+ * Colored indicator dots for legend items
+ */
 .legendDot {
-  width: 8px;
+  width: 8px;                       /* Small circular indicator */
   height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  display: inline-block;
+  border-radius: 50%;               /* Perfect circle */
+  flex-shrink: 0;                   /* Prevent compression */
+  display: inline-block;            /* Inline with text */
 }
 
+/**
+ * Individual legend text items with spacing
+ */
 .legendText {
   display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-right: 50px;
+  align-items: center;              /* Center align dot and text */
+  gap: 6px;                         /* Space between dot and text */
+  margin-right: 50px;               /* Space between legend items */
   font-family: Inter;
-  font-weight: 400;
+  font-weight: 400;                 /* Regular weight */
   font-style: Regular;
   font-size: 12px;
-  line-height: 18px;
-  letter-spacing: 0%;
-  color: #1C1C1C;
+  line-height: 18px;                /* Comfortable line spacing */
+  letter-spacing: 0%;               /* No extra letter spacing */
+  color: #1C1C1C;                   /* Dark text color */
 }
 
+/**
+ * Visual separator between title and legend
+ */
 .smallVerticalBar {
-  color: #1C1C1C33;
+  color: #1C1C1C33;                 /* Semi-transparent separator */
 }
 
+/**
+ * Revenue value styling within legend
+ */
 .legendValue {
   font-family: Inter;
-  font-weight: 800;
+  font-weight: 800;                 /* Bold weight for emphasis */
   font-style: Semi Bold;
   font-size: 12px;
   line-height: 18px;
   letter-spacing: 0%;
-  color: #1C1C1C;
+  color: #1C1C1C;                   /* High contrast for readability */
 }
 
-/* Chart Container */
+/* =============================================================================
+   CHART CONTAINER - Recharts Integration Area
+   ============================================================================= */
+
+/**
+ * Main chart rendering area
+ */
 .chartContainer {
-  flex: 1;
-  width: 100%;
-  height: 220px;
+  flex: 1;                          /* Take remaining vertical space */
+  width: 100%;                      /* Full width of parent */
+  height: 220px;                    /* Fixed height for desktop */
 }
 
+/* =============================================================================
+   LINE STYLING - Visual Enhancements with Drop Shadows
+   ============================================================================= */
+
+/**
+ * Previous week line styling with subtle shadow
+ */
 /* ✅ Line Styles with subtle shadows */
 .previousLine {
-  filter: drop-shadow(0 1px 2px rgba(168, 184, 208, 0.2));
+  filter: drop-shadow(0 1px 2px rgba(168, 184, 208, 0.2)); /* Light blue shadow */
 }
 
+/**
+ * Current week solid line styling
+ */
 .currentSolidLine {
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15)); /* Subtle black shadow */
 }
 
+/**
+ * Current week dotted line styling
+ */
 .currentDottedLine {
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15)); /* Matching shadow for consistency */
 }
 
+/* =============================================================================
+   RECHARTS GLOBAL OVERRIDES - Smooth Curve Styling
+   ============================================================================= */
+
+/**
+ * Global Recharts line curve styling
+ * Applies smooth line caps and joins to all chart lines
+ */
 /* ✅ Smooth curves */
 :global(.recharts-line-curve) {
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  stroke-linecap: round;            /* Rounded line endings */
+  stroke-linejoin: round;           /* Smooth corner joins */
 }
 
-/* ✅ RESPONSIVE DESIGN - Progressive Scaling */
+/* =============================================================================
+   RESPONSIVE DESIGN SYSTEM - Progressive Scaling Breakpoints
+   ============================================================================= */
 
-/* ✅ LARGE SCREENS (1441px+) - Full desktop */
+/* ✅ LARGE SCREENS (1441px+) - Maximum desktop experience */
 @media screen and (min-width: 1441px) {
   .revenueChart {
-    width: 650px;
-    min-width: 650px;
-    max-width: 850px;
+    width: 650px;                   /* Maintain desktop width */
+    min-width: 650px;               /* Fixed minimum for large screens */
+    max-width: 850px;               /* Allow some growth on very large screens */
   }
 }
 
-/* ✅ DESKTOP (1301px - 1440px) - Standard desktop */
+/* ✅ DESKTOP (1301px - 1440px) - Standard desktop adaptation */
 @media screen and (max-width: 1440px) and (min-width: 1301px) {
   .revenueChart {
-    width: 100%;
-    min-width: 550px; /* ✅ Reduced from 600px */
-    max-width: 750px;
+    width: 100%;                    /* Fill available space */
+    min-width: 550px;               /* ✅ Reduced from 600px for flexibility */
+    max-width: 750px;               /* Reasonable maximum width */
   }
 }
 
-/* ✅ CRITICAL: Medium Desktop (1123px - 1300px) - Allow shrinking */
+/* ✅ CRITICAL: Medium Desktop (1123px - 1300px) - Flexible sizing for layouts */
 @media screen and (max-width: 1300px) and (min-width: 1123px) {
   .revenueChart {
-    width: 100%;
-    min-width: 500px; /* ✅ Further reduced to allow side-by-side */
-    max-width: 650px;
+    width: 100%;                    /* Responsive width */
+    min-width: 500px;               /* ✅ Further reduced for side-by-side layouts */
+    max-width: 650px;               /* Maintain desktop proportions */
   }
 }
 
-/* ✅ TABLET LANDSCAPE + SMALL DESKTOP (901px - 1122px) */
+/* ✅ TABLET LANDSCAPE + SMALL DESKTOP (901px - 1122px) - Compact desktop */
 @media screen and (max-width: 1122px) and (min-width: 901px) {
   .revenueChart {
     width: 100%;
-    min-width: 400px; /* ✅ Much smaller to fit smaller screens */
+    min-width: 400px;               /* ✅ Much smaller for constrained screens */
     max-width: 550px;
-    padding: 20px;
-    height: 300px;
+    padding: 20px;                  /* Reduced padding */
+    height: 300px;                  /* Slightly reduced height */
   }
   
   .chartContainer {
-    height: 200px;
+    height: 200px;                  /* Proportionally reduced chart area */
   }
   
   .legendText {
-    margin-right: 30px; /* ✅ Reduced spacing */
+    margin-right: 30px;             /* ✅ Reduced legend spacing */
   }
 }
 
-/* ✅ TABLET LANDSCAPE (769px - 900px) */
+/* ✅ TABLET LANDSCAPE (769px - 900px) - Tablet optimization */
 @media screen and (max-width: 900px) and (min-width: 769px) {
   .revenueChart {
     width: 100%;
-    min-width: 350px; /* ✅ Even smaller for tablets */
+    min-width: 350px;               /* ✅ Tablet-appropriate minimum */
     max-width: 500px;
-    padding: 18px;
-    height: 280px;
+    padding: 18px;                  /* Compact padding */
+    height: 280px;                  /* Tablet-optimized height */
   }
   
   .chartHeader {
-    flex-direction: column;
-    gap: 10px;
-    align-items: flex-start;
+    flex-direction: column;         /* Stack title and legend vertically */
+    gap: 10px;                      /* Space between stacked elements */
+    align-items: flex-start;        /* Left-align stacked items */
   }
   
   .customLegend {
-    flex-direction: row; /* ✅ Keep horizontal on tablet */
+    flex-direction: row;            /* ✅ Keep horizontal on tablet */
     align-items: center;
   }
   
   .legendText {
-    margin-right: 25px;
-    font-size: 11px;
+    margin-right: 25px;             /* Reduced spacing for tablet */
+    font-size: 11px;                /* Smaller text for tablet */
   }
   
   .legendValue {
-    font-size: 11px;
+    font-size: 11px;                /* Consistent smaller text */
   }
   
   .chartContainer {
-    height: 180px;
+    height: 180px;                  /* Compact chart area */
   }
 }
 
-/* ✅ TABLET PORTRAIT (481px - 768px) */
+/* ✅ TABLET PORTRAIT (481px - 768px) - Vertical layout optimization */
 @media screen and (max-width: 768px) and (min-width: 481px) {
   .revenueChart {
     width: 100%;
-    min-width: 300px; /* ✅ Much smaller for tablet portrait */
+    min-width: 300px;               /* ✅ Tablet portrait minimum */
     max-width: 450px;
-    padding: 16px;
-    height: 260px;
+    padding: 16px;                  /* Minimal padding */
+    height: 260px;                  /* Compact height */
   }
   
   .chartHeader {
-    flex-direction: column;
-    gap: 8px;
+    flex-direction: column;         /* Vertical stacking required */
+    gap: 8px;                       /* Tight spacing */
     align-items: flex-start;
   }
   
   .chartTitle {
-    font-size: 15px;
+    font-size: 15px;                /* Slightly smaller title */
   }
   
   .customLegend {
-    flex-direction: column; /* ✅ Stack vertically on smaller tablets */
-    align-items: flex-start;
-    gap: 6px;
+    flex-direction: column;         /* ✅ Stack legend items vertically */
+    align-items: flex-start;        /* Left-align stacked legend */
+    gap: 6px;                       /* Space between legend items */
   }
   
   .legendText {
-    margin-right: 0;
-    font-size: 10px;
+    margin-right: 0;                /* No horizontal margin needed */
+    font-size: 10px;                /* Small readable text */
   }
   
   .legendValue {
-    font-size: 10px;
+    font-size: 10px;                /* Consistent small text */
   }
   
   .chartContainer {
-    height: 160px;
+    height: 160px;                  /* Very compact chart area */
   }
 }
 
-/* ✅ MOBILE LANDSCAPE (376px - 480px) */
+/* ✅ MOBILE LANDSCAPE (376px - 480px) - Mobile optimization */
 @media screen and (max-width: 480px) and (min-width: 376px) {
   .revenueChart {
     width: 100%;
-    min-width: 280px; /* ✅ Mobile-friendly size */
+    min-width: 280px;               /* ✅ Mobile-friendly minimum */
     max-width: 380px;
-    padding: 14px;
-    height: 240px;
+    padding: 14px;                  /* Minimal mobile padding */
+    height: 240px;                  /* Mobile-appropriate height */
   }
   
   .chartTitle {
-    font-size: 14px;
+    font-size: 14px;                /* Mobile title size */
   }
   
   .customLegend {
-    flex-direction: column;
+    flex-direction: column;         /* Vertical legend stacking */
     align-items: flex-start;
-    gap: 4px;
+    gap: 4px;                       /* Tight spacing for mobile */
   }
   
   .legendText {
-    font-size: 9px;
+    font-size: 9px;                 /* Very small but readable */
   }
   
   .legendValue {
-    font-size: 9px;
+    font-size: 9px;                 /* Consistent tiny text */
   }
   
   .chartContainer {
-    height: 140px;
+    height: 140px;                  /* Compact mobile chart */
   }
 }
 
-/* ✅ MOBILE PORTRAIT (320px - 375px) */
+/* ✅ MOBILE PORTRAIT (320px - 375px) - Ultra-compact mobile */
 @media screen and (max-width: 375px) {
   .revenueChart {
     width: 100%;
-    min-width: 250px; /* ✅ Very small screens */
+    min-width: 250px;               /* ✅ Very small screen minimum */
     max-width: 320px;
-    padding: 12px;
-    height: 220px;
+    padding: 12px;                  /* Ultra-minimal padding */
+    height: 220px;                  /* Minimal viable height */
   }
   
   .chartTitle {
-    font-size: 13px;
+    font-size: 13px;                /* Smallest reasonable title */
   }
   
   .customLegend {
-    flex-direction: column;
-    gap: 3px;
+    flex-direction: column;         /* Vertical legend essential */
+    gap: 3px;                       /* Minimal spacing */
   }
   
   .legendText {
-    font-size: 8px;
+    font-size: 8px;                 /* Smallest readable text */
   }
   
   .legendValue {
-    font-size: 8px;
+    font-size: 8px;                 /* Matching tiny text */
   }
   
   .chartContainer {
-    height: 120px;
+    height: 120px;                  /* Minimal chart area */
   }
 }
 
+/* =============================================================================
+   THEME SUPPORT - Dark Mode Styling
+   ============================================================================= */
+
+/**
+ * Dark theme color overrides for complete dark mode support
+ */
 /* ✅ Dark Theme Support */
 [data-theme="dark"] .revenueChart {
-  background: #1f2937;
+  background: #1f2937;              /* Dark background */
 }
 
 [data-theme="dark"] .chartTitle {
-  color: #f9fafb;
+  color: #f9fafb;                   /* Light title text */
 }
 
 [data-theme="dark"] .legendText {
-  color: #9ca3af;
+  color: #9ca3af;                   /* Muted legend text */
 }
 
 [data-theme="dark"] .legendValue {
-  color: #f9fafb;
+  color: #f9fafb;                   /* Bright legend values */
 }
 
+/**
+ * Dark theme line shadow adjustments
+ */
 [data-theme="dark"] .previousLine {
-  filter: drop-shadow(0 1px 2px rgba(168, 184, 208, 0.3));
+  filter: drop-shadow(0 1px 2px rgba(168, 184, 208, 0.3)); /* Enhanced shadow */
 }
 
 [data-theme="dark"] .currentSolidLine,
 [data-theme="dark"] .currentDottedLine {
-  filter: drop-shadow(0 1px 2px rgba(255, 255, 255, 0.2));
+  filter: drop-shadow(0 1px 2px rgba(255, 255, 255, 0.2)); /* Light shadow for dark background */
+}
+
+/* =============================================================================
+   ACCESSIBILITY AND PERFORMANCE
+   ============================================================================= */
+
+/**
+ * High contrast mode support
+ */
+@media (forced-colors: active) {
+  .revenueChart {
+    border: 2px solid;              /* Ensure visible border */
+  }
+  
+  .legendDot {
+    border: 1px solid;              /* Visible legend dots */
+  }
+}
+
+/**
+ * Print styles for chart
+ */
+@media print {
+  .revenueChart {
+    break-inside: avoid;            /* Don't break chart across pages */
+    box-shadow: none;               /* Remove shadows for print */
+  }
+  
+  .chartTitle {
+    color: #000 !important;         /* Ensure black text */
+  }
+  
+  .legendText,
+  .legendValue {
+    color: #000 !important;         /* Black text for print */
+  }
+}
+
+/**
+ * Reduced motion accessibility
+ */
+@media (prefers-reduced-motion: reduce) {
+  .previousLine,
+  .currentSolidLine,
+  .currentDottedLine {
+    filter: none;                   /* Remove shadow animations */
+  }
 }

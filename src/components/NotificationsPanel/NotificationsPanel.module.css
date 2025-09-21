@@ -1,4 +1,20 @@
+/**
+ * NotificationsPanel Component Styles
+ * 
+ * Responsive styling for notifications side panel with desktop/mobile behavior switching.
+ * Desktop: Fixed 280px sidebar | Mobile: Full-screen overlay with backdrop blur
+ * Breakpoint: 887px for behavior transformation
+ * 
+ * @author Your Name
+ * @since 1.0.0
+ * @version 2.3.0
+ */
+
 /* NotificationsPanel.module.css - Fully Responsive */
+
+/* =============================================================================
+   DESKTOP LAYOUT - Primary Panel Configuration (888px+)
+   ============================================================================= */
 
 /* ✅ DESKTOP - Exact original styling preserved */
 .panelWrapper {
@@ -21,6 +37,10 @@
   /* overflow-y: auto; */
   flex-shrink: 0;
 }
+
+/* =============================================================================
+   PANEL HEADER - Title and Navigation
+   ============================================================================= */
 
 /* ✅ Header - Close button hidden on desktop */
 .header {
@@ -71,11 +91,19 @@
   transform: scale(0.95);
 }
 
+/* =============================================================================
+   CONTENT AREA - Scrollable Panel Content
+   ============================================================================= */
+
 /* Content */
 .content {
   flex: 1;
   margin-top: -20px;
 }
+
+/* =============================================================================
+   SECTION STRUCTURE - Content Organization
+   ============================================================================= */
 
 /* Sections */
 .section {
@@ -89,6 +117,10 @@
   margin: 0 0 12px 0;
   padding: 0;
 }
+
+/* =============================================================================
+   NOTIFICATION ITEMS - System Alerts and Updates
+   ============================================================================= */
 
 /* Notification Items */
 .notificationItem {
@@ -143,6 +175,10 @@
   font-weight: 400;
 }
 
+/* =============================================================================
+   ACTIVITY ITEMS - User Activity Feed
+   ============================================================================= */
+
 /* Activity Items */
 .activityItem {
   display: flex;
@@ -185,6 +221,10 @@
   font-weight: 400;
 }
 
+/* =============================================================================
+   CONTACT ITEMS - Team Directory
+   ============================================================================= */
+
 /* Contact Items */
 .contactItem {
   display: flex;
@@ -216,6 +256,10 @@
   margin: 0;
   line-height: 1.4;
 }
+
+/* =============================================================================
+   RESPONSIVE DESIGN - Adaptive Behavior System
+   ============================================================================= */
 
 /* ✅ TABLET LANDSCAPE (888px - 1024px) - Slight adjustments */
 @media screen and (max-width: 1024px) and (min-width: 888px) {
@@ -375,6 +419,10 @@
     max-width: none;
   }
 }
+
+/* =============================================================================
+   DARK THEME OVERRIDES - Comprehensive Dark Mode Support
+   ============================================================================= */
 
 /* Dark theme support */
 [data-theme="dark"] .notificationsPanel {

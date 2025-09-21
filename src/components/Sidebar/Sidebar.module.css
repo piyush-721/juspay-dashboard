@@ -1,458 +1,686 @@
+/**
+ * Sidebar Component Styles
+ * 
+ * Advanced responsive navigation sidebar with expandable menu sections,
+ * smooth animations, and intelligent mobile overlay behavior. Features
+ * hierarchical navigation structure with theme support and accessibility.
+ * 
+ * Key Features:
+ * - Fixed sidebar on desktop (212px width)
+ * - Mobile overlay with backdrop blur (280px width)
+ * - Expandable menu sections with rotation animations
+ * - Active state management with visual indicators
+ * - Theme-aware styling for light/dark modes
+ * - Mobile-only close button system
+ * - Smooth hover transitions and visual feedback
+ * - Hierarchical submenu system
+ * 
+ * Responsive Behavior:
+ * - Desktop (769px+): Fixed sidebar, no close button
+ * - Mobile (≤768px): Overlay with close button and backdrop
+ * - Breakpoint transformation at 768px
+ * 
+ * @author Your Name
+ * @since 1.0.0
+ * @version 3.0.0
+ */
+
 /* Sidebar.module.css - No Scrollbar + Mobile-Only Close Button */
 
+/* =============================================================================
+   DESKTOP LAYOUT - Fixed Sidebar Configuration (769px+)
+   ============================================================================= */
+
+/**
+ * Sidebar wrapper - transparent on desktop, overlay on mobile
+ */
 /* ✅ DESKTOP - Exact original styling with no scrollbar */
 .sidebarWrapper {
   display: contents; /* No wrapper interference on desktop */
 }
 
+/**
+ * Main sidebar container with precise desktop specifications
+ * 
+ * Fixed width sidebar positioned on the left side of the viewport.
+ * No scrollbar on desktop to maintain clean appearance.
+ */
 .sidebar {
-  width: 212px;
-  gap: 16px;
-  opacity: 1;
-  border-right-width: 1px;
-  padding-top: 20px;
-  padding-right: 16px;
-  padding-bottom: 20px;
-  padding-left: 16px;
-  border-right: 1px solid var(--black-10, #1C1C1C1A);
-  overflow: hidden; /* ✅ No scrollbar - back to your original setting */
-  background: #ffffff;
+  width: 212px;                     /* Fixed width from design specs */
+  gap: 16px;                        /* Internal spacing between sections */
+  opacity: 1;                       /* Full visibility */
+  border-right-width: 1px;          /* Right border specification */
+  padding-top: 20px;                /* Top padding */
+  padding-right: 16px;              /* Right padding */
+  padding-bottom: 20px;             /* Bottom padding */
+  padding-left: 16px;               /* Left padding */
+  border-right: 1px solid var(--black-10, #1C1C1C1A); /* Subtle right border */
+  overflow: hidden;                 /* ✅ No scrollbar - clean desktop appearance */
+  background: #ffffff;              /* Light background */
 }
 
+/* =============================================================================
+   MOBILE HEADER - Close Button System
+   ============================================================================= */
+
+/**
+ * Mobile header container - hidden on desktop
+ */
 /* ✅ Mobile Header - COMPLETELY HIDDEN on desktop */
 .mobileHeader {
   display: none; /* ✅ Hidden on desktop - NO close button visible */
 }
 
+/**
+ * Close button styling for mobile overlay
+ */
 .closeButton {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
+  width: 32px;                      /* Touch-friendly size */
   height: 32px;
   border: none;
   background: transparent;
-  border-radius: 8px;
+  border-radius: 8px;               /* Rounded touch area */
   cursor: pointer;
-  color: #6b7280;
-  transition: all 0.2s ease;
+  color: #6b7280;                   /* Muted gray color */
+  transition: all 0.2s ease;       /* Smooth interactions */
 }
 
 .closeButton:hover {
-  background: #f3f4f6;
-  color: #374151;
+  background: #f3f4f6;              /* Light hover background */
+  color: #374151;                   /* Darker hover color */
 }
 
 .closeButton:active {
-  background: #e5e7eb;
-  transform: scale(0.95);
+  background: #e5e7eb;              /* Pressed state background */
+  transform: scale(0.95);           /* Subtle press animation */
 }
 
-/* Logo Section */
+/* =============================================================================
+   LOGO SECTION - Brand Identity Area
+   ============================================================================= */
+
+/**
+ * Logo section container with brand elements
+ */
 .logoSection {
-  padding: 0 16px 20px 16px;
-  margin-bottom: 8px;
+  padding: 0 16px 20px 16px;        /* Horizontal and bottom padding */
+  margin-bottom: 8px;               /* Space before menu sections */
 }
 
+/**
+ * Logo container with icon and text alignment
+ */
 .logo {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  align-items: center;              /* Center align icon and text */
+  gap: 8px;                         /* Space between icon and text */
 }
 
+/**
+ * Logo icon styling
+ */
 .logoIcon {
-  width: 24px;
+  width: 24px;                      /* Standard icon size */
   height: 24px;
-  opacity: 1;
-  border-radius: 80px;
+  opacity: 1;                       /* Full visibility */
+  border-radius: 80px;              /* Circular logo shape */
 }
 
+/**
+ * Logo text styling with precise specifications
+ */
 .logoText {
-  width: 58px;
-  height: 20px;
-  opacity: 1;
-  font-family: Inter;
-  font-weight: 400;
+  width: 58px;                      /* Fixed width from design */
+  height: 20px;                     /* Fixed height for alignment */
+  opacity: 1;                       /* Full visibility */
+  font-family: Inter;               /* Brand typography */
+  font-weight: 400;                 /* Regular weight */
   font-style: Regular;
-  font-size: 14px;
-  line-height: 20px;
-  letter-spacing: 0%;
+  font-size: 14px;                  /* Readable size */
+  line-height: 20px;                /* Perfect vertical alignment */
+  letter-spacing: 0%;               /* No additional spacing */
 }
 
-/* Menu Sections */
+/* =============================================================================
+   MENU SECTIONS - Navigation Structure
+   ============================================================================= */
+
+/**
+ * Individual menu section container
+ */
 .menuSection {
-  margin-bottom: 20px;
+  margin-bottom: 20px;              /* Space between sections */
 }
 
+/**
+ * Section header with title and optional badge
+ */
 /* Section Headers - ALIGNED */
 .sectionHeader {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 5px;
-  padding-left: 16px;
+  align-items: center;              /* Center align header elements */
+  justify-content: space-between;   /* Spread title and badge */
+  margin-bottom: 5px;               /* Space before menu items */
+  padding-left: 16px;               /* Left alignment with menu items */
 }
 
+/**
+ * Interactive section title with hover effects
+ * Used for sections like "Favorites" with "Recently" badge
+ */
 /* Section Title with hover (Favorites, Recently) */
 .sectionTitle {
-  width: 82px;
-  height: 30px;
-  opacity: 1;
-  font-family: Inter;
-  font-weight: 400;
+  width: 82px;                      /* Fixed width for alignment */
+  height: 30px;                     /* Fixed height for consistency */
+  opacity: 1;                       /* Full visibility */
+  font-family: Inter;               /* Consistent typography */
+  font-weight: 400;                 /* Regular weight */
   font-style: Regular;
-  font-size: 14px;
-  line-height: 20px;
-  letter-spacing: 0%;
-  text-align: left;
-  vertical-align: middle;
-  color: #1C1C1C66;
+  font-size: 14px;                  /* Readable section title size */
+  line-height: 20px;                /* Comfortable line height */
+  letter-spacing: 0%;               /* No additional spacing */
+  text-align: left;                 /* Left alignment */
+  vertical-align: middle;           /* Vertical centering */
+  color: #1C1C1C66;                 /* Semi-transparent dark text */
   
-  padding: 4px 8px;
-  border-radius: 8px;
-  transition: background-color 0.15s ease;
+  padding: 4px 8px;                 /* Internal padding for hover area */
+  border-radius: 8px;               /* Rounded hover area */
+  transition: background-color 0.15s ease; /* Smooth hover transition */
 }
 
 .sectionTitle:hover {
-  cursor: pointer;
-  background: #f9fafb;
+  cursor: pointer;                  /* Indicate interactivity */
+  background: #f9fafb;              /* Light hover background */
 }
 
+/**
+ * Non-interactive section title without hover effects
+ * Used for sections like "Dashboards" and "Pages"
+ */
 /* Section Title NO HOVER (Dashboards, Pages) - ALIGNED */
 .sectionTitleNoHover {
-  width: 82px;
-  height: 30px;
-  opacity: 1;
-  font-family: Inter;
-  font-weight: 400;
+  width: 82px;                      /* Matching width for alignment */
+  height: 30px;                     /* Matching height */
+  opacity: 1;                       /* Full visibility */
+  font-family: Inter;               /* Consistent typography */
+  font-weight: 400;                 /* Regular weight */
   font-style: Regular;
-  font-size: 14px;
-  line-height: 20px;
-  letter-spacing: 0%;
-  text-align: left;
-  vertical-align: middle;
-  color: #1C1C1C66;
-  padding: 4px 8px;
+  font-size: 14px;                  /* Same size as interactive titles */
+  line-height: 20px;                /* Consistent line height */
+  letter-spacing: 0%;               /* No additional spacing */
+  text-align: left;                 /* Left alignment */
+  vertical-align: middle;           /* Vertical centering */
+  color: #1C1C1C66;                 /* Semi-transparent dark text */
+  padding: 4px 8px;                 /* Matching padding without hover */
 }
 
+/**
+ * Section badge styling (e.g., "Recently" badge)
+ */
 .sectionBadge {
-  width: 78px;
-  height: 30px;
-  opacity: 1;
-  font-family: Inter;
-  font-weight: 400;
+  width: 78px;                      /* Fixed width for badge */
+  height: 30px;                     /* Matching section title height */
+  opacity: 1;                       /* Full visibility */
+  font-family: Inter;               /* Consistent typography */
+  font-weight: 400;                 /* Regular weight */
   font-style: Regular;
-  font-size: 14px;
-  line-height: 20px;
-  letter-spacing: 0%;
-  text-align: center;
-  vertical-align: middle;
-  color: #1C1C1C33;
+  font-size: 14px;                  /* Matching font size */
+  line-height: 20px;                /* Consistent line height */
+  letter-spacing: 0%;               /* No additional spacing */
+  text-align: center;               /* Center align badge text */
+  vertical-align: middle;           /* Vertical centering */
+  color: #1C1C1C33;                 /* More transparent than title */
   
-  padding: 4px 8px;
-  border-radius: 8px;
-  transition: background-color 0.15s ease;
+  padding: 4px 8px;                 /* Internal padding for hover area */
+  border-radius: 8px;               /* Rounded hover area */
+  transition: background-color 0.15s ease; /* Smooth hover transition */
 }
 
 .sectionBadge:hover {
-  cursor: pointer;
-  background: #f9fafb;
+  cursor: pointer;                  /* Indicate interactivity */
+  background: #f9fafb;              /* Light hover background */
 }
 
-/* Menu List */
+/* =============================================================================
+   MENU ITEMS - Navigation Links and Expandable Items
+   ============================================================================= */
+
+/**
+ * Menu list container
+ */
 .menuList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  list-style: none;                 /* Remove default list styling */
+  padding: 0;                       /* No default padding */
+  margin: 0;                        /* No default margins */
 }
 
-/* Regular Menu Items */
+/**
+ * Regular menu item styling with hover effects
+ */
 .menuItem {
   display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 16px;
-  cursor: pointer;
-  transition: background-color 0.15s ease;
-  position: relative;
+  align-items: center;              /* Center align icon and text */
+  gap: 8px;                         /* Space between icon and text */
+  padding: 6px 16px;                /* Internal padding for click area */
+  cursor: pointer;                  /* Indicate clickability */
+  transition: background-color 0.15s ease; /* Smooth hover transition */
+  position: relative;               /* Enable absolute positioning for active indicator */
 }
 
 .menuItem:hover {
-  background: #f9fafb;
+  background: #f9fafb;              /* Light hover background */
 }
 
-/* Active Menu Item */
+/**
+ * Active menu item styling with left border indicator
+ */
 .menuItem.active {
-  background: #f3f4f6;
+  background: #f3f4f6;              /* Slightly darker active background */
 }
 
 .menuItem.active::before {
-  content: '';
+  content: '';                      /* Create active indicator */
   position: absolute;
-  left: 0;
+  left: 0;                          /* Position at left edge */
   top: 0;
   bottom: 0;
-  width: 3px;
-  background: #000000;
+  width: 3px;                       /* Thin vertical bar */
+  background: #000000;              /* Black active indicator */
 }
 
-/* Expandable Menu Items */
+/**
+ * Expandable menu item container
+ */
 .menuItemExpandable {
-  margin-bottom: 2px;
+  margin-bottom: 2px;               /* Small space between expandable items */
 }
 
+/**
+ * Expandable menu item header (clickable area)
+ */
 .menuItemHeader {
   display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 16px;
-  cursor: pointer;
-  transition: background-color 0.15s ease;
+  align-items: center;              /* Center align all elements */
+  gap: 6px;                         /* Compact spacing for expand icon */
+  padding: 6px 16px;                /* Matching padding with regular items */
+  cursor: pointer;                  /* Indicate expandability */
+  transition: background-color 0.15s ease; /* Smooth hover transition */
 }
 
 .menuItemHeader:hover {
-  background: #f9fafb;
+  background: #f9fafb;              /* Light hover background */
 }
 
+/* =============================================================================
+   EXPAND ICONS - Smooth Rotation Animation System
+   ============================================================================= */
+
+/**
+ * Expand/collapse icon with smooth rotation animation
+ */
 /* Expand Icons - SMOOTH ROTATION */
 .expandIcon {
-  color: #9ca3af;
-  transition: transform 0.3s ease;
-  width: 16px;
-  height: 16px;
-  opacity: 1;
-  display: inline-block;
+  color: #9ca3af;                   /* Muted gray color */
+  transition: transform 0.3s ease;  /* Smooth rotation animation */
+  width: 16px;                      /* Fixed width for consistency */
+  height: 16px;                     /* Fixed height for consistency */
+  opacity: 1;                       /* Full visibility */
+  display: inline-block;            /* Inline block for transformation */
 }
 
 .expandIcon.expanded {
-  transform: rotate(90deg);
+  transform: rotate(90deg);         /* 90-degree rotation when expanded */
 }
 
-/* Menu Icons */
+/* =============================================================================
+   ICON AND TEXT STYLING - Visual Elements
+   ============================================================================= */
+
+/**
+ * Menu item icon styling
+ */
 .menuIcon {
-  width: 16px;
+  width: 16px;                      /* Standard icon size */
   height: 16px;
-  flex-shrink: 0;
+  flex-shrink: 0;                   /* Prevent icon compression */
 }
 
-/* Menu Text */
+/**
+ * Menu item text styling with precise specifications
+ */
 .menuText {
-  width: 102px;
-  height: 20px;
-  opacity: 1;
-  font-family: Inter;
-  font-weight: 400;
+  width: 102px;                     /* Fixed width from design specs */
+  height: 20px;                     /* Fixed height for alignment */
+  opacity: 1;                       /* Full visibility */
+  font-family: Inter;               /* Consistent typography */
+  font-weight: 400;                 /* Regular weight */
   font-style: Regular;
-  font-size: 14px;
-  line-height: 20px;
-  letter-spacing: 0%;
-  color: #1C1C1C;
+  font-size: 14px;                  /* Readable text size */
+  line-height: 20px;                /* Perfect vertical alignment */
+  letter-spacing: 0%;               /* No additional spacing */
+  color: #1C1C1C;                   /* Dark text color */
 }
 
+/**
+ * Active menu item text styling
+ */
 .menuItem.active .menuText {
-  font-weight: 500;
-  color: #111827;
+  font-weight: 500;                 /* Medium weight for emphasis */
+  color: #111827;                   /* Darker color for active state */
 }
 
-/* Sub Menu */
+/* =============================================================================
+   SUBMENU SYSTEM - Hierarchical Navigation
+   ============================================================================= */
+
+/**
+ * Submenu container with indentation
+ */
 .subMenu {
-  padding-left: 32px;
-  padding-top: 4px;
+  padding-left: 32px;               /* Left indentation for hierarchy */
+  padding-top: 4px;                 /* Small top spacing */
 }
 
+/**
+ * Individual submenu item styling
+ */
 .subMenuItem {
   display: flex;
-  align-items: center;
-  padding: 4px 16px 4px 0;
-  cursor: pointer;
-  transition: background-color 0.15s ease;
+  align-items: center;              /* Center align content */
+  padding: 4px 16px 4px 0;          /* Compact padding for sub-items */
+  cursor: pointer;                  /* Indicate clickability */
+  transition: background-color 0.15s ease; /* Smooth hover transition */
 }
 
 .subMenuItem:hover {
-  background: #f9fafb;
+  background: #f9fafb;              /* Light hover background */
 }
 
+/**
+ * Submenu item text with additional left margin
+ */
 .subMenuItem .menuText {
-  font-family: Inter;
-  font-weight: 400;
+  font-family: Inter;               /* Consistent typography */
+  font-weight: 400;                 /* Regular weight */
   font-style: Regular;
-  font-size: 14px;
-  line-height: 20px;
-  letter-spacing: 0%;
-  color: #1C1C1C;
-  margin-left: 30px;
+  font-size: 14px;                  /* Same size as main menu */
+  line-height: 20px;                /* Consistent line height */
+  letter-spacing: 0%;               /* No additional spacing */
+  color: #1C1C1C;                   /* Dark text color */
+  margin-left: 30px;                /* Additional left margin for sub-items */
 }
 
-/* ✅ TABLET LANDSCAPE (769px - 1024px) - Slight adjustments */
+/* =============================================================================
+   RESPONSIVE DESIGN - Progressive Mobile Adaptation
+   ============================================================================= */
+
+/* ✅ TABLET LANDSCAPE (769px - 1024px) - Slight desktop adjustments */
 @media screen and (max-width: 1024px) and (min-width: 769px) {
   .sidebar {
-    width: 200px;
-    overflow: hidden; /* ✅ Still no scrollbar */
+    width: 200px;                   /* Slightly narrower for tablet */
+    overflow: hidden;               /* ✅ Still no scrollbar */
   }
   
   .logoSection {
-    padding: 0 14px 18px 14px;
+    padding: 0 14px 18px 14px;      /* Reduced padding */
   }
   
   .sectionHeader {
-    padding-left: 14px;
+    padding-left: 14px;             /* Matching alignment adjustment */
   }
   
   .menuItem,
   .menuItemHeader {
-    padding: 6px 14px;
+    padding: 6px 14px;              /* Reduced horizontal padding */
   }
   
   /* ✅ Close button still hidden on tablet */
   .mobileHeader {
-    display: none;
+    display: none;                  /* Keep hidden on large tablets */
   }
 }
 
-/* ✅ TABLET PORTRAIT (481px - 768px) - Mobile overlay behavior */
+/* ✅ TABLET PORTRAIT & MOBILE (≤768px) - Overlay transformation */
 @media screen and (max-width: 768px) {
+  /**
+   * Mobile overlay wrapper with backdrop
+   */
   .sidebarWrapper {
-    position: fixed;
+    position: fixed;                /* Full screen overlay */
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 2000;
-    backdrop-filter: blur(2px);
+    width: 100vw;                   /* Full viewport width */
+    height: 100vh;                  /* Full viewport height */
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent backdrop */
+    z-index: 2000;                  /* High z-index for modal behavior */
+    backdrop-filter: blur(2px);     /* Modern backdrop blur effect */
   }
   
+  /**
+   * Mobile sidebar with overlay styling
+   */
   .sidebar {
-    width: 280px;
-    height: 100vh;
-    position: relative;
-    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.15);
-    padding: 18px 16px;
-    overflow-y: auto; /* ✅ Allow scroll only on mobile when needed */
+    width: 280px;                   /* Larger width for mobile touch */
+    height: 100vh;                  /* Full viewport height */
+    position: relative;             /* Position within overlay */
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.15); /* Depth shadow */
+    padding: 18px 16px;             /* Adjusted mobile padding */
+    overflow-y: auto;               /* ✅ Allow scroll only on mobile when needed */
   }
   
+  /**
+   * Mobile header with close button
+   */
   .mobileHeader {
-    display: flex; /* ✅ ONLY show close button on mobile (≤768px) */
-    padding: 0 0 16px 0;
-    border-bottom: 1px solid #e5e7eb;
-    margin-bottom: 16px;
-    justify-content: flex-end;
+    display: flex;                  /* ✅ ONLY show close button on mobile (≤768px) */
+    padding: 0 0 16px 0;            /* Bottom padding */
+    border-bottom: 1px solid #e5e7eb; /* Visual separator */
+    margin-bottom: 16px;            /* Space before logo */
+    justify-content: flex-end;      /* Right-align close button */
   }
   
+  /**
+   * Mobile logo section adjustments
+   */
   .logoSection {
-    padding: 0 12px 16px 12px;
-    margin-bottom: 12px;
+    padding: 0 12px 16px 12px;      /* Reduced mobile padding */
+    margin-bottom: 12px;            /* Reduced spacing */
   }
   
+  /**
+   * Mobile menu section spacing
+   */
   .menuSection {
-    margin-bottom: 16px;
+    margin-bottom: 16px;            /* Reduced section spacing */
   }
   
+  /**
+   * Mobile section header alignment
+   */
   .sectionHeader {
-    padding-left: 12px;
+    padding-left: 12px;             /* Reduced left padding */
   }
   
+  /**
+   * Mobile menu item padding adjustments
+   */
   .menuItem,
   .menuItemHeader {
-    padding: 8px 12px;
+    padding: 8px 12px;              /* Larger touch targets */
   }
   
+  /**
+   * Mobile close button sizing
+   */
   .closeButton {
-    width: 36px;
+    width: 36px;                    /* Larger touch target */
     height: 36px;
   }
 }
 
-/* ✅ MOBILE PORTRAIT (320px - 480px) - Smaller size */
+/* ✅ MOBILE PORTRAIT (320px - 480px) - Compact mobile optimization */
 @media screen and (max-width: 480px) {
   .sidebar {
-    width: 260px;
-    padding: 16px 14px;
+    width: 260px;                   /* Smaller width for portrait */
+    padding: 16px 14px;             /* Compact padding */
   }
   
   .logoSection {
-    padding: 0 10px 14px 10px;
+    padding: 0 10px 14px 10px;      /* Very compact logo area */
   }
   
   .menuItem,
   .menuItemHeader {
-    padding: 10px;
-    gap: 6px;
+    padding: 10px;                  /* Simplified padding */
+    gap: 6px;                       /* Reduced gap for small screens */
   }
   
   .menuIcon {
-    width: 14px;
+    width: 14px;                    /* Smaller icons for mobile */
     height: 14px;
   }
   
   .menuText {
-    font-size: 13px;
-    width: auto;
+    font-size: 13px;                /* Slightly smaller text */
+    width: auto;                    /* Flexible width */
   }
   
   .sectionTitle,
   .sectionTitleNoHover {
-    font-size: 13px;
-    width: auto;
+    font-size: 13px;                /* Smaller section titles */
+    width: auto;                    /* Flexible width */
   }
   
   .sectionBadge {
-    font-size: 13px;
-    width: auto;
+    font-size: 13px;                /* Smaller badge text */
+    width: auto;                    /* Flexible width */
   }
   
   .expandIcon {
-    width: 14px;
+    width: 14px;                    /* Smaller expand icons */
     height: 14px;
   }
 }
 
-/* ✅ EXTRA SMALL MOBILE (Below 320px) */
+/* ✅ EXTRA SMALL MOBILE (Below 320px) - Ultra-compact */
 @media screen and (max-width: 319px) {
   .sidebar {
-    width: calc(100vw - 40px);
-    min-width: 240px;
+    width: calc(100vw - 40px);      /* Nearly full width */
+    min-width: 240px;               /* Minimum viable width */
   }
 }
 
-/* Dark theme support */
+/* =============================================================================
+   DARK THEME SUPPORT - Complete Dark Mode Styling
+   ============================================================================= */
+
+/**
+ * Dark theme sidebar background and border
+ */
 [data-theme="dark"] .sidebar {
-  background: #1f2937;
-  border-right-color: #374151;
+  background: #1f2937;              /* Dark background */
+  border-right-color: #374151;     /* Dark border color */
 }
 
+/**
+ * Dark theme mobile header
+ */
 [data-theme="dark"] .mobileHeader {
-  border-bottom-color: #374151;
+  border-bottom-color: #374151;    /* Dark separator border */
 }
 
+/**
+ * Dark theme close button
+ */
 [data-theme="dark"] .closeButton {
-  color: #9ca3af;
+  color: #9ca3af;                   /* Light gray icon */
 }
 
 [data-theme="dark"] .closeButton:hover {
-  background: #374151;
-  color: #f3f4f6;
+  background: #374151;              /* Dark hover background */
+  color: #f3f4f6;                   /* Light hover color */
 }
 
+/**
+ * Dark theme menu item hover states
+ */
 [data-theme="dark"] .menuItem:hover,
 [data-theme="dark"] .menuItemHeader:hover,
 [data-theme="dark"] .subMenuItem:hover {
-  background: #374151;
+  background: #374151;              /* Dark hover background */
 }
 
+/**
+ * Dark theme active menu item
+ */
 [data-theme="dark"] .menuItem.active {
-  background: #374151;
+  background: #374151;              /* Dark active background */
 }
 
+/**
+ * Dark theme text colors
+ */
 [data-theme="dark"] .logoText,
 [data-theme="dark"] .menuText {
-  color: #f9fafb;
+  color: #f9fafb;                   /* Light text color */
 }
 
+/**
+ * Dark theme section headers and badges
+ */
 [data-theme="dark"] .sectionTitle,
 [data-theme="dark"] .sectionTitleNoHover,
 [data-theme="dark"] .sectionBadge {
-  color: #9ca3af;
+  color: #9ca3af;                   /* Muted light color */
+}
+
+/* =============================================================================
+   ACCESSIBILITY AND PERFORMANCE FEATURES
+   ============================================================================= */
+
+/**
+ * High contrast mode support
+ */
+@media (forced-colors: active) {
+  .sidebar {
+    border-right: 2px solid;        /* Visible border in high contrast */
+  }
+  
+  .menuItem.active::before {
+    background: Highlight;          /* System highlight color */
+  }
+}
+
+/**
+ * Reduced motion accessibility support
+ */
+@media (prefers-reduced-motion: reduce) {
+  .expandIcon {
+    transition: none;               /* Disable rotation animation */
+  }
+  
+  .menuItem,
+  .menuItemHeader,
+  .closeButton {
+    transition: none;               /* Disable hover transitions */
+  }
+}
+
+/**
+ * Print styles for sidebar
+ */
+@media print {
+  .sidebar {
+    box-shadow: none;               /* Remove shadows for print */
+    border-right: 1px solid #000;  /* Simple border for print */
+  }
+  
+  .mobileHeader {
+    display: none;                  /* Hide mobile elements */
+  }
 }

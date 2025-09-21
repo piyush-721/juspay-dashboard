@@ -1,266 +1,462 @@
+/**
+ * TotalSales Component Styles
+ * 
+ * Advanced styling for a doughnut chart component with custom percentage
+ * labeling, arrow pointers, and responsive legend system. Features precise
+ * positioning and backdrop blur effects for professional appearance.
+ * 
+ * Key Features:
+ * - Fixed component dimensions (222px × 318px)
+ * - Custom-positioned percentage label with arrow pointer
+ * - Backdrop blur effect on floating label
+ * - Responsive chart scaling for mobile devices
+ * - Color-coordinated legend with precise typography
+ * - Theme-aware styling for light/dark modes
+ * - Smooth responsive transitions
+ * 
+ * Layout Architecture:
+ * - Header: Component title
+ * - Chart Container: 120px diameter chart with custom label overlay
+ * - Legend: Color-coded channel list with sales values
+ * 
+ * Responsive Behavior:
+ * - Desktop: 222px fixed width
+ * - Tablet: 100px chart, adjusted spacing
+ * - Mobile: 80px chart, compact legend
+ * 
+ * @author Your Name
+ * @since 1.0.0
+ * @version 2.2.0
+ */
+
 /* src/components/TotalSales/TotalSales.module.css */
 
+/* =============================================================================
+   MAIN COMPONENT CONTAINER - Fixed Dimensions and Layout
+   ============================================================================= */
+
+/**
+ * Primary component container with precise dimensions
+ * 
+ * Establishes fixed component size for consistent dashboard layout
+ * with careful spacing and visual hierarchy.
+ */
 .totalSales {
-  width: 222px;
-  height: 318px;
-  min-width: 222px;
-  border-radius: 16px;
-  padding: 20px;
-  background: var(--Primary-Light, #F7F9FB);
-  font-family: Inter, sans-serif;
+  width: 222px;                     /* Fixed width for dashboard consistency */
+  height: 318px;                    /* Fixed height matching other components */
+  min-width: 222px;                 /* Minimum width constraint */
+  border-radius: 16px;              /* Rounded corners */
+  padding: 20px;                    /* Internal spacing */
+  background: var(--Primary-Light, #F7F9FB); /* Light background variable */
+  font-family: Inter, sans-serif;   /* Consistent brand typography */
   display: flex;
-  flex-direction: column;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  box-sizing: border-box;
-  overflow: hidden;
+  flex-direction: column;           /* Vertical layout: header + chart + legend */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Subtle depth shadow */
+  box-sizing: border-box;           /* Include padding in dimensions */
+  overflow: hidden;                 /* Contain any overflow content */
 }
 
+/* =============================================================================
+   COMPONENT HEADER - Title Section
+   ============================================================================= */
+
+/**
+ * Header container with title spacing
+ */
 .header {
-  margin-bottom: 16px;
-  flex-shrink: 0;
+  margin-bottom: 16px;              /* Space before chart area */
+  flex-shrink: 0;                   /* Prevent header compression */
 }
 
+/**
+ * Component title with precise design specifications
+ */
 .title {
-  width: 154px;
-  height: 20px;
-  opacity: 1;
-  font-family: Inter;
-font-weight: 600;
-font-style: Semi Bold;
-font-size: 14px;
-line-height: 20px;
-letter-spacing: 0%;
-color: #1C1C1C;
+  width: 154px;                     /* Fixed width from design specs */
+  height: 20px;                     /* Fixed height for alignment */
+  opacity: 1;                       /* Full visibility */
+  font-family: Inter;               /* Consistent typography */
+  font-weight: 600;                 /* Semi-bold weight */
+  font-style: Semi Bold;
+  font-size: 14px;                  /* Readable title size */
+  line-height: 20px;                /* Perfect vertical alignment */
+  letter-spacing: 0%;               /* No additional spacing */
+  color: #1C1C1C;                   /* High contrast dark text */
 }
 
+/* =============================================================================
+   CHART CONTAINER - Doughnut Chart Area
+   ============================================================================= */
+
+/**
+ * Chart container with fixed dimensions and centering
+ */
 .chartContainer {
-  flex: 0 0 120px;
+  flex: 0 0 120px;                  /* Fixed 120px height, no grow/shrink */
   display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 16px;
-  position: relative;
-  overflow: visible;
+  align-items: center;              /* Center chart vertically */
+  justify-content: center;          /* Center chart horizontally */
+  margin-bottom: 16px;              /* Space before legend */
+  position: relative;               /* Enable absolute positioning for label */
+  overflow: visible;                /* Allow label to extend outside bounds */
 }
 
+/**
+ * Chart wrapper for precise chart sizing and label positioning
+ */
 .chartWrapper {
-  position: relative;
-  width: 120px;
+  position: relative;               /* Enable absolute positioning for overlay */
+  width: 120px;                     /* Chart diameter */
   height: 120px;
   display: flex;
-  align-items: center;
+  align-items: center;              /* Perfect chart centering */
   justify-content: center;
 }
 
+/* =============================================================================
+   PERCENTAGE LABEL SYSTEM - Custom Floating Label with Arrow
+   ============================================================================= */
+
+/**
+ * Percentage label container with precise positioning
+ * 
+ * Positions the floating percentage label near the largest chart segment
+ * with careful alignment to create visual connection to data.
+ */
 /* ✅ Percentage label positioned next to the largest segment */
 .percentageContainer {
   position: absolute;
-  bottom: 10px; /* Position near the Direct (black) segment */
-  left: -8px; /* Adjusted position */
-  z-index: 10;
+  bottom: 10px;                     /* Position near the Direct (black) segment */
+  left: -8px;                       /* Adjusted position for optimal alignment */
+  z-index: 10;                      /* Above chart elements */
 }
 
+/**
+ * Styled percentage label with backdrop blur effect
+ * 
+ * Creates professional floating label with backdrop blur and
+ * arrow pointer for clear visual connection to chart data.
+ */
 .percentageLabel {
-  width: 51px;
-  height: 26px;
-  gap: 4px;
-  opacity: 1;
-  border-radius: 8px;
-  padding-top: 4px;
-  padding-right: 8px;
-  padding-bottom: 4px;
-  padding-left: 8px;
-  background: #1C1C1CCC;
-  color: #FFFFFF;
-backdrop-filter: blur(40px);
-font-family: Inter;
-font-weight: 400;
-font-style: Regular;
-font-size: 12px;
-line-height: 18px;
-letter-spacing: 0%;
-
+  width: 51px;                      /* Fixed label width */
+  height: 26px;                     /* Fixed label height */
+  gap: 4px;                         /* Internal spacing */
+  opacity: 1;                       /* Full visibility */
+  border-radius: 8px;               /* Rounded label corners */
+  padding-top: 4px;                 /* Top padding */
+  padding-right: 8px;               /* Right padding */
+  padding-bottom: 4px;              /* Bottom padding */
+  padding-left: 8px;                /* Left padding */
+  background: #1C1C1CCC;            /* Semi-transparent black background */
+  color: #FFFFFF;                   /* White text for contrast */
+  backdrop-filter: blur(40px);      /* Modern backdrop blur effect */
+  font-family: Inter;               /* Consistent typography */
+  font-weight: 400;                 /* Regular weight */
+  font-style: Regular;
+  font-size: 12px;                  /* Small readable text */
+  line-height: 18px;                /* Comfortable line spacing */
+  letter-spacing: 0%;               /* No additional spacing */
 }
 
+/**
+ * Arrow pointer connecting label to chart segment
+ * 
+ * Creates triangular arrow using CSS borders to visually
+ * connect the percentage label to the relevant chart segment.
+ */
 /* ✅ Arrow pointing to the chart segment */
 .percentageLabel::before {
-  content: '';
+  content: '';                      /* Empty pseudo-element */
   position: absolute;
-  top: -3px;
-  left: 15px;
-  width: 0;
-  height: 0;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-bottom: 4px solid #1C1C1C;
+  top: -3px;                        /* Position above label */
+  left: 15px;                       /* Centered horizontally */
+  width: 0;                         /* No width (border-only triangle) */
+  height: 0;                        /* No height (border-only triangle) */
+  border-left: 4px solid transparent;    /* Left triangle side */
+  border-right: 4px solid transparent;   /* Right triangle side */
+  border-bottom: 4px solid #1C1C1C;      /* Bottom creates upward-pointing arrow */
 }
 
+/* =============================================================================
+   LEGEND SYSTEM - Sales Channel Information Display
+   ============================================================================= */
+
+/**
+ * Legend container with flexible layout
+ */
 .legend {
-  flex: 1;
+  flex: 1;                          /* Take remaining vertical space */
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-  overflow: hidden;
+  flex-direction: column;           /* Stack legend items vertically */
+  gap: 12px;                        /* Space between legend items */
+  overflow: hidden;                 /* Prevent legend overflow */
 }
 
+/**
+ * Individual legend item container
+ */
 .legendItem {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  flex-direction: column;           /* Vertical item layout */
+  gap: 4px;                         /* Internal item spacing */
 }
 
+/**
+ * Legend row with indicator and value
+ */
 .legendRow {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: space-between;   /* Spread indicator and value */
+  align-items: center;              /* Center align row content */
 }
 
+/**
+ * Legend indicator with color dot and label
+ */
 .legendIndicator {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  align-items: center;              /* Center align dot and text */
+  gap: 8px;                         /* Space between dot and text */
 }
 
+/**
+ * Color indicator dot matching chart segments
+ */
 .legendDot {
-  width: 6px;
+  width: 6px;                       /* Small circular indicator */
   height: 6px;
-  border-radius: 50%;
-  flex-shrink: 0;
+  border-radius: 50%;               /* Perfect circle */
+  flex-shrink: 0;                   /* Prevent dot compression */
 }
 
+/**
+ * Legend label text with precise specifications
+ */
 .legendLabel {
-width: 40px;
-height: 18px;
-opacity: 1;
-font-family: Inter;
-font-weight: 400;
-font-style: Regular;
-font-size: 12px;
-line-height: 18px;
-letter-spacing: 0%;
-color: #1C1C1C;
+  width: 40px;                      /* Fixed width from design */
+  height: 18px;                     /* Fixed height for alignment */
+  opacity: 1;                       /* Full visibility */
+  font-family: Inter;               /* Consistent typography */
+  font-weight: 400;                 /* Regular weight */
+  font-style: Regular;
+  font-size: 12px;                  /* Small readable text */
+  line-height: 18px;                /* Perfect vertical alignment */
+  letter-spacing: 0%;               /* No additional spacing */
+  color: #1C1C1C;                   /* High contrast dark text */
 }
 
+/**
+ * Legend value text showing sales amounts
+ */
 .legendValue {
-width: 53px;
-height: 18px;
-opacity: 1;
-font-family: Inter;
-font-weight: 400;
-font-style: Regular;
-font-size: 12px;
-line-height: 18px;
-letter-spacing: 0%;
-color: #1C1C1C;
+  width: 53px;                      /* Fixed width from design */
+  height: 18px;                     /* Fixed height for alignment */
+  opacity: 1;                       /* Full visibility */
+  font-family: Inter;               /* Consistent typography */
+  font-weight: 400;                 /* Regular weight */
+  font-style: Regular;
+  font-size: 12px;                  /* Small readable text */
+  line-height: 18px;                /* Perfect vertical alignment */
+  letter-spacing: 0%;               /* No additional spacing */
+  color: #1C1C1C;                   /* High contrast dark text */
 }
 
+/* =============================================================================
+   RESPONSIVE DESIGN - Progressive Mobile Optimization
+   ============================================================================= */
+
+/**
+ * Desktop responsiveness (max-width: 1440px)
+ * Flexible width while maintaining proportions
+ */
 /* ✅ Responsive Breakpoints */
 @media screen and (max-width: 1440px) {
   .totalSales {
-    width: 100%;
-    min-width: 180px;
-    max-width: 222px;
+    width: 100%;                    /* Responsive width */
+    min-width: 180px;               /* Smaller minimum for flexibility */
+    max-width: 222px;               /* Maintain maximum size */
   }
 }
 
+/**
+ * Tablet responsiveness (max-width: 768px)
+ * Reduced chart size and adjusted spacing
+ */
 @media screen and (max-width: 768px) {
   .totalSales {
     width: 100%;
-    min-width: 180px;
-    max-width: 240px;
-    padding: 18px;
-    height: 300px;
+    min-width: 180px;               /* Tablet minimum width */
+    max-width: 240px;               /* Slightly larger maximum */
+    padding: 18px;                  /* Reduced padding for space */
+    height: 300px;                  /* Slightly reduced height */
   }
   
   .chartContainer {
-    flex: 0 0 100px;
-    margin-bottom: 14px;
+    flex: 0 0 100px;                /* Smaller chart container */
+    margin-bottom: 14px;            /* Reduced spacing */
   }
   
   .chartWrapper {
-    width: 100px;
+    width: 100px;                   /* Smaller chart diameter */
     height: 100px;
   }
   
   .percentageContainer {
-    bottom: 8px;
+    bottom: 8px;                    /* Adjusted label position */
     left: 3px;
   }
   
   .percentageLabel {
-    font-size: 11px;
-    padding: 5px 8px;
+    font-size: 11px;                /* Smaller label text */
+    padding: 5px 8px;               /* Adjusted padding */
   }
   
   .legend {
-    gap: 10px;
+    gap: 10px;                      /* Reduced legend spacing */
   }
 }
 
+/**
+ * Mobile responsiveness (max-width: 480px)
+ * Compact layout with minimal chart size
+ */
 @media screen and (max-width: 480px) {
   .totalSales {
-    min-width: 160px;
-    max-width: 200px;
-    padding: 16px;
-    height: 280px;
+    min-width: 160px;               /* Mobile minimum width */
+    max-width: 200px;               /* Compact maximum */
+    padding: 16px;                  /* Minimal padding */
+    height: 280px;                  /* Compact height */
   }
   
   .title {
-    font-size: 13px;
+    font-size: 13px;                /* Smaller title text */
   }
   
   .chartContainer {
-    flex: 0 0 80px;
-    margin-bottom: 12px;
+    flex: 0 0 80px;                 /* Minimal chart container */
+    margin-bottom: 12px;            /* Minimal spacing */
   }
   
   .chartWrapper {
-    width: 80px;
+    width: 80px;                    /* Minimal chart diameter */
     height: 80px;
   }
   
   .percentageContainer {
-    bottom: 6px;
+    bottom: 6px;                    /* Adjusted for small chart */
     left: 2px;
   }
   
   .legendLabel,
   .legendValue {
-    font-size: 11px;
+    font-size: 11px;                /* Smaller legend text */
   }
   
   .legend {
-    gap: 8px;
+    gap: 8px;                       /* Minimal legend spacing */
   }
   
   .percentageLabel {
-    font-size: 10px;
-    padding: 4px 6px;
+    font-size: 10px;                /* Smallest readable text */
+    padding: 4px 6px;               /* Minimal padding */
   }
 }
 
+/* =============================================================================
+   THEME SUPPORT - Dark Mode Styling
+   ============================================================================= */
+
+/**
+ * Dark theme component background
+ */
 /* ✅ Dark Theme Support */
 [data-theme="dark"] .totalSales {
-  background: var(--Primary-Dark, #1f2937);
+  background: var(--Primary-Dark, #1f2937); /* Dark background variable */
 }
 
+/**
+ * Dark theme title color
+ */
 [data-theme="dark"] .title {
-  color: #f9fafb;
+  color: #f9fafb;                   /* Light title text */
 }
 
+/**
+ * Dark theme percentage label styling
+ */
 [data-theme="dark"] .percentageLabel {
-  background: #374151;
-  color: #f9fafb;
+  background: #374151;              /* Dark label background */
+  color: #f9fafb;                   /* Light label text */
 }
 
+/**
+ * Dark theme arrow pointer color
+ */
 [data-theme="dark"] .percentageLabel::before {
-  border-bottom-color: #374151;
+  border-bottom-color: #374151;    /* Match label background */
 }
 
+/**
+ * Dark theme legend label color
+ */
 [data-theme="dark"] .legendLabel {
-  color: #e5e7eb;
+  color: #e5e7eb;                   /* Muted light text */
 }
 
+/**
+ * Dark theme legend value color
+ */
 [data-theme="dark"] .legendValue {
-  color: #f9fafb;
+  color: #f9fafb;                   /* Bright light text for values */
+}
+
+/* =============================================================================
+   ACCESSIBILITY AND PERFORMANCE FEATURES
+   ============================================================================= */
+
+/**
+ * High contrast mode support
+ */
+@media (forced-colors: active) {
+  .totalSales {
+    border: 1px solid;              /* Ensure visible border */
+  }
+  
+  .percentageLabel {
+    border: 1px solid;              /* Visible label border */
+  }
+  
+  .legendDot {
+    border: 1px solid;              /* Visible legend dots */
+  }
+}
+
+/**
+ * Reduced motion accessibility
+ */
+@media (prefers-reduced-motion: reduce) {
+  .chartContainer {
+    transition: none;               /* Disable any transitions */
+  }
+}
+
+/**
+ * Print styles for chart component
+ */
+@media print {
+  .totalSales {
+    break-inside: avoid;            /* Avoid page breaks inside component */
+    box-shadow: none;               /* Remove shadows for print */
+  }
+  
+  .percentageLabel {
+    background: #000 !important;    /* Solid background for print */
+    backdrop-filter: none;          /* Remove blur for print */
+  }
+  
+  .title,
+  .legendLabel,
+  .legendValue {
+    color: #000 !important;         /* Black text for print */
+  }
 }

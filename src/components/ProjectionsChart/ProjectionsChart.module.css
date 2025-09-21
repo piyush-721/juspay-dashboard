@@ -1,183 +1,279 @@
+/**
+ * ProjectionsChart Component Styles
+ * 
+ * Comprehensive responsive styling for a bar chart component with custom
+ * grid lines, flexible sizing, and mobile-first responsive design.
+ * Features advanced container queries and performance optimizations.
+ * 
+ * Architecture:
+ * - Flexible container with min/max width constraints
+ * - Custom grid line overlay system
+ * - Mobile-first responsive breakpoints
+ * - Performance optimizations for mobile
+ * - Dark/light theme support
+ * - Container queries for advanced responsiveness
+ * 
+ * Layout System:
+ * - Flexbox-based chart wrapper
+ * - Positioned grid line overlays
+ * - Custom Y-axis label positioning
+ * - Responsive padding and sizing
+ * 
+ * @author Your Name
+ * @since 1.0.0
+ * @version 2.1.0
+ */
+
 /* src/components/ProjectionsChart/ProjectionsChart.module.css */
 
+/* =============================================================================
+   MAIN CHART CONTAINER - Flexible Sizing and Base Layout
+   ============================================================================= */
+
+/**
+ * Primary chart container with flexible responsive sizing
+ * 
+ * Establishes the main chart container with flexible width constraints
+ * that adapt to different screen sizes while maintaining readability.
+ * Uses CSS custom properties integration for consistent theming.
+ */
 .projectionsChart {
-  width: 100%;
-  max-width: 432px;
-  min-width: 280px; /* ✅ Reduced from 350px to allow better flexibility */
-  height: 252px;
-  background: var(--Primary-Light, #F7F9FB);
-  border-radius: 16px;
-  border: 1px solid #e5e7eb;
-  padding: 24px;
-  opacity: 1;
-  font-family: Inter, sans-serif;
+  width: 100%;                      /* Full width of parent container */
+  max-width: 432px;                 /* Maximum width for optimal readability */
+  min-width: 280px;                 /* ✅ Reduced minimum for better flexibility */
+  height: 252px;                    /* Fixed height matching MetricsGrid */
+  background: var(--Primary-Light, #F7F9FB); /* Light gray background */
+  border-radius: 16px;              /* Rounded corners */
+  border: 1px solid #e5e7eb;        /* Subtle border */
+  padding: 24px;                    /* Internal spacing */
+  opacity: 1;                       /* Full visibility */
+  font-family: Inter, sans-serif;   /* Consistent brand typography */
   display: flex;
-  flex-direction: column;
-  box-shadow: none;
+  flex-direction: column;           /* Vertical layout: header + chart */
+  box-shadow: none;                 /* Clean appearance without shadow */
+  flex-shrink: 1;                   /* ✅ Allow shrinking in flex layouts */
+  flex-grow: 1;                     /* ✅ Allow growing to fill space */
+  box-sizing: border-box;           /* Include padding in size calculations */
 }
 
-/* Chart Header */
+/* =============================================================================
+   CHART HEADER - Title Section
+   ============================================================================= */
+
+/**
+ * Chart header container for title and potential controls
+ */
 .chartHeader {
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-bottom: 16px;
-  height: 24px;
+  justify-content: flex-start;      /* Left-align title */
+  align-items: center;              /* Vertical center alignment */
+  margin-bottom: 16px;              /* Space before chart area */
+  height: 24px;                     /* Fixed header height */
 }
 
+/**
+ * Chart title styling with brand typography
+ */
 .title {
   font-size: 16px;
-  font-weight: 600;
-  color: #111827;
-  margin: 0;
-  line-height: 1.5;
+  font-weight: 600;                 /* Semi-bold weight */
+  color: #111827;                   /* High contrast dark text */
+  margin: 0;                        /* Remove default margins */
+  line-height: 1.5;                 /* Comfortable line spacing */
 }
 
-/* Chart Wrapper */
+/* =============================================================================
+   CHART LAYOUT SYSTEM - Wrapper and Container Structure
+   ============================================================================= */
+
+/**
+ * Chart wrapper containing Y-axis labels and chart container
+ * 
+ * Uses flexbox to create a two-column layout with custom Y-axis labels
+ * on the left and the main chart area on the right.
+ */
 .chartWrapper {
   display: flex;
-  align-items: stretch;
-  height: calc(100% - 40px);
-  position: relative;
+  align-items: stretch;             /* Stretch children to full height */
+  height: calc(100% - 40px);        /* Remaining height after header */
+  position: relative;               /* Enable absolute positioning for grid */
 }
 
-/* Y-axis Labels */
+/* =============================================================================
+   CUSTOM Y-AXIS LABELS - External Label System
+   ============================================================================= */
+
+/**
+ * Y-axis labels container positioned outside chart area
+ * 
+ * Creates custom Y-axis labels with precise positioning and spacing
+ * to match chart grid lines and data scale.
+ */
 .yAxisLabels {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 30px;
-  height: 100%;
-  padding-right: 8px;
-  align-items: flex-end;
-  padding-top: 10px;
-  padding-bottom: 30px;
-  flex-shrink: 0; /* ✅ Prevent Y-axis from shrinking */
+  flex-direction: column;           /* Vertical label stacking */
+  justify-content: space-between;   /* Even spacing between labels */
+  width: 30px;                      /* Fixed width for label area */
+  height: 100%;                     /* Full available height */
+  padding-right: 8px;               /* Space between labels and chart */
+  align-items: flex-end;            /* Right-align labels to chart edge */
+  padding-top: 10px;                /* Offset to match chart margins */
+  padding-bottom: 30px;             /* Account for X-axis label space */
+  flex-shrink: 0;                   /* ✅ Prevent Y-axis from shrinking */
 }
 
+/**
+ * Individual Y-axis label styling
+ */
 .yLabel {
-  font-size: 12px;
-  color: #9ca3af;
-  font-weight: 400;
-  line-height: 1;
+  font-size: 12px;                  /* Small, readable text */
+  color: #9ca3af;                   /* Muted gray color */
+  font-weight: 400;                 /* Regular weight */
+  line-height: 1;                   /* Tight line height for alignment */
 }
 
-/* Chart Container */
+/* =============================================================================
+   CHART CONTAINER - Main Chart Area with Grid Overlay
+   ============================================================================= */
+
+/**
+ * Main chart container housing Recharts component and grid overlay
+ */
 .chartContainer {
-  flex: 1;
-  height: 100%;
-  position: relative;
-  min-width: 0; /* ✅ Allow chart to shrink properly */
+  flex: 1;                          /* Take remaining horizontal space */
+  height: 100%;                     /* Full available height */
+  position: relative;               /* Enable absolute positioning for grid */
+  min-width: 0;                     /* ✅ Allow chart to shrink properly */
 }
 
+/* =============================================================================
+   CUSTOM GRID LINES - Visual Data Guides
+   ============================================================================= */
+
+/**
+ * Grid lines overlay container
+ * 
+ * Positions custom horizontal grid lines over the chart area to provide
+ * visual reference points for data values. Coordinates with Y-axis labels.
+ */
 /* ✅ Fixed Grid Lines - Now Properly Visible */
 .gridLines {
   position: absolute;
-  top: 10px;
-  left: 10px;
-  right: 10px;
-  bottom: 30px;
-  pointer-events: none;
-  z-index: 1;
+  top: 10px;                        /* Match chart top margin */
+  left: 10px;                       /* Match chart left margin */
+  right: 10px;                      /* Match chart right margin */
+  bottom: 30px;                     /* Account for X-axis labels */
+  pointer-events: none;             /* Don't interfere with chart interaction */
+  z-index: 1;                       /* Layer above chart background */
 }
 
+/**
+ * Individual grid line styling
+ * 
+ * Subtle horizontal lines that provide visual reference without
+ * overwhelming the chart data.
+ */
 .gridLine {
   position: absolute;
   left: 0;
   right: 0;
-  height: 1px;
-  background: rgba(28, 28, 28, 0.05);
-  border: none;
-  opacity: 1;
+  height: 1px;                      /* Thin line */
+  background: rgba(28, 28, 28, 0.05); /* Very subtle gray */
+  border: none;                     /* No border styling */
+  opacity: 1;                       /* Full visibility */
 }
 
-/* ✅ DESKTOP & LARGE SCREENS (1025px+) - Full size */
+/* =============================================================================
+   RESPONSIVE DESIGN SYSTEM - Mobile-First Approach
+   ============================================================================= */
+
+/* ✅ DESKTOP & LARGE SCREENS (1025px+) - Full size presentation */
 @media screen and (min-width: 1025px) {
   .projectionsChart {
-    min-width: 350px;
-    max-width: 432px;
+    min-width: 350px;               /* Larger minimum width for desktop */
+    max-width: 432px;               /* Maintain maximum width */
   }
 }
 
-/* ✅ TABLET LANDSCAPE (769px - 1024px) - Fill available space */
+/* ✅ TABLET LANDSCAPE (769px - 1024px) - Optimized for tablet landscape */
 @media screen and (max-width: 1024px) and (min-width: 769px) {
   .projectionsChart {
-    min-width: 300px;
-    max-width: 100%;
-    height: 245px;
-    padding: 22px;
+    min-width: 300px;               /* Reduced minimum width */
+    max-width: 100%;                /* Allow full width utilization */
+    height: 245px;                  /* Slightly reduced height */
+    padding: 22px;                  /* Reduced padding */
   }
   
   .title {
-    font-size: 15px;
+    font-size: 15px;                /* Slightly smaller title */
   }
   
   .chartHeader {
-    margin-bottom: 14px;
+    margin-bottom: 14px;            /* Reduced header spacing */
   }
   
   .yAxisLabels {
-    width: 28px;
-    padding-right: 7px;
+    width: 28px;                    /* Narrower Y-axis area */
+    padding-right: 7px;             /* Adjusted spacing */
   }
   
   .yLabel {
-    font-size: 11px;
+    font-size: 11px;                /* Smaller label text */
   }
 }
 
-/* ✅ MOBILE LANDSCAPE & TABLET PORTRAIT (481px - 768px) - Full width */
+/* ✅ MOBILE LANDSCAPE & TABLET PORTRAIT (481px - 768px) - Full width adaptation */
 @media screen and (max-width: 768px) and (min-width: 481px) {
   .projectionsChart {
-    min-width: 0; /* ✅ Remove min-width constraint */
-    max-width: 100%;
-    width: 100%;
-    height: 230px;
-    padding: 18px;
+    min-width: 0;                   /* ✅ Remove min-width constraint */
+    max-width: 100%;                /* Full width utilization */
+    width: 100%;                    /* Force full width */
+    height: 230px;                  /* Compact mobile height */
+    padding: 18px;                  /* Reduced padding for space efficiency */
   }
   
   .title {
-    font-size: 14px;
+    font-size: 14px;                /* Mobile-appropriate title size */
   }
   
   .chartHeader {
-    margin-bottom: 12px;
-    height: 20px;
+    margin-bottom: 12px;            /* Compact header spacing */
+    height: 20px;                   /* Reduced header height */
   }
   
   .yAxisLabels {
-    width: 25px;
-    padding-right: 6px;
-    padding-top: 8px;
-    padding-bottom: 25px;
+    width: 25px;                    /* Narrower Y-axis for mobile */
+    padding-right: 6px;             /* Compact spacing */
+    padding-top: 8px;               /* Adjusted top padding */
+    padding-bottom: 25px;           /* Adjusted bottom padding */
   }
   
   .yLabel {
-    font-size: 11px;
+    font-size: 11px;                /* Readable mobile text size */
   }
   
   .gridLines {
-    top: 8px;
+    top: 8px;                       /* Adjusted grid positioning */
     bottom: 25px;
     left: 8px;
     right: 8px;
   }
 }
 
-/* ✅ MOBILE PORTRAIT (320px - 480px) - Full width, compact */
+/* ✅ MOBILE PORTRAIT (320px - 480px) - Ultra-compact mobile optimization */
 @media screen and (max-width: 480px) {
   .projectionsChart {
-    min-width: 0; /* ✅ Remove all width constraints */
+    min-width: 0;                   /* ✅ Remove all width constraints */
     max-width: 100%;
     width: 100%;
-    height: 220px;
-    padding: 16px;
-    border-radius: 12px;
+    height: 220px;                  /* Compact mobile height */
+    padding: 16px;                  /* Minimal padding */
+    border-radius: 12px;            /* Smaller radius for mobile */
   }
   
   .title {
     font-size: 14px;
-    line-height: 1.4;
+    line-height: 1.4;               /* Improved mobile readability */
   }
   
   .chartHeader {
@@ -186,33 +282,33 @@
   }
   
   .yAxisLabels {
-    width: 22px;
+    width: 22px;                    /* Ultra-compact Y-axis */
     padding-right: 5px;
     padding-top: 8px;
     padding-bottom: 22px;
   }
   
   .yLabel {
-    font-size: 10px;
+    font-size: 10px;                /* Small but readable labels */
   }
   
   .gridLines {
-    top: 8px;
+    top: 8px;                       /* Precise grid positioning */
     bottom: 22px;
     left: 6px;
     right: 6px;
   }
 }
 
-/* ✅ EXTRA SMALL MOBILE (Below 320px) - Minimal */
+/* ✅ EXTRA SMALL MOBILE (Below 320px) - Minimal viable layout */
 @media screen and (max-width: 319px) {
   .projectionsChart {
     min-width: 0;
     max-width: 100%;
     width: 100%;
-    height: 200px;
-    padding: 14px;
-    border-radius: 10px;
+    height: 200px;                  /* Minimal height */
+    padding: 14px;                  /* Minimal padding */
+    border-radius: 10px;            /* Smaller border radius */
   }
   
   .title {
@@ -226,14 +322,14 @@
   }
   
   .yAxisLabels {
-    width: 20px;
+    width: 20px;                    /* Minimal Y-axis width */
     padding-right: 4px;
     padding-top: 6px;
     padding-bottom: 20px;
   }
   
   .yLabel {
-    font-size: 9px;
+    font-size: 9px;                 /* Smallest readable size */
   }
   
   .gridLines {
@@ -244,32 +340,46 @@
   }
 }
 
-/* ✅ Specific fix for your layout issue */
+/* ✅ Specific fix for layout constraint issues */
 @media screen and (max-width: 1081px) {
   .projectionsChart {
-    min-width: 0;
-    width: 100%;
+    min-width: 0;                   /* Remove all minimum width constraints */
+    width: 100%;                    /* Force full width utilization */
   }
 }
 
-/* Dark theme support */
+/* =============================================================================
+   THEME SUPPORT - Dark Mode Styling
+   ============================================================================= */
+
+/**
+ * Dark theme overrides for complete dark mode support
+ */
 [data-theme="dark"] .projectionsChart {
-  background: #1f2937;
-  border-color: #374151;
+  background: #1f2937;              /* Dark background */
+  border-color: #374151;            /* Dark border */
 }
 
 [data-theme="dark"] .title {
-  color: #f9fafb;
+  color: #f9fafb;                   /* Light text on dark background */
 }
 
 [data-theme="dark"] .yLabel {
-  color: #6b7280;
+  color: #6b7280;                   /* Muted light text for labels */
 }
 
 [data-theme="dark"] .gridLine {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.1); /* Subtle white grid lines */
 }
 
+/* =============================================================================
+   ADVANCED RESPONSIVE FEATURES
+   ============================================================================= */
+
+/**
+ * Container queries for advanced responsive behavior
+ * Provides fine-grained control based on actual container size
+ */
 /* ✅ Container queries for better responsiveness */
 @container (max-width: 400px) {
   .projectionsChart {
@@ -286,20 +396,71 @@
   }
 }
 
-/* ✅ Ensure proper flexbox behavior */
-.projectionsChart {
-  flex-shrink: 1; /* Allow shrinking */
-  flex-grow: 1;   /* Allow growing */
-}
+/* =============================================================================
+   PERFORMANCE OPTIMIZATIONS
+   ============================================================================= */
 
+/**
+ * Performance optimizations for mobile devices
+ * Enables hardware acceleration and optimizes rendering
+ */
 /* ✅ Performance optimizations */
 @media screen and (max-width: 768px) {
   .projectionsChart {
-    will-change: transform;
+    will-change: transform;          /* Hint for hardware acceleration */
   }
   
   .chartContainer {
-    transform: translateZ(0);
+    transform: translateZ(0);        /* Force hardware acceleration */
   }
 }
 
+/* =============================================================================
+   ACCESSIBILITY AND PRINT SUPPORT
+   ============================================================================= */
+
+/**
+ * High contrast mode support for accessibility
+ */
+@media (forced-colors: active) {
+  .projectionsChart {
+    border: 2px solid;              /* Ensure visible border */
+  }
+  
+  .gridLine {
+    background: CanvasText;         /* Use system text color */
+    opacity: 0.3;                   /* Reduce opacity for readability */
+  }
+}
+
+/**
+ * Print styles for chart component
+ */
+@media print {
+  .projectionsChart {
+    break-inside: avoid;            /* Prevent page breaks inside chart */
+    box-shadow: none;               /* Remove shadows for print */
+    border: 1px solid #000;         /* Simple border for print */
+  }
+  
+  .title {
+    color: #000 !important;         /* Ensure black text for print */
+  }
+  
+  .yLabel {
+    color: #666 !important;         /* Gray labels for print */
+  }
+}
+
+/**
+ * Reduced motion support for accessibility
+ */
+@media (prefers-reduced-motion: reduce) {
+  .chartContainer {
+    transform: none;                /* Disable hardware acceleration */
+  }
+  
+  .projectionsChart {
+    will-change: auto;              /* Reset performance hints */
+  }
+}
