@@ -5,7 +5,7 @@ A React-based eCommerce dashboard with data visualization, responsive design, an
 🚀 Links
 🌐 Live Demo: https://juspay-dashboard-topaz.vercel.app/
 📁 GitHub: https://github.com/piyush-721/juspay-dashboard
-
+    Video link for Dashboard Walkthrough: https://drive.google.com/file/d/1YMGVpsfs_I2BYxNsPKxvYb0be54Tt4iQ/view?usp=sharing
 🛠️ Local Setup
 Prerequisites
 Node.js (v16.0.0+)
@@ -78,3 +78,4 @@ Deployed on Vercel with automatic builds from GitHub main branch.
 
 Developer: Piyush Shinde
 Tech Stack: JavaScript, React 18, Redux Toolkit, Chart.js, Recharts, CSS Modules
+
