@@ -1,0 +1,503 @@
+/* src/components/MetricsGrid/MetricsGrid.module.css - COMPLETE UPDATED VERSION WITH WHITE ARROWS */
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 16px;
+  width: 100%;
+  max-width: 400px;
+  height: 252px; /* ✅ Match ProjectionsChart height exactly */
+}
+
+/* Metric Cards */
+.metricCard {
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-family: Inter, sans-serif;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  position: relative;
+  height: 118px; /* ✅ Perfect card height for alignment */
+}
+
+.metricCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ LIGHT THEME Card Variants */
+.metricCard.customers {
+  background: var(--Primary-Blue, #E3F5FF); /* ✅ Customers - Light Blue */
+  border: 1px solid #bfdbfe;
+}
+
+.metricCard.orders {
+  background: var(--Primary-Light, #F7F9FB); /* ✅ Orders - Light Gray */
+  border: 1px solid #e5e7eb;
+}
+
+.metricCard.revenue {
+  background: var(--Primary-Light, #F7F9FB); /* ✅ Revenue - Light Gray */
+  border: 1px solid #e5e7eb;
+}
+
+.metricCard.growth {
+  background: var(--Primary-Purple, #E5ECF6); /* ✅ Growth - Light Purple */
+  border: 1px solid #d1d5db;
+}
+
+/* Card Header */
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.title {
+  width: 154px;
+  height: 20px;
+  opacity: 1;
+  font-family: Inter;
+  font-weight: 600;
+  font-style: Semi Bold;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0%;
+  color: #1C1C1C;
+}
+
+/* ✅ Card Content - Perfect Flex Alignment */
+.cardContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  height: 32px; /* Fixed height for consistent alignment */
+}
+
+/* ✅ Main displays - visible by default */
+.mainValue,
+.changeDisplay {
+  display: flex;
+  align-items: center;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.mainValue {
+  justify-content: flex-start;
+}
+
+.changeDisplay {
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+/* ✅ Hover content - hidden by default */
+.hoverContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.hoverChange {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4px;
+}
+
+.hoverValue {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* ✅ Hover state - swap the displays */
+.metricCard:hover .mainValue,
+.metricCard:hover .changeDisplay {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.metricCard:hover .hoverContent {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Value styling */
+.value {
+  width: 62px;
+  height: 36px;
+  opacity: 1;
+  font-family: Inter;
+  font-weight: 600;
+  font-style: Semi Bold;
+  font-size: 24px;
+  line-height: 36px;
+  letter-spacing: 0%;
+  color: #000000;
+}
+
+/* Change styling */
+.change {
+  width: 44px;
+  height: 18px;
+  opacity: 1;
+  font-family: Inter;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0%;
+}
+
+.change.up {
+  color: #10b981;
+}
+
+.change.down {
+  color: #ef4444;
+}
+
+/* Trend Icons */
+.trendIcon {
+  width: 12px;
+  height: 12px;
+  opacity: 0.8;
+}
+
+/* ✅ DARK THEME - SPECIFIC BACKGROUND COLORS & WHITE ARROWS */
+
+/* Customers card - Keep light blue in dark theme */
+[data-theme="dark"] .metricCard.customers {
+  background: var(--Primary-Blue, #E3F5FF); /* ✅ Keep light blue */
+  border-color: #bfdbfe;
+}
+
+/* Orders card - Black background in dark theme */
+[data-theme="dark"] .metricCard.orders {
+  background: #000000; /* ✅ Black background */
+  border-color: #404040;
+}
+
+/* Revenue card - Black background in dark theme */
+[data-theme="dark"] .metricCard.revenue {
+  background: #000000; /* ✅ Black background */
+  border-color: #404040;
+}
+
+/* Growth card - Keep light blue in dark theme */
+[data-theme="dark"] .metricCard.growth {
+  background: var(--Primary-Blue, #E3F5FF); /* ✅ Keep light blue */
+  border-color: #bfdbfe;
+}
+
+/* ✅ Text colors for dark theme */
+[data-theme="dark"] .title {
+  color: #1C1C1C; /* ✅ Dark text for light backgrounds */
+}
+
+[data-theme="dark"] .value {
+  color: #000000; /* ✅ Black values for light backgrounds */
+}
+
+/* ✅ Special text colors for black cards */
+[data-theme="dark"] .metricCard.orders .title,
+[data-theme="dark"] .metricCard.revenue .title {
+  color: #FFFFFF; /* ✅ White text for black backgrounds */
+}
+
+[data-theme="dark"] .metricCard.orders .value,
+[data-theme="dark"] .metricCard.revenue .value {
+  color: #FFFFFF; /* ✅ White values for black backgrounds */
+}
+
+/* ✅ WHITE ARROWS FOR BLACK CARDS IN DARK THEME */
+[data-theme="dark"] .metricCard.orders .trendIcon,
+[data-theme="dark"] .metricCard.revenue .trendIcon {
+  filter: brightness(0) invert(1); /* ✅ Makes trend icons white */
+  opacity: 1; /* ✅ Full opacity for better visibility */
+}
+
+/* ✅ Keep original trend icons for light background cards in dark theme */
+[data-theme="dark"] .metricCard.customers .trendIcon,
+[data-theme="dark"] .metricCard.growth .trendIcon {
+  filter: none; /* ✅ Keep original colors */
+  opacity: 0.8; /* ✅ Original opacity */
+}
+
+/* Keep trend colors consistent */
+[data-theme="dark"] .change.up {
+  color: #10b981;
+}
+
+[data-theme="dark"] .change.down {
+  color: #ef4444;
+}
+
+/* Hover effects for dark theme */
+[data-theme="dark"] .metricCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ✅ TABLET LANDSCAPE (1025px - 1200px) */
+@media screen and (max-width: 1200px) and (min-width: 1025px) {
+  .metricsGrid {
+    max-width: 380px;
+    height: 240px;
+  }
+  
+  .metricCard {
+    height: 112px;
+    padding: 18px;
+  }
+  
+  .title {
+    width: 140px;
+  }
+  
+  .value {
+    font-size: 22px;
+    line-height: 34px;
+    width: 58px;
+    height: 34px;
+  }
+}
+
+/* ✅ TABLET PORTRAIT (769px - 1024px) */
+@media screen and (max-width: 1024px) and (min-width: 769px) {
+  .metricsGrid {
+    max-width: 100%;
+    height: 230px;
+  }
+  
+  .metricCard {
+    height: 107px;
+    padding: 17px;
+  }
+  
+  .title {
+    width: auto;
+    max-width: 140px;
+    min-width: 100px;
+  }
+  
+  .value {
+    font-size: 21px;
+    line-height: 32px;
+    width: auto;
+    min-width: 55px;
+    height: 32px;
+  }
+  
+  .change {
+    width: auto;
+    min-width: 40px;
+  }
+}
+
+/* ✅ MOBILE LANDSCAPE (481px - 768px) */
+@media screen and (max-width: 768px) and (min-width: 481px) {
+  .metricsGrid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    max-width: 100%;
+    height: 220px;
+    gap: 14px;
+  }
+  
+  .metricCard {
+    padding: 16px;
+    height: 103px;
+    gap: 10px;
+  }
+  
+  .title {
+    width: auto;
+    max-width: 120px;
+    min-width: 80px;
+    font-size: 13px;
+    line-height: 18px;
+  }
+  
+  .cardContent {
+    height: 30px;
+  }
+  
+  .value {
+    font-size: 20px;
+    line-height: 30px;
+    width: auto;
+    min-width: 50px;
+    height: 30px;
+  }
+  
+  .change {
+    font-size: 11px;
+    line-height: 16px;
+    width: auto;
+    min-width: 38px;
+    height: 16px;
+  }
+  
+  .trendIcon {
+    width: 11px;
+    height: 11px;
+  }
+}
+
+/* ✅ MOBILE PORTRAIT (320px - 480px) */
+@media screen and (max-width: 480px) {
+  .metricsGrid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 1fr);
+    max-width: 100%;
+    height: auto;
+    gap: 12px;
+  }
+  
+  .metricCard {
+    padding: 16px;
+    height: 100px;
+    min-height: 100px;
+    gap: 8px;
+  }
+  
+  .title {
+    width: auto;
+    max-width: none;
+    min-width: auto;
+    font-size: 13px;
+    line-height: 18px;
+  }
+  
+  .cardContent {
+    height: 28px;
+  }
+  
+  .value {
+    font-size: 20px;
+    line-height: 28px;
+    width: auto;
+    min-width: auto;
+    height: 28px;
+  }
+  
+  .change {
+    font-size: 11px;
+    line-height: 16px;
+    width: auto;
+    min-width: auto;
+    height: 16px;
+  }
+  
+  .trendIcon {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+/* ✅ EXTRA SMALL MOBILE (Below 320px) */
+@media screen and (max-width: 319px) {
+  .metricsGrid {
+    gap: 10px;
+  }
+  
+  .metricCard {
+    padding: 14px;
+    height: 95px;
+    gap: 6px;
+  }
+  
+  .title {
+    font-size: 12px;
+    line-height: 16px;
+  }
+  
+  .cardContent {
+    height: 26px;
+  }
+  
+  .value {
+    font-size: 18px;
+    line-height: 26px;
+    height: 26px;
+  }
+  
+  .change {
+    font-size: 10px;
+    line-height: 14px;
+    height: 14px;
+  }
+  
+  .trendIcon {
+    width: 9px;
+    height: 9px;
+  }
+}
+
+/* ✅ Accessibility - Focus states */
+[data-theme="dark"] .metricCard:focus-within {
+  outline: 2px solid #3B82F6;
+  outline-offset: 2px;
+}
+
+/* ✅ High contrast mode support */
+@media (forced-colors: active) {
+  [data-theme="dark"] .metricCard {
+    border: 2px solid;
+  }
+  
+  [data-theme="dark"] .title,
+  [data-theme="dark"] .value {
+    color: CanvasText;
+  }
+}
+
+/* ✅ Responsive utility - Maintain hover effect on all screens */
+@media (hover: hover) {
+  .metricCard:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/* ✅ Touch devices - Reduce hover sensitivity */
+@media (hover: none) {
+  .metricCard:active {
+    transform: translateY(-1px);
+  }
+}
+
+/* ✅ Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .metricCard:hover {
+    transform: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  [data-theme="dark"] .metricCard:hover {
+    transform: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .mainValue,
+  .changeDisplay,
+  .hoverContent {
+    transition: none;
+  }
+}

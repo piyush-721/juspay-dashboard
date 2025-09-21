@@ -1,0 +1,83 @@
+/* App.css - FIXED VERSION */
+.app {
+  display: flex;
+  /* Remove overflow: hidden */
+}
+
+.layout {
+  display: flex;
+  width: 100%;
+  min-height: 100vh; /* Change from height: 100% */
+}
+
+/* Main content area */
+.mainArea {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Change from height: 100% */
+  /* Remove overflow: hidden */
+
+}
+
+/* Header - keep it sticky */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Content area - THIS IS KEY FOR SCROLLING */
+.content {
+  flex: 1;
+  padding: 20px;
+  /* Remove overflow-y: auto - let it scroll naturally */
+  background: #f8f9fa;
+  
+  /* Add min-height so content can expand */
+  min-height: calc(100vh - 64px); /* Subtract header height */
+}
+
+/* Sidebar styling */
+.sidebar {
+  width: 240px;
+  min-height: 100vh; /* Allow sidebar to be tall */
+  flex-shrink: 0;
+  /* Remove overflow: hidden from sidebar CSS too */
+}
+
+/* Notifications panel styling */
+.notificationsPanel {
+  width: 300px;
+  min-height: 100vh;
+  flex-shrink: 0;
+  background: white;
+  border-left: 1px solid #e5e7eb;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .layout {
+    position: relative;
+  }
+  
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    z-index: 1000;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .notificationsPanel {
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    z-index: 1000;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  }
+}

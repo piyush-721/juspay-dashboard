@@ -1,0 +1,354 @@
+/* src/components/TopSellingProducts/TopSellingProducts.module.css */
+
+.topSellingProducts {
+  width: 650px; /* ✅ EXACTLY same as RevenueChart */
+  height: 318px; /* ✅ EXACTLY same as RevenueChart */
+  min-width: 650px; /* ✅ EXACTLY same as RevenueChart */
+  background: #F7F9FB; /* ✅ Same background as RevenueChart */
+  border-radius: 16px; /* ✅ Same border-radius as RevenueChart */
+  padding: 24px; /* ✅ Same padding as RevenueChart */
+  font-family: Inter, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* ✅ Same gap as RevenueChart */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* ✅ Same shadow as RevenueChart */
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* ✅ Header - Match RevenueChart header */
+.header {
+  flex-shrink: 0;
+  margin-bottom: 12px; /* ✅ Same as RevenueChart chartHeader */
+}
+
+.title {
+width: 614px;
+height: 20px;
+opacity: 1;
+font-family: Inter;
+font-weight: 600;
+font-style: Semi Bold;
+font-size: 14px;
+line-height: 20px;
+letter-spacing: 0%;
+color: #1C1C1C;
+}
+
+/* ✅ Table Container - Match RevenueChart chartContainer */
+.tableContainer {
+  flex: 1; /* ✅ Same as RevenueChart chartContainer */
+  width: 100%; /* ✅ Same as RevenueChart chartContainer */
+  height: 220px; /* ✅ Same as RevenueChart chartContainer */
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: transparent;
+  table-layout: fixed;
+}
+
+.tableHead {
+  background: transparent;
+}
+
+.headerRow {
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.headerCell {
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: #9CA3AF;
+  text-align: left;
+  padding: 0 0 12px 0;
+  border: none;
+  background: transparent;
+  width: 212px;
+  height: 18px;
+  opacity: 1;
+
+}
+
+.headerCell:nth-child(1) { width: 40%; }
+.headerCell:nth-child(2) { width: 20%; }
+.headerCell:nth-child(3) { width: 20%; }
+.headerCell:nth-child(4) { width: 20%; }
+
+
+.tableBody {
+  background: transparent;
+}
+
+.tableRow {
+  border-bottom: 1px solid #F3F4F6;
+  transition: background-color 0.2s ease;
+}
+
+.tableRow:last-child {
+  border-bottom: none;
+}
+
+.tableRow:hover {
+  background-color: #F9FAFB;
+}
+
+.tableCell {
+  padding: 14px 0;
+  border: none;
+  vertical-align: middle;
+}
+
+.productName,
+.productPrice,
+.productQuantity,
+.productAmount {
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #1C1C1C;
+}
+
+.productAmount {
+  width: 106px;
+  height: 18px;
+  opacity: 1;
+
+}
+
+.productName {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ✅ RESPONSIVE BREAKPOINTS - EXACTLY MATCHING REVENUECHART */
+@media screen and (min-width: 1441px) {
+  .topSellingProducts {
+    width: 650px;
+    min-width: 650px;
+    max-width: 850px;
+  }
+}
+
+@media screen and (max-width: 1440px) and (min-width: 1301px) {
+  .topSellingProducts {
+    width: 100%;
+    min-width: 550px;
+    max-width: 750px;
+  }
+}
+
+@media screen and (max-width: 1300px) and (min-width: 1123px) {
+  .topSellingProducts {
+    width: 100%;
+    min-width: 500px;
+    max-width: 650px;
+  }
+}
+
+@media screen and (max-width: 1122px) and (min-width: 901px) {
+  .topSellingProducts {
+    width: 100%;
+    min-width: 400px;
+    max-width: 550px;
+    padding: 20px;
+    height: 300px;
+  }
+  
+  .tableContainer {
+    height: 200px;
+  }
+  
+  .headerCell:nth-child(1) { width: 40%; }
+  .headerCell:nth-child(2) { width: 20%; }
+  .headerCell:nth-child(3) { width: 20%; }
+  .headerCell:nth-child(4) { width: 20%; }
+}
+
+@media screen and (max-width: 900px) and (min-width: 769px) {
+  .topSellingProducts {
+    width: 100%;
+    min-width: 350px;
+    max-width: 500px;
+    padding: 18px;
+    height: 280px;
+  }
+  
+  .title {
+    font-size: 15px;
+  }
+  
+  .tableContainer {
+    height: 180px;
+  }
+  
+  .headerCell {
+    font-size: 11px;
+  }
+  
+  .productName,
+  .productPrice,
+  .productQuantity,
+  .productAmount {
+    font-size: 13px;
+  }
+  
+  .tableCell {
+    padding: 12px 0;
+  }
+}
+
+@media screen and (max-width: 768px) and (min-width: 481px) {
+  .topSellingProducts {
+    width: 100%;
+    min-width: 300px;
+    max-width: 450px;
+    padding: 16px;
+    height: 260px;
+  }
+  
+  .title {
+    font-size: 14px;
+  }
+  
+  .tableContainer {
+    height: 160px;
+  }
+  
+  .headerCell {
+    font-size: 10px;
+  }
+  
+  .productName,
+  .productPrice,
+  .productQuantity,
+  .productAmount {
+    font-size: 12px;
+  }
+  
+  .tableCell {
+    padding: 10px 0;
+  }
+  
+  /* ✅ Hide some columns on smaller tablets */
+  .headerCell:nth-child(3),
+  .tableCell:nth-child(3) { /* Quantity */
+    display: none;
+  }
+  
+  .headerCell:nth-child(1) { width: 50%; }
+  .headerCell:nth-child(2) { width: 25%; }
+  .headerCell:nth-child(4) { width: 25%; }
+}
+
+@media screen and (max-width: 480px) and (min-width: 376px) {
+  .topSellingProducts {
+    width: 100%;
+    min-width: 280px;
+    max-width: 380px;
+    padding: 14px;
+    height: 240px;
+  }
+  
+  .title {
+    font-size: 14px;
+  }
+  
+  .tableContainer {
+    height: 140px;
+  }
+  
+  .headerCell {
+    font-size: 10px;
+  }
+  
+  .productName,
+  .productPrice,
+  .productQuantity,
+  .productAmount {
+    font-size: 11px;
+  }
+  
+  .tableCell {
+    padding: 8px 0;
+  }
+  
+  /* ✅ Show only Name and Amount on mobile */
+  .headerCell:nth-child(2),
+  .headerCell:nth-child(3),
+  .tableCell:nth-child(2),
+  .tableCell:nth-child(3) {
+    display: none;
+  }
+  
+  .headerCell:nth-child(1) { width: 60%; }
+  .headerCell:nth-child(4) { width: 40%; }
+}
+
+@media screen and (max-width: 375px) {
+  .topSellingProducts {
+    width: 100%;
+    min-width: 250px;
+    max-width: 320px;
+    padding: 12px;
+    height: 220px;
+  }
+  
+  .title {
+    font-size: 13px;
+  }
+  
+  .tableContainer {
+    height: 120px;
+  }
+  
+  .headerCell {
+    font-size: 9px;
+  }
+  
+  .productName,
+  .productAmount {
+    font-size: 10px;
+  }
+  
+  .tableCell {
+    padding: 6px 0;
+  }
+}
+
+/* ✅ Dark Theme Support */
+[data-theme="dark"] .topSellingProducts {
+  background: #1f2937;
+}
+
+[data-theme="dark"] .title {
+  color: #f9fafb;
+}
+
+[data-theme="dark"] .headerCell {
+  color: #9ca3af;
+}
+
+[data-theme="dark"] .headerRow,
+[data-theme="dark"] .tableRow {
+  border-bottom-color: #374151;
+}
+
+[data-theme="dark"] .tableRow:hover {
+  background-color: #374151;
+}
+
+[data-theme="dark"] .productName,
+[data-theme="dark"] .productPrice,
+[data-theme="dark"] .productQuantity,
+[data-theme="dark"] .productAmount {
+  color: #f9fafb;
+}

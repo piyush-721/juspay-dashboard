@@ -1,0 +1,92 @@
+/* src/components/ThemeToggle/ThemeToggle.module.css */
+.themeToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.themeToggle:hover {
+  background: #f3f4f6;
+  color: #111827;
+  transform: scale(1.05);
+}
+
+.themeToggle:active {
+  background: #e5e7eb;
+  transform: scale(0.95);
+}
+
+/* Smooth icon transition */
+.themeToggle svg {
+  transition: all 0.3s ease;
+}
+
+.themeToggle:hover svg {
+  transform: rotate(15deg);
+}
+
+/* Dark theme support */
+[data-theme="dark"] .themeToggle {
+  color: #9ca3af;
+}
+
+[data-theme="dark"] .themeToggle:hover {
+  background: #374151;
+  color: #f9fafb;
+}
+
+[data-theme="dark"] .themeToggle:active {
+  background: #4b5563;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .themeToggle {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .themeToggle {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .themeToggle,
+  .themeToggle svg {
+    transition: none;
+  }
+  
+  .themeToggle:hover {
+    transform: none;
+  }
+  
+  .themeToggle:active {
+    transform: none;
+  }
+  
+  .themeToggle:hover svg {
+    transform: none;
+  }
+}
+
+/* High contrast mode support */
+@media (forced-colors: active) {
+  .themeToggle {
+    border: 1px solid;
+  }
+}

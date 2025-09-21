@@ -1,0 +1,316 @@
+/* src/components/RevenueChart/RevenueChart.module.css */
+
+.revenueChart {
+  width: 650px;
+  height: 318px;
+  min-width: 650px; /* ✅ This will be overridden for smaller screens */
+  background: #F7F9FB;
+  border-radius: 16px;
+  padding: 24px;
+  font-family: Inter, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Header */
+.chartHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.chartTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0;
+  line-height: 1.2;
+  font-family: Inter, sans-serif;
+}
+
+/* ✅ Perfect Legend */
+.customLegend {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  font-family: Inter, sans-serif;
+}
+
+.legendDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+.legendText {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 50px;
+  font-family: Inter;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0%;
+  color: #1C1C1C;
+}
+
+.smallVerticalBar {
+  color: #1C1C1C33;
+}
+
+.legendValue {
+  font-family: Inter;
+  font-weight: 800;
+  font-style: Semi Bold;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0%;
+  color: #1C1C1C;
+}
+
+/* Chart Container */
+.chartContainer {
+  flex: 1;
+  width: 100%;
+  height: 220px;
+}
+
+/* ✅ Line Styles with subtle shadows */
+.previousLine {
+  filter: drop-shadow(0 1px 2px rgba(168, 184, 208, 0.2));
+}
+
+.currentSolidLine {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
+}
+
+.currentDottedLine {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
+}
+
+/* ✅ Smooth curves */
+:global(.recharts-line-curve) {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ✅ RESPONSIVE DESIGN - Progressive Scaling */
+
+/* ✅ LARGE SCREENS (1441px+) - Full desktop */
+@media screen and (min-width: 1441px) {
+  .revenueChart {
+    width: 650px;
+    min-width: 650px;
+    max-width: 850px;
+  }
+}
+
+/* ✅ DESKTOP (1301px - 1440px) - Standard desktop */
+@media screen and (max-width: 1440px) and (min-width: 1301px) {
+  .revenueChart {
+    width: 100%;
+    min-width: 550px; /* ✅ Reduced from 600px */
+    max-width: 750px;
+  }
+}
+
+/* ✅ CRITICAL: Medium Desktop (1123px - 1300px) - Allow shrinking */
+@media screen and (max-width: 1300px) and (min-width: 1123px) {
+  .revenueChart {
+    width: 100%;
+    min-width: 500px; /* ✅ Further reduced to allow side-by-side */
+    max-width: 650px;
+  }
+}
+
+/* ✅ TABLET LANDSCAPE + SMALL DESKTOP (901px - 1122px) */
+@media screen and (max-width: 1122px) and (min-width: 901px) {
+  .revenueChart {
+    width: 100%;
+    min-width: 400px; /* ✅ Much smaller to fit smaller screens */
+    max-width: 550px;
+    padding: 20px;
+    height: 300px;
+  }
+  
+  .chartContainer {
+    height: 200px;
+  }
+  
+  .legendText {
+    margin-right: 30px; /* ✅ Reduced spacing */
+  }
+}
+
+/* ✅ TABLET LANDSCAPE (769px - 900px) */
+@media screen and (max-width: 900px) and (min-width: 769px) {
+  .revenueChart {
+    width: 100%;
+    min-width: 350px; /* ✅ Even smaller for tablets */
+    max-width: 500px;
+    padding: 18px;
+    height: 280px;
+  }
+  
+  .chartHeader {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  
+  .customLegend {
+    flex-direction: row; /* ✅ Keep horizontal on tablet */
+    align-items: center;
+  }
+  
+  .legendText {
+    margin-right: 25px;
+    font-size: 11px;
+  }
+  
+  .legendValue {
+    font-size: 11px;
+  }
+  
+  .chartContainer {
+    height: 180px;
+  }
+}
+
+/* ✅ TABLET PORTRAIT (481px - 768px) */
+@media screen and (max-width: 768px) and (min-width: 481px) {
+  .revenueChart {
+    width: 100%;
+    min-width: 300px; /* ✅ Much smaller for tablet portrait */
+    max-width: 450px;
+    padding: 16px;
+    height: 260px;
+  }
+  
+  .chartHeader {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  
+  .chartTitle {
+    font-size: 15px;
+  }
+  
+  .customLegend {
+    flex-direction: column; /* ✅ Stack vertically on smaller tablets */
+    align-items: flex-start;
+    gap: 6px;
+  }
+  
+  .legendText {
+    margin-right: 0;
+    font-size: 10px;
+  }
+  
+  .legendValue {
+    font-size: 10px;
+  }
+  
+  .chartContainer {
+    height: 160px;
+  }
+}
+
+/* ✅ MOBILE LANDSCAPE (376px - 480px) */
+@media screen and (max-width: 480px) and (min-width: 376px) {
+  .revenueChart {
+    width: 100%;
+    min-width: 280px; /* ✅ Mobile-friendly size */
+    max-width: 380px;
+    padding: 14px;
+    height: 240px;
+  }
+  
+  .chartTitle {
+    font-size: 14px;
+  }
+  
+  .customLegend {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  
+  .legendText {
+    font-size: 9px;
+  }
+  
+  .legendValue {
+    font-size: 9px;
+  }
+  
+  .chartContainer {
+    height: 140px;
+  }
+}
+
+/* ✅ MOBILE PORTRAIT (320px - 375px) */
+@media screen and (max-width: 375px) {
+  .revenueChart {
+    width: 100%;
+    min-width: 250px; /* ✅ Very small screens */
+    max-width: 320px;
+    padding: 12px;
+    height: 220px;
+  }
+  
+  .chartTitle {
+    font-size: 13px;
+  }
+  
+  .customLegend {
+    flex-direction: column;
+    gap: 3px;
+  }
+  
+  .legendText {
+    font-size: 8px;
+  }
+  
+  .legendValue {
+    font-size: 8px;
+  }
+  
+  .chartContainer {
+    height: 120px;
+  }
+}
+
+/* ✅ Dark Theme Support */
+[data-theme="dark"] .revenueChart {
+  background: #1f2937;
+}
+
+[data-theme="dark"] .chartTitle {
+  color: #f9fafb;
+}
+
+[data-theme="dark"] .legendText {
+  color: #9ca3af;
+}
+
+[data-theme="dark"] .legendValue {
+  color: #f9fafb;
+}
+
+[data-theme="dark"] .previousLine {
+  filter: drop-shadow(0 1px 2px rgba(168, 184, 208, 0.3));
+}
+
+[data-theme="dark"] .currentSolidLine,
+[data-theme="dark"] .currentDottedLine {
+  filter: drop-shadow(0 1px 2px rgba(255, 255, 255, 0.2));
+}

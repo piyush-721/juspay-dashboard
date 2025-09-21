@@ -1,0 +1,591 @@
+/* Header.module.css */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  height: 64px;
+  width: 100%;
+  min-width: 0; /* ✅ Allow shrinking */
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Left Section */
+.leftSection {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0; /* ✅ Allow left section to shrink if needed */
+  flex: 1;
+}
+
+/* Right Section */
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0; /* ✅ Prevent icons from hiding */
+}
+
+/* Icon Buttons */
+.iconButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  flex-shrink: 0; /* ✅ Prevent buttons from shrinking */
+}
+
+.iconButton:hover {
+  background: #f3f4f6;
+}
+
+.iconButton:active {
+  background: #e5e7eb;
+  transform: scale(0.95);
+}
+
+/* Icon Images */
+.icon {
+  width: 20px;
+  height: 20px;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.iconButton:hover .icon {
+  opacity: 1;
+}
+
+/* Search Icon (specific styling) */
+.searchIcon {
+  width: 16px;
+  height: 16px;
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+/* Breadcrumb styles */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 8px;
+  overflow: hidden; /* ✅ Prevent overflow */
+}
+
+.breadcrumbText {
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #9ca3af;
+  white-space: nowrap; /* ✅ Prevent wrapping */
+}
+
+.breadcrumbSeparator {
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  color: #d1d5db;
+  flex-shrink: 0;
+}
+
+.breadcrumbCurrent {
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  white-space: nowrap; /* ✅ Prevent wrapping */
+  overflow: hidden;
+  text-overflow: ellipsis; /* ✅ Add ellipsis for long text */
+}
+
+/* Search Container */
+.searchContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 5px 12px;
+  width: 240px;
+  max-width: 280px;
+  transition: all 0.2s ease;
+  flex-shrink: 0; /* ✅ Prevent search from shrinking too much */
+}
+
+.searchContainer:focus-within {
+  border-color: #3b82f6;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  color: #374151;
+  min-width: 0; /* ✅ Allow input to shrink */
+}
+
+.searchInput::placeholder {
+  color: #9ca3af;
+}
+
+.searchShortcut {
+  width: 20px;
+  height: 16px;
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+/* ✅ RESPONSIVE BREAKPOINTS - Progressive Enhancement */
+
+/* ✅ LARGE DESKTOP (1441px+) - Full features */
+@media screen and (min-width: 1441px) {
+  .header {
+    padding: 12px 24px;
+  }
+  
+  .searchContainer {
+    width: 260px;
+  }
+  
+  .leftSection {
+    gap: 18px;
+  }
+  
+  .rightSection {
+    gap: 14px;
+  }
+}
+
+/* ✅ DESKTOP (1201px - 1440px) - Standard desktop */
+@media screen and (max-width: 1440px) and (min-width: 1201px) {
+  .header {
+    padding: 12px 22px;
+  }
+  
+  .searchContainer {
+    width: 240px;
+  }
+  
+  .leftSection {
+    gap: 16px;
+  }
+  
+  .rightSection {
+    gap: 12px;
+  }
+}
+
+/* ✅ TABLET LANDSCAPE (1025px - 1200px) - Compact layout */
+@media screen and (max-width: 1200px) and (min-width: 1025px) {
+  .header {
+    padding: 12px 20px;
+  }
+  
+  .searchContainer {
+    width: 220px;
+    padding: 5px 10px;
+  }
+  
+  .searchInput {
+    font-size: 13px;
+  }
+  
+  .leftSection {
+    gap: 14px;
+  }
+  
+  .rightSection {
+    gap: 10px;
+  }
+  
+  .breadcrumb {
+    margin-left: 6px;
+  }
+  
+  .breadcrumbText,
+  .breadcrumbCurrent {
+    font-size: 13px;
+  }
+}
+
+/* ✅ TABLET PORTRAIT (769px - 1024px) - Optimized for tablets */
+@media screen and (max-width: 1024px) and (min-width: 769px) {
+  .header {
+    padding: 12px 18px;
+  }
+  
+  .searchContainer {
+    width: 200px;
+    padding: 4px 10px;
+  }
+  
+  .searchInput {
+    font-size: 13px;
+  }
+  
+  .searchShortcut {
+    width: 18px;
+    height: 14px;
+  }
+  
+  .leftSection {
+    gap: 12px;
+  }
+  
+  .rightSection {
+    gap: 9px;
+  }
+  
+  .iconButton {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .icon {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .searchIcon {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .breadcrumb {
+    margin-left: 4px;
+  }
+  
+  .breadcrumbText,
+  .breadcrumbCurrent {
+    font-size: 12px;
+  }
+}
+
+/* ✅ MOBILE LANDSCAPE (481px - 768px) - Hide breadcrumb, compact search */
+@media screen and (max-width: 768px) and (min-width: 481px) {
+  .header {
+    padding: 10px 16px;
+    height: 56px;
+  }
+  
+  .searchContainer {
+    width: 180px;
+    padding: 4px 8px;
+  }
+  
+  .searchInput {
+    font-size: 12px;
+  }
+  
+  .searchShortcut {
+    width: 16px;
+    height: 12px;
+  }
+  
+  .breadcrumb {
+    display: none; /* ✅ Hide breadcrumb to save space */
+  }
+  
+  .leftSection {
+    gap: 10px;
+  }
+  
+  .rightSection {
+    gap: 8px;
+  }
+  
+  .iconButton {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+  }
+  
+  .icon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .searchIcon {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+/* ✅ MOBILE PORTRAIT (376px - 480px) - Hide search, essential buttons only */
+@media screen and (max-width: 480px) and (min-width: 376px) {
+  .header {
+    padding: 10px 14px;
+    height: 54px;
+  }
+  
+  .searchContainer {
+    display: none; /* ✅ Hide search to save space */
+  }
+  
+  .leftSection {
+    gap: 8px;
+  }
+  
+  .rightSection {
+    gap: 6px;
+  }
+  
+  .iconButton {
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+  }
+  
+  .icon {
+    width: 14px;
+    height: 14px;
+  }
+  
+  /* ✅ Hide less important buttons on mobile */
+  .rightSection .iconButton:nth-child(2), /* Clock */
+  .rightSection .iconButton:nth-child(3) { /* Theme */
+    display: none;
+  }
+}
+
+/* ✅ SMALL MOBILE (320px - 375px) - Ultra compact */
+@media screen and (max-width: 375px) and (min-width: 320px) {
+  .header {
+    padding: 8px 12px;
+    height: 52px;
+  }
+  
+  .leftSection {
+    gap: 6px;
+  }
+  
+  .rightSection {
+    gap: 4px;
+  }
+  
+  .iconButton {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+  }
+  
+  .icon {
+    width: 12px;
+    height: 12px;
+  }
+  
+  /* ✅ Keep only essential buttons */
+  .rightSection .iconButton:nth-child(2), /* Clock */
+  .rightSection .iconButton:nth-child(3), /* Theme */
+  .rightSection .iconButton:nth-child(4) { /* Notification Bell */
+    display: none;
+  }
+}
+
+/* ✅ EXTRA SMALL MOBILE (Below 320px) - Minimal interface */
+@media screen and (max-width: 319px) {
+  .header {
+    padding: 8px 10px;
+    height: 48px;
+  }
+  
+  .leftSection {
+    gap: 4px;
+  }
+  
+  .rightSection {
+    gap: 2px;
+  }
+  
+  .iconButton {
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+  }
+  
+  .icon {
+    width: 10px;
+    height: 10px;
+  }
+  
+  /* ✅ Only keep menu toggle and panel toggle */
+  .rightSection .iconButton:not(:last-child) {
+    display: none;
+  }
+}
+
+/* ✅ LANDSCAPE ORIENTATION on mobile devices */
+@media screen and (orientation: landscape) and (max-height: 500px) and (max-width: 900px) {
+  .header {
+    height: 48px;
+    padding: 6px 16px;
+  }
+  
+  .iconButton {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .icon {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .searchContainer {
+    width: 160px;
+    padding: 3px 8px;
+  }
+  
+  .searchInput {
+    font-size: 11px;
+  }
+  
+  .searchShortcut {
+    width: 14px;
+    height: 10px;
+  }
+}
+
+/* ✅ TOUCH DEVICE OPTIMIZATIONS */
+@media (hover: none) and (pointer: coarse) {
+  .iconButton {
+    min-height: 32px; /* ✅ Accessible touch target */
+    min-width: 32px;
+  }
+  
+  .iconButton:active {
+    background: #e5e7eb;
+    transform: none; /* ✅ Remove scale for touch devices */
+  }
+  
+  /* ✅ Larger touch targets on mobile */
+  @media screen and (max-width: 768px) {
+    .iconButton {
+      min-height: 28px;
+      min-width: 28px;
+    }
+  }
+}
+
+/* ✅ HIGH DPI DISPLAY SUPPORT */
+@media screen and (-webkit-min-device-pixel-ratio: 2),
+       screen and (min-resolution: 192dpi) {
+  .icon,
+  .searchIcon,
+  .searchShortcut {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* ✅ DARK THEME SUPPORT */
+/* ADD TO: src/components/Header/Header.module.css */
+
+[data-theme="dark"] .header {
+  background: #2D2D2D;
+  border-bottom-color: #404040;
+}
+
+[data-theme="dark"] .searchContainer {
+  background: #404040;
+  border-color: #555555;
+}
+
+[data-theme="dark"] .searchContainer:focus-within {
+  background: #404040;
+  border-color: #3b82f6;
+}
+
+[data-theme="dark"] .searchInput {
+  color: #FFFFFF;
+}
+
+[data-theme="dark"] .searchInput::placeholder {
+  color: #9CA3AF;
+}
+
+[data-theme="dark"] .breadcrumbText {
+  color: #9CA3AF;
+}
+
+[data-theme="dark"] .breadcrumbSeparator {
+  color: #666666;
+}
+
+[data-theme="dark"] .breadcrumbCurrent {
+  color: #FFFFFF;
+}
+
+[data-theme="dark"] .iconButton:hover {
+  background: #404040;
+}
+
+/* ✅ PRINT STYLES */
+@media print {
+  .header {
+    background: white !important;
+    border-bottom: 1px solid #000 !important;
+    box-shadow: none !important;
+    height: auto !important;
+    padding: 8px 16px !important;
+  }
+  
+  .rightSection {
+    display: none; /* ✅ Hide action buttons in print */
+  }
+  
+  .searchContainer {
+    display: none; /* ✅ Hide search in print */
+  }
+  
+  .breadcrumbText,
+  .breadcrumbCurrent {
+    color: #000 !important;
+  }
+}
+
+/* ✅ REDUCED MOTION PREFERENCE */
+@media (prefers-reduced-motion: reduce) {
+  .iconButton,
+  .searchContainer,
+  .icon {
+    transition: none;
+  }
+  
+  .iconButton:active {
+    transform: none;
+  }
+}
+
+/* ✅ FORCED COLORS MODE (Windows High Contrast) */
+@media (forced-colors: active) {
+  .header {
+    border-bottom: 1px solid;
+  }
+  
+  .iconButton {
+    border: 1px solid;
+  }
+  
+  .searchContainer {
+    border: 1px solid;
+  }
+}

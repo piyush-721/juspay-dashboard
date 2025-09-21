@@ -1,0 +1,416 @@
+/* NotificationsPanel.module.css - Fully Responsive */
+
+/* ✅ DESKTOP - Exact original styling preserved */
+.panelWrapper {
+  display: contents; /* No wrapper interference on desktop */
+}
+
+.notificationsPanel {
+  width: 280px; /* ✅ Exact width from Figma */
+  background: #ffffff;
+  border-left: 1px solid var(--black-10, #1C1C1C1A); /* ✅ Exact border from Figma */
+  display: flex;
+  flex-direction: column;
+  gap: 24px; /* ✅ Gap from Figma */
+  padding: 20px; /* ✅ Padding from Figma */
+  opacity: 1; /* ✅ From Figma */
+  font-family: Inter, sans-serif;
+  
+  /* NO scrollbar on desktop */
+  overflow: hidden;
+  /* overflow-y: auto; */
+  flex-shrink: 0;
+}
+
+/* ✅ Header - Close button hidden on desktop */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* ✅ Space for close button */
+  background: #ffffff;
+  margin-bottom: 0;
+}
+
+.title {
+  opacity: 1;
+  font-family: Inter;
+  font-weight: 600;
+  font-style: Semi Bold;
+  font-size: 14px;
+  line-height: 10px;
+  letter-spacing: 0%;
+  color: #1C1C1C;
+  margin: 15px 0px 0px 0px;
+  /* ✅ Remove fixed width for flexibility */
+  flex: 1;
+}
+
+/* ✅ Close Button - Hidden on desktop */
+.closeButton {
+  display: none; /* ✅ Hidden on desktop */
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #6b7280;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.closeButton:hover {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.closeButton:active {
+  background: #e5e7eb;
+  transform: scale(0.95);
+}
+
+/* Content */
+.content {
+  flex: 1;
+  margin-top: -20px;
+}
+
+/* Sections */
+.section {
+  margin-bottom: 24px;
+}
+
+.sectionTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 12px 0;
+  padding: 0;
+}
+
+/* Notification Items */
+.notificationItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+}
+
+.notificationItem:last-child {
+  border-bottom: none;
+}
+
+.iconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: #f3f4f6;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.notificationIcon {
+  width: 16px;
+  height: 16px;
+  opacity: 1;
+}
+
+.notificationContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.notificationTitle {
+  opacity: 1;
+  font-family: Inter;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0%;
+  color: #1C1C1C;
+  margin: 0 0 4px 0;
+  /* ✅ Remove fixed width for flexibility */
+}
+
+.notificationTime {
+  font-size: 12px;
+  color: #9ca3af;
+  font-weight: 400;
+}
+
+/* Activity Items */
+.activityItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+}
+
+.activityItem:last-child {
+  border-bottom: none;
+}
+
+.avatarContainer {
+  flex-shrink: 0;
+}
+
+.avatar {
+  width: 24px;
+  height: 24px;
+  opacity: 1;
+  border-radius: 80px;
+}
+
+.activityContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.activityTitle {
+  font-size: 14px;
+  font-weight: 400;
+  color: #374151;
+  margin: 0 0 4px 0;
+  line-height: 1.4;
+}
+
+.activityTime {
+  font-size: 12px;
+  color: #9ca3af;
+  font-weight: 400;
+}
+
+/* Contact Items */
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.contactItem:hover {
+  background: #f9fafb;
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-left: -8px;
+  margin-right: -8px;
+}
+
+.contactContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.contactName {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ✅ TABLET LANDSCAPE (888px - 1024px) - Slight adjustments */
+@media screen and (max-width: 1024px) and (min-width: 888px) {
+  .notificationsPanel {
+    width: 260px; /* ✅ Slightly smaller */
+  }
+  
+  .closeButton {
+    display: none; /* ✅ Still hidden on large tablet */
+  }
+}
+
+/* ✅ PROBLEM AREA: Under 887px - Mobile overlay behavior */
+@media screen and (max-width: 887px) {
+  .panelWrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    backdrop-filter: blur(2px);
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .notificationsPanel {
+    width: 320px; /* ✅ Larger for touch */
+    height: 100vh;
+    position: relative;
+    box-shadow: -4px 0 15px rgba(0, 0, 0, 0.15);
+    padding: 18px 20px;
+    overflow-y: auto; /* ✅ Allow scroll on mobile */
+  }
+  
+  .closeButton {
+    display: flex; /* ✅ Show close button on mobile */
+  }
+  
+  .title {
+    font-size: 15px;
+    line-height: 1.2;
+    margin: 0;
+  }
+  
+  .header {
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 16px;
+  }
+  
+  .section {
+    margin-bottom: 20px;
+  }
+  
+  .notificationItem,
+  .activityItem {
+    padding: 14px 0; /* ✅ Better touch targets */
+  }
+  
+  .contactItem {
+    padding: 10px 0;
+  }
+  
+  .iconContainer {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .notificationIcon {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .avatar {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .closeButton {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* ✅ MOBILE PORTRAIT (320px - 480px) - Full width */
+@media screen and (max-width: 480px) {
+  .notificationsPanel {
+    width: 100vw;
+    max-width: 360px;
+    padding: 16px 18px;
+  }
+  
+  .title {
+    font-size: 14px;
+  }
+  
+  .closeButton {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .section {
+    margin-bottom: 18px;
+  }
+  
+  .sectionTitle {
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+  
+  .notificationItem,
+  .activityItem {
+    padding: 12px 0;
+    gap: 10px;
+  }
+  
+  .contactItem {
+    padding: 8px 0;
+    gap: 10px;
+  }
+  
+  .notificationTitle,
+  .activityTitle,
+  .contactName {
+    font-size: 13px;
+  }
+  
+  .notificationTime,
+  .activityTime {
+    font-size: 11px;
+  }
+  
+  .iconContainer {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .notificationIcon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .avatar {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* ✅ EXTRA SMALL MOBILE (Below 320px) */
+@media screen and (max-width: 319px) {
+  .notificationsPanel {
+    width: calc(100vw - 20px);
+    max-width: none;
+  }
+}
+
+/* Dark theme support */
+[data-theme="dark"] .notificationsPanel {
+  background: #1f2937;
+  border-left-color: #374151;
+}
+
+[data-theme="dark"] .header {
+  background: #1f2937;
+  border-bottom-color: #374151;
+}
+
+[data-theme="dark"] .title,
+[data-theme="dark"] .sectionTitle {
+  color: #f9fafb;
+}
+
+[data-theme="dark"] .closeButton {
+  color: #9ca3af;
+}
+
+[data-theme="dark"] .closeButton:hover {
+  background: #374151;
+  color: #f3f4f6;
+}
+
+[data-theme="dark"] .notificationTitle,
+[data-theme="dark"] .activityTitle,
+[data-theme="dark"] .contactName {
+  color: #e5e7eb;
+}
+
+[data-theme="dark"] .iconContainer {
+  background: #374151;
+}
+
+[data-theme="dark"] .contactItem:hover {
+  background: #374151;
+}

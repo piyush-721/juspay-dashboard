@@ -1,0 +1,513 @@
+/* src/pages/DashboardPage/DashboardPage.module.css - Complete Updated Version */
+
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.layout {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* ✅ MAIN AREA WITH PROPER WIDTH CALCULATIONS */
+.mainArea {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-width: 0;
+  width: 100%;
+  transition: width 0.3s ease;
+}
+
+/* ✅ When notifications panel is open - Reduce main area width */
+.dashboard[data-notifications-open="true"] .mainArea {
+  width: calc(100% - 280px); /* Subtract notifications panel width */
+}
+
+/* ✅ When both sidebar and notifications are open */
+.dashboard[data-sidebar-open="true"][data-notifications-open="true"] .mainArea {
+  width: calc(100% - 212px - 280px); /* Subtract both panels */
+}
+
+/* ✅ When only sidebar is open */
+.dashboard[data-sidebar-open="true"] .mainArea {
+  width: calc(100% - 212px); /* Subtract only sidebar */
+}
+
+.content {
+  flex: 1;
+  padding: 24px;
+  background: #f8f9fa;
+  min-height: calc(100vh - 64px);
+  width: 100%;
+  overflow-x: auto; /* Allow horizontal scrolling if needed */
+  background-color: white;
+  box-sizing: border-box;
+}
+
+/* ✅ Sidebar and Notifications Panel Containers */
+.sidebarContainer {
+  display: contents; /* 🖥️ Desktop: No wrapper */
+}
+
+.notificationsContainer {
+  display: contents; /* 🖥️ Desktop: No wrapper */
+}
+
+/* Page Header */
+.pageHeader {
+  margin-bottom: 24px;
+}
+
+.pageTitle {
+  opacity: 1;
+  font-family: Inter;
+  font-weight: 600;
+  font-style: Semi Bold;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0%;
+  color: #1C1C1C;
+  margin: 0;
+  min-width: 83px;
+  min-height: 20px;
+}
+
+/* Dashboard Layout Grid */
+.dashboardGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* ✅ Top Row for MetricsGrid + ProjectionsChart */
+.topRow {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 24px;
+  align-items: start;
+  width: 100%;
+}
+
+/* ✅ UNIFIED CHARTS GRID - Fixed overflow issues */
+.chartsGrid {
+  display: grid;
+  grid-template-columns: 1fr 222px;
+  grid-template-rows: auto auto;
+  gap: 24px;
+  width: 100%;
+  max-width: 100%;
+  grid-template-areas: 
+    "revenue-chart world-map"
+    "top-products total-sales";
+  overflow: hidden; /* Prevent overflow */
+}
+
+/* ✅ Individual Grid Areas - Fixed overflow */
+.revenueSection {
+  grid-area: revenue-chart;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  min-width: 0; /* Allow shrinking */
+  overflow: hidden; /* Prevent content overflow */
+}
+
+.mapSection {
+  grid-area: world-map;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.productsSection {
+  grid-area: top-products;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.salesSection {
+  grid-area: total-sales;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* Individual Sections */
+.metricsSection {
+  background: transparent;
+  padding: 0;
+  box-shadow: none;
+}
+
+.chartsSection {
+  background: transparent;
+  padding: 0;
+  box-shadow: none;
+}
+
+/* ✅ LARGE DESKTOP (1441px+) - Perfect 2x2 Grid */
+@media screen and (min-width: 1441px) {
+  .dashboard[data-notifications-open="true"] .mainArea {
+    width: calc(100vw - 280px);
+  }
+  
+  .dashboard[data-sidebar-open="true"][data-notifications-open="true"] .mainArea {
+    width: calc(100vw - 212px - 280px);
+  }
+  
+  .dashboard[data-sidebar-open="true"] .mainArea {
+    width: calc(100vw - 212px);
+  }
+  
+  .topRow {
+    grid-template-columns: 400px 1fr;
+    gap: 24px;
+  }
+  
+  .chartsGrid {
+    grid-template-columns: 1fr 222px;
+    gap: 24px;
+  }
+}
+
+/* ✅ DESKTOP (1301px - 1440px) - Maintain 2x2 Grid */
+@media screen and (max-width: 1440px) and (min-width: 1301px) {
+  .dashboard[data-notifications-open="true"] .mainArea {
+    width: calc(100vw - 280px);
+  }
+  
+  .dashboard[data-sidebar-open="true"][data-notifications-open="true"] .mainArea {
+    width: calc(100vw - 212px - 280px);
+  }
+  
+  .dashboard[data-sidebar-open="true"] .mainArea {
+    width: calc(100vw - 212px);
+  }
+  
+  .topRow {
+    grid-template-columns: 400px 1fr;
+    gap: 24px;
+  }
+  
+  .chartsGrid {
+    grid-template-columns: 1fr 222px;
+    gap: 24px;
+  }
+}
+
+/* ✅ Responsive grid adjustment for smaller screens */
+@media screen and (max-width: 1400px) and (min-width: 1301px) {
+  .chartsGrid {
+    grid-template-columns: 1fr 200px; /* Slightly smaller right column */
+  }
+}
+
+/* ✅ CRITICAL FIX: Under 1300px - Stack everything vertically */
+@media screen and (max-width: 1300px) {
+  /* ✅ Full width with overlays on smaller screens */
+  .dashboard[data-notifications-open="true"] .mainArea,
+  .dashboard[data-sidebar-open="true"] .mainArea,
+  .dashboard[data-sidebar-open="true"][data-notifications-open="true"] .mainArea {
+    width: 100% !important;
+  }
+  
+  .mainArea {
+    width: 100%;
+  }
+  
+  .topRow {
+    grid-template-columns: 1fr; /* ✅ Single column layout */
+    gap: 20px;
+  }
+  
+  /* ✅ CHARTS GRID - Stack all 4 components vertically */
+  .chartsGrid {
+    display: flex; /* ✅ Change from grid to flex for stacking */
+    flex-direction: column; /* ✅ Stack vertically */
+    gap: 20px;
+    grid-template-areas: none; /* ✅ Remove grid areas */
+  }
+  
+  /* ✅ All sections become full width when stacked */
+  .revenueSection,
+  .mapSection,
+  .productsSection,
+  .salesSection {
+    width: 100%;
+    grid-area: unset; /* ✅ Remove grid area assignments */
+  }
+  
+  .content {
+    padding: 20px;
+  }
+  
+  /* Make MetricsGrid responsive for single column */
+  .metricsSection {
+    max-width: none;
+    width: 100%;
+  }
+}
+
+/* ✅ TABLET LANDSCAPE (1025px - 1300px) - Maintain single column */
+@media screen and (max-width: 1300px) and (min-width: 1025px) {
+  .topRow {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .chartsGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .dashboardGrid {
+    gap: 20px;
+  }
+}
+
+/* ✅ TABLET LANDSCAPE (769px - 1024px) - Mobile overlay starts */
+@media screen and (max-width: 1024px) and (min-width: 769px) {
+  .topRow {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  
+  .chartsGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  
+  .content {
+    padding: 18px;
+  }
+  
+  .dashboardGrid {
+    gap: 18px;
+  }
+  
+  /* 📱 Sidebar overlay */
+  .sidebarContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1500;
+    backdrop-filter: blur(2px);
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  /* 📱 Notifications Panel overlay */
+  .notificationsContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1500;
+    backdrop-filter: blur(2px);
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  /* 🖥️ Full width main area when panels are hidden */
+  .mainArea {
+    width: 100% !important;
+  }
+}
+
+/* ✅ MOBILE LANDSCAPE (481px - 768px) */
+@media screen and (max-width: 768px) and (min-width: 481px) {
+  .layout {
+    position: relative;
+  }
+  
+  .mainArea {
+    width: 100% !important;
+  }
+  
+  .content {
+    padding: 18px;
+  }
+  
+  .topRow {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .chartsGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .metricsSection {
+    max-width: none;
+  }
+  
+  .pageHeader {
+    margin-bottom: 20px;
+  }
+  
+  .pageTitle {
+    font-size: 14px;
+  }
+  
+  .dashboardGrid {
+    gap: 18px;
+  }
+  
+  /* 📱 Mobile overlays */
+  .sidebarContainer,
+  .notificationsContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    backdrop-filter: blur(3px);
+  }
+  
+  .sidebarContainer {
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .notificationsContainer {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+/* ✅ MOBILE PORTRAIT (320px - 480px) */
+@media screen and (max-width: 480px) {
+  .layout {
+    position: relative;
+  }
+  
+  .mainArea {
+    width: 100% !important;
+  }
+  
+  .content {
+    padding: 16px;
+  }
+  
+  .topRow {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  
+  .chartsGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  
+  .metricsSection {
+    max-width: none;
+  }
+  
+  .pageHeader {
+    margin-bottom: 16px;
+  }
+  
+  .pageTitle {
+    font-size: 14px;
+    min-width: auto;
+  }
+  
+  .dashboardGrid {
+    gap: 16px;
+  }
+  
+  /* 📱 Full mobile overlays */
+  .sidebarContainer,
+  .notificationsContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 2500;
+    backdrop-filter: blur(4px);
+  }
+  
+  .sidebarContainer {
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .notificationsContainer {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+/* ✅ Prevent body scroll when panels open on mobile */
+@media screen and (max-width: 1024px) {
+  .dashboard[data-sidebar-open="true"],
+  .dashboard[data-notifications-open="true"] {
+    overflow: hidden;
+  }
+  
+  .dashboard[data-sidebar-open="true"] body,
+  .dashboard[data-notifications-open="true"] body {
+    overflow: hidden;
+  }
+}
+
+/* ✅ Smooth animations */
+.sidebarContainer,
+.notificationsContainer {
+  transition: opacity 0.3s ease;
+}
+
+/* ✅ Dark theme support - Updated to match reference image */
+[data-theme="dark"] .content {
+  background: #1C1C1C; /* ✅ Pure dark background like reference */
+}
+
+[data-theme="dark"] .pageTitle {
+  color: #FFFFFF; /* ✅ White page title */
+}
+
+/* ✅ Accessibility - Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .sidebarContainer,
+  .notificationsContainer,
+  .mainArea {
+    transition: none;
+  }
+}

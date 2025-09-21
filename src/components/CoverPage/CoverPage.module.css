@@ -1,0 +1,341 @@
+/* ==========================================================================
+   CoverPage Component Styles
+   ========================================================================== */
+
+/* CSS Custom Properties */
+:root {
+  --color-primary: #FFBB37;
+  --color-primary-hover: #FFA500;
+  --color-shadow: #555555;
+  --color-text-primary: #FFFFFF;
+  --color-background: #000000;
+  --color-border: #000000;
+  
+  --font-sora: 'Sora', sans-serif;
+  --font-space-mono: 'Space Mono', monospace;
+}
+
+/* Container */
+.coverContainer {
+  padding-left: 100px;
+  padding-top: 70px;
+  contain: paint;
+  overflow: hidden;
+}
+
+/* Hero Section */
+.heroSection {
+  margin-bottom: 30px;
+}
+
+.heroTitle {
+  height: 270px;
+  margin: 0;
+  opacity: 1;
+  font-family: var(--font-sora);
+  font-weight: 700;
+  font-size: 90px;
+  line-height: 110px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+}
+
+.heroAssignment {
+  letter-spacing: 0px;
+}
+
+/* Button Components */
+.buttonWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.assignmentButton {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 80px;
+  width: 250px;
+  height: 42px;
+  border-radius: 15px;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-primary);
+  font-family: var(--font-space-mono);
+  font-weight: 400;        
+  font-size: 20.42px;
+  line-height: 100%;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.assignmentButton:hover {
+  background-color: var(--color-primary-hover);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(255, 187, 55, 0.3);
+}
+
+.assignmentButton:active {
+  transform: translateY(0) scale(0.98);
+  transition-duration: 0.1s;
+}
+
+/* Shadow button creates layered effect */
+.shadowAssignmentButton {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  z-index: 1;
+  width: 250px;
+  height: 42px;
+  background-color: var(--color-shadow);
+  border-radius: 15px;
+  border: none;
+  pointer-events: none;
+}
+
+/* Vector Graphics */
+.vector {
+  position: absolute;
+  top: -70px;
+  left: 0;
+  z-index: 1;
+  width: 540px;
+  height: 600px;
+}
+
+.ellipse2 {
+  position: absolute;
+  top: -50px;
+}
+
+.ellipse1 {
+  position: absolute;
+  bottom: -120px;
+  right: -60px;
+}
+
+/* Company Information */
+.companyLabel {
+  margin: 0;
+  width: 155px;
+  height: 45px;
+  opacity: 0.7;
+  font-family: var(--font-space-mono);
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+}
+
+.companyName {
+  margin: 0;
+  font-family: var(--font-space-mono);
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-transform: capitalize;
+  color: var(--color-text-primary);
+}
+
+/* ==========================================================================
+   Responsive Design
+   ========================================================================== */
+
+/* Large Tablets (768px - 1024px) */
+@media screen and (max-width: 1024px) and (min-width: 769px) {
+  .coverContainer {
+    padding-left: 60px;
+    padding-top: 50px;
+  }
+  .heroTitle {
+    font-size: 75px;
+    line-height: 95px;
+    height: 220px;
+  }
+  .assignmentButton,
+  .shadowAssignmentButton {
+    width: 220px;
+    height: 38px;
+  }
+  .assignmentButton {
+    font-size: 18px;
+    margin-bottom: 60px;
+  }
+  .vector {
+    width: 450px;
+    height: 500px;
+    top: -60px;
+  }
+  .companyLabel {
+    font-size: 24px;
+  }
+  .companyName {
+    font-size: 22px;
+  }
+}
+
+/* Small Tablets (601px - 768px) */
+@media screen and (max-width: 768px) and (min-width: 601px) {
+  .coverContainer {
+    padding-left: 40px;
+    padding-top: 40px;
+  }
+  .heroTitle {
+    font-size: 65px;
+    line-height: 80px;
+    height: 180px;
+  }
+  .assignmentButton,
+  .shadowAssignmentButton {
+    width: 200px;
+    height: 36px;
+  }
+  .assignmentButton {
+    font-size: 16px;
+    margin-bottom: 50px;
+  }
+  .vector {
+    width: 400px;
+    height: 450px;
+    top: -50px;
+  }
+  .ellipse1 {
+    bottom: -80px;
+    right: -40px;
+  }
+  .ellipse2 {
+    top: -30px;
+  }
+  .companyLabel {
+    font-size: 22px;
+  }
+  .companyName {
+    font-size: 20px;
+  }
+}
+
+/* Mobile Landscape (481px - 600px) */
+@media screen and (max-width: 600px) and (min-width: 481px) {
+  .coverContainer {
+    padding-left: 30px;
+    padding-top: 30px;
+  }
+  .heroTitle {
+    font-size: 50px;
+    line-height: 65px;
+    height: 150px;
+  }
+  .assignmentButton,
+  .shadowAssignmentButton {
+    width: 180px;
+    height: 34px;
+  }
+  .assignmentButton {
+    font-size: 14px;
+    margin-bottom: 40px;
+  }
+  .vector {
+    width: 350px;
+    height: 400px;
+    top: -40px;
+  }
+  .ellipse1 {
+    bottom: -60px;
+    right: -30px;
+  }
+  .ellipse2 {
+    top: -20px;
+  }
+  .companyLabel {
+    font-size: 20px;
+  }
+  .companyName {
+    font-size: 18px;
+  }
+}
+
+/* Mobile Portrait (320px - 480px) */
+@media screen and (max-width: 480px) {
+  .coverContainer {
+    padding-left: 20px;
+    padding-top: 20px;
+  }
+  .heroTitle {
+    font-size: 40px;
+    line-height: 50px;
+    height: 120px;
+  }
+  .assignmentButton,
+  .shadowAssignmentButton {
+    width: 160px;
+    height: 32px;
+  }
+  .assignmentButton {
+    font-size: 12px;
+    margin-bottom: 30px;
+  }
+  .vector {
+    width: 280px;
+    height: 320px;
+    top: -30px;
+  }
+  .ellipse1 {
+    bottom: -40px;
+    right: -20px;
+  }
+  .ellipse2 {
+    top: -10px;
+  }
+  .companyLabel {
+    font-size: 18px;
+    width: auto;
+  }
+  .companyName {
+    font-size: 16px;
+  }
+}
+
+/* Extra Small Mobile (Below 320px) */
+@media screen and (max-width: 319px) {
+  .coverContainer {
+    padding-left: 15px;
+    padding-top: 15px;
+  }
+  .heroTitle {
+    font-size: 32px;
+    line-height: 40px;
+    height: 100px;
+  }
+  .assignmentButton,
+  .shadowAssignmentButton {
+    width: 140px;
+    height: 30px;
+  }
+  .assignmentButton {
+    font-size: 11px;
+    margin-bottom: 25px;
+  }
+  .vector {
+    width: 240px;
+    height: 280px;
+    top: -25px;
+  }
+  .ellipse1 {
+    bottom: -30px;
+    right: -15px;
+  }
+  .ellipse2 {
+    top: -5px;
+  }
+  .companyLabel {
+    font-size: 16px;
+  }
+  .companyName {
+    font-size: 14px;
+  }
+}
